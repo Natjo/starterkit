@@ -1,0 +1,85 @@
+:root {
+    --ctr-width: 1280px;
+    
+    --font-1: "Brown", sans-serif;
+    --font-2: "Albra", sans-serif;
+
+    --color-0: #fff;
+    --color-1: #e8ae3a;
+    --color-2: #061927;
+    --color-3: #054652;
+    --color-4: #d7dde6;
+    --color-5: #ebf1f9;
+    --color-6: #b1c6d2;
+
+    --color-gray-light: #f5f5f5;
+    --color-gray: #ccc;
+    --color-gray-dark: #555;
+
+    --color-text: #000;
+    --color-error: #ff625a;
+    --color-valid: #054652;
+}
+
+
+@media (--breakpoint-md-down) {
+    :root{
+        --ctr-margin: 20px;
+        --gap: 20px;
+
+        --font-size-xsm: 0.688rem;
+        --font-size-sm: 0.75rem;
+        --font-size: 0.875rem;
+        --font-size-md: 1rem;
+        --font-size-lg: 1.438rem;
+        --font-size-xlg: 1.875rem;
+        --font-size-xxlg: 2.188rem;
+
+        --margin-xsm: 5px;
+        --margin-sm: 20px;
+        --margin: 20px;
+        --margin-lg: 40px;
+        --margin-xlg: 60px;
+    }
+}
+
+@media (--breakpoint-md-scoped) {
+    :root {
+        --ctr-margin: 40px;
+        --gap: 30px;
+
+        --font-size-xsm: 0.75rem;
+        --font-size-sm: 0.875em;
+        --font-size: 1rem;
+        --font-size-md: 2rem;
+        --font-size-lg: 2rem;
+        --font-size-xlg: 2.375rem;
+        --font-size-xxlg: 2.688rem;
+
+        --margin-xsm: 10px;
+        --margin-sm: 20px;
+        --margin: 40px;
+        --margin-lg: 60px;
+        --margin-xlg: 80px;
+    }
+}
+@media (--breakpoint-lg-up) {
+    :root {
+        --ctr-margin: 120px;
+        --gap: 40px;
+
+        --font-size-xsm: 0.75rem;
+        --font-size-sm: 0.875rem;
+        --font-size: 1rem;
+        --font-size-md: 1.5rem;
+        --font-size-lg: 1.625rem;
+        --font-size-xlg: 2.375rem;
+        --font-size-xxlg: 3.375rem;
+
+        --margin-xsm: 15px;
+        --margin-sm: 25px;
+        --margin: 45px;
+        --margin-lg: 65px;
+        --margin-xlg: 85px;
+    }
+}

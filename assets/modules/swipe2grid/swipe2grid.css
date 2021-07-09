@@ -1,0 +1,30 @@
+.swipe2grid {
+    padding: 0 var(--ctr-margin);
+    
+    @media (--breakpoint-md-down) {
+        &.swiper-container{
+            margin: 0 var(--ctr-margin);
+            height: 100%;
+            overflow: visible;
+            width: calc(70% - 20px);
+        }
+    }
+    @media (--breakpoint-md-up) {
+        > ul {
+            display: grid;
+            grid-column-gap: var(--gap);
+        }
+        &.grid3 {
+            > ul {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    }
+    @media (--breakpoint-lg-up) {
+        &.grid3 {
+            > ul {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    }
+}
