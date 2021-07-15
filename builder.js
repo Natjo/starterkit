@@ -8,9 +8,11 @@ const uglifycss = require('uglifycss');
 const babel = require('@babel/core');
 const watch = require('node-watch');
 const isProd = process.argv[2] == '--prod' ? true : false;
+
+const theme = 'starterkit';
 const src = 'assets/';
-const dist = 'web/wp-content/themes/starterkit/';
-const styles = ['reset.css', 'variables.css', 'fonts.css', 'styles.css', 'customMedias.css', 'header_nav.css', 'footer.css'];
+const dist = `web/wp-content/themes/${theme}/`;
+const styles = ['reset.css', 'variables.css', 'fonts.css', 'styles.css', 'layout.css',  'header_nav.css', 'footer.css'];
 
 
 const json = {
@@ -99,7 +101,7 @@ const core = {
         for(let file of styles){
             str += fs.readFileSync(`${src}styles/${file}`, 'utf8');
         }
-        core.postcss(str, `${dist}assets/styles/styles.css`);
+        core.postcss(str, `${dist}assets/styles.css`);
     }
 }
 

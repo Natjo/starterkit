@@ -1,49 +1,60 @@
-/* Albra */
+/* ConduitITCPro */
 @font-face {
-    font-family: 'Albra', Arial;
-    src: url(/assets/fonts/Albra-Semi.woff2) format('woff2');
-    font-weight: 600;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'Albra', Arial;
-    src: url(/assets/fonts/Albra-Bold.woff2) format('woff2');
-    font-weight: 800;
-    font-style: normal;
-}
-
-/* Brown */
-@font-face {
-    font-family: 'Brown', Arial;
-    src: url(/assets/fonts/BrownLLWeb-Light.woff2) format('woff2');
+    font-family: 'ConduitITCPro';
+    src: url(fonts/ConduitITCPro-Light.woff2) format('woff2');
     font-weight: 300;
     font-style: normal;
+    font-display: swap
 }
 @font-face {
-    font-family: 'Brown', Arial;
-    src: url(/assets/fonts/BrownLLWeb-Regular.woff2) format('woff2');
+    font-family: 'ConduitITCPro';
+    src: url(fonts/ConduitITCPro-LightItalic.woff2) format('woff2');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap
+}
+@font-face {
+    font-family: 'ConduitITCPro';
+    src: url(fonts/ConduitITCStd-Regular.woff2) format('woff2');
     font-weight: 400;
     font-style: normal;
-    font-display: swap;
+    font-display: swap
 }
 @font-face {
-    font-family: 'Brown', Arial;
-    src: url(/assets/fonts/BrownLLWeb-Italic.woff2) format('woff2');
-    font-weight: 400;
-    font-style: italic;
-    font-display: swap;
-}
-@font-face {
-    font-family: 'Brown', Arial;
-    src: url(/assets/fonts/BrownLLWeb-Bold.woff2) format('woff2');
-    font-weight: 800;
+    font-family: 'ConduitITCPro';
+    src: url(fonts/ConduitITCPro-Bold.woff2) format('woff2');
+    font-weight: 700;
     font-style: normal;
-    font-display: swap;
+    font-display: swap
+}
+
+
+/* Aeonik */
+@font-face {
+    font-family: 'Aeonik';
+    src: url(fonts/aeonik-light.woff2) format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap
 }
 @font-face {
-    font-family: 'Brown', Arial;
-    src: url(/assets/fonts/BrownLLWeb-BoldItalic.woff2) format('woff2');
-    font-weight: 800;
-    font-style: italic;
-    font-display: swap;
+    font-family: 'Aeonik';
+    src: url(fonts/aeonik-regular.woff2) format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap
+}
+@font-face {
+    font-family: 'Aeonik';
+    src: url(fonts/aeonik-medium.woff2) format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap
+}
+@font-face {
+    font-family: 'Aeonik';
+    src: url(fonts/aeonik-bold.woff2) format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap
 }

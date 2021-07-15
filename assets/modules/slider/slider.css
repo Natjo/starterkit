@@ -1,0 +1,20 @@
+.slider-container {
+    overflow: hidden;
+}
+.slider {
+    display: grid;
+    grid-template-columns: repeat(var(--total),calc((100% / var(--nb)) - (((var(--nb) - 1) * var(--gap)) / var(--nb))));
+    grid-gap: var(--gap);
+    --total: 20;
+    //--nb: 1;
+
+    &.onswipe {
+        cursor: grab;
+        user-select: none;
+		
+        a,
+        button {
+            pointer-events: none;
+        }
+    }
+}

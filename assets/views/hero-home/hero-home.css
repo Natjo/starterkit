@@ -1,0 +1,62 @@
+.hero-home{
+    position: relative;
+
+    picture {
+        width: 100%;
+    }
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    @keyframes loop{
+        0%{
+            transform: rotate(0);
+        }
+        100%{
+            transform: rotate(360deg);
+        }
+    }
+    .scroll {
+        position: absolute;
+        
+
+        polyline, line{
+            fill:none;
+            stroke:#FFFFFF;
+            stroke-width:2;
+            stroke-linecap:round;
+            stroke-linejoin:round;
+        }
+        path{
+            fill:#E98A83;
+            transform-origin: 50%;
+            animation: loop 10s linear infinite;
+        }
+    }
+    @media (--breakpoint-lg-down) {
+        picture {
+            height: calc(100vh - 70px);
+        }
+        img{
+            object-position: center bottom;
+        }
+        .scroll {
+            bottom: 0px;
+            left: 50%;
+            transform: translate(-50%, 0);
+        }
+        #scroll-text {
+            display: none;
+        }
+    }
+    @media (--breakpoint-lg-up) {
+        picture {
+            height: calc(100vh - 90px);
+        }
+        .scroll {
+            bottom: 40px;
+            right: 40px;
+        }
+    }
+}

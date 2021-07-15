@@ -1,85 +1,73 @@
-:root {
-    --ctr-width: 1280px;
-    
-    --font-1: "Brown", sans-serif;
-    --font-2: "Albra", sans-serif;
+:root{
+    --font-1: 'ConduitITCPro', sans-serif;
+    --font-2: 'aeonik', sans-serif;
 
-    --color-0: #fff;
-    --color-1: #e8ae3a;
-    --color-2: #061927;
-    --color-3: #054652;
-    --color-4: #d7dde6;
-    --color-5: #ebf1f9;
-    --color-6: #b1c6d2;
+    --ctr-width: 1180px;
+    --ctr-margin: 20px;
 
-    --color-gray-light: #f5f5f5;
-    --color-gray: #ccc;
-    --color-gray-dark: #555;
+    --gap: 20px;
 
-    --color-text: #000;
-    --color-error: #ff625a;
-    --color-valid: #054652;
+    --header-height: 70px;
+    --color-text: #1D1D1B;
+    --gray: #ECECEC;
+
+    --color-1: #7163A9;
+    --color-2: #3F3B8F;
+    --color-3: #0089AB;
+    --color-4: #77C7C8;
+    --color-5: #F18E7E;
+    --color-6: #B770AC;
+    --color-7: #5F71B5;
+    --color-8: #F3F2CE;
+    --color-9: #60AAA7;
+    --color-10: #FFDC93;
+
+    --color-tpl-1: var(--color-4);
+    --color-tpl-2: var(--color-3);
+    --color-tpl-3: var(--color-1);
+   
+
+    --font-size-sm: .875rem;
+    --font-size: .875rem;
+    --font-size-md: 1.125rem;
+    --font-size-xmd: 1rem;
+    --font-size-lg: 1.5rem;
+    --font-size-xlg: 2.25rem;
+    --font-size-xxlg: 2.25rem;
+
+    --margin-sm: 30px;
+    --margin: 60px;
+    --margin-md: 40px;
+    --margin-lg: 40px;
+    --margin-xl: 60px;
 }
 
 
-@media (--breakpoint-md-down) {
-    :root{
-        --ctr-margin: 20px;
-        --gap: 20px;
-
-        --font-size-xsm: 0.688rem;
-        --font-size-sm: 0.75rem;
-        --font-size: 0.875rem;
-        --font-size-md: 1rem;
-        --font-size-lg: 1.438rem;
-        --font-size-xlg: 1.875rem;
-        --font-size-xxlg: 2.188rem;
-
-        --margin-xsm: 5px;
-        --margin-sm: 20px;
-        --margin: 20px;
-        --margin-lg: 40px;
-        --margin-xlg: 60px;
-    }
-}
-
-@media (--breakpoint-md-scoped) {
-    :root {
-        --ctr-margin: 40px;
-        --gap: 30px;
-
-        --font-size-xsm: 0.75rem;
-        --font-size-sm: 0.875em;
-        --font-size: 1rem;
-        --font-size-md: 2rem;
-        --font-size-lg: 2rem;
-        --font-size-xlg: 2.375rem;
-        --font-size-xxlg: 2.688rem;
-
-        --margin-xsm: 10px;
-        --margin-sm: 20px;
-        --margin: 40px;
-        --margin-lg: 60px;
-        --margin-xlg: 80px;
-    }
-}
 @media (--breakpoint-lg-up) {
-    :root {
-        --ctr-margin: 120px;
+    :root{
+        --ctr-margin: 60px;
+        --header-height: 90px;
         --gap: 40px;
 
-        --font-size-xsm: 0.75rem;
-        --font-size-sm: 0.875rem;
-        --font-size: 1rem;
-        --font-size-md: 1.5rem;
-        --font-size-lg: 1.625rem;
-        --font-size-xlg: 2.375rem;
-        --font-size-xxlg: 3.375rem;
+        --font-size-sm: .875rem;
+        --font-size: 1.125rem;
+        --font-size-md: 1.375rem;
+        --font-size-xmd: 1.5rem;
+        --font-size-lg: 2.125rem;
+        --font-size-xlg: 4rem;
+        --font-size-xxlg: 4.625rem;
 
-        --margin-xsm: 15px;
-        --margin-sm: 25px;
-        --margin: 45px;
-        --margin-lg: 65px;
-        --margin-xlg: 85px;
+        --margin-sm: 40px; 
+        --margin: 50px;
+        --margin-md: 60px;
+        --margin-lg: 84px;
+        --margin-xl: 200px;
     }
+}
+
+/* template */
+.tpl-prise-de-parole{
+    --color-tpl-1: var(--color-5);
+    --color-tpl-2:  var(--color-6);
+    --color-tpl-3:  var(--color-2);
 }
