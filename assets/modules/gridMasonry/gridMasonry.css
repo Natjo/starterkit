@@ -1,0 +1,14 @@
+.masonry {
+    display: grid;
+    grid-column-gap: 15%;
+}
+.masonry + .masonry-items {
+    height: 0;
+    overflow: hidden;
+}
+.masonry > li:first-child {
+    margin-top: 150px;
+}
+.masonry > li:last-child {
+    margin-top: 150px;
+}
