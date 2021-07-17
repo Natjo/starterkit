@@ -19,7 +19,8 @@
     "postcss": "^8.0.14",
     "postcss-custom-media": "7.0.8",
     "postcss-nested": "^5.0.1",
-    "uglifycss": "^0.0.29"
+    "uglifycss": "^0.0.29",
+    "dotenv": "10.0.0"
   },
   "dependencies": {
     "core-js": "^3.6.5"

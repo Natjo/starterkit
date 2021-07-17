@@ -43,7 +43,7 @@
 }
 
 
-@media (--breakpoint-lg-up) {
+@media (min-width: 992px) {
     :root{
         --ctr-margin: 60px;
         --header-height: 90px;

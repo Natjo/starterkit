@@ -8,11 +8,11 @@ services:
       dockerfile: wordpress/Dockerfile
     container_name: ${APP_NAME}-wp
     environment:
-      WORDPRESS_DB_HOST: ${DB_HOST}
-      WORDPRESS_DB_NAME: ${DB_NAME}
-      WORDPRESS_DB_USER: ${DB_USER}
-      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
-      WORDPRESS_TABLE_PREFIX: ${DB_TABLE_PREFIX}
+      DB_HOST: ${DB_HOST}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      TABLE_PREFIX: ${DB_TABLE_PREFIX}
     volumes:
       - ../.docker/wordpress/php.ini:/usr/local/etc/php/conf.d/php.ini
       - ../web:/var/www/html
@@ -24,10 +24,10 @@ services:
     restart: unless-stopped
     command: > 
       bash -c '
-        if [ ! -d "/var/www/html/wp-content/themes/${WP_THEME_NAME}" ]
+        if [ ! -d "/var/www/html/wp-content/themes/${THEME_NAME}" ]
         then
             echo "Directory /path/to/dir DOES NOT exists." 
-            mv /var/www/html/wp-content/themes/default /var/www/html/wp-content/themes/${WP_THEME_NAME}
+            mv /var/www/html/wp-content/themes/default /var/www/html/wp-content/themes/${THEME_NAME}
         fi
         php-fpm
       '
@@ -41,12 +41,6 @@ services:
     ports:
       - 80:80
       - 443:443
-    environment:
-      MYSQL_HOST: ${DB_HOST}
-      MYSQL_DATABASE: ${DB_NAME}
-      MYSQL_USER: ${DB_USER}
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
     volumes:
       - ../.docker/nginx/default.conf:/tmp/default.template
       - ../.docker/certs:/etc/certs
