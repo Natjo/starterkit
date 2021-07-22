@@ -1,7 +1,7 @@
 import animation from '../../modules/animation/animation.js';
 import ytPlayer from '../../modules/ytPlayer/ytPlayer.js';
 
-const el = document.querySelector('.interview');
+const el = document.querySelector('[data-view=interview]');
 const cta = el.querySelector(".videoPlayer-cta");
 const btn_close = el.querySelector(".btn-close");
 let popinVideo;

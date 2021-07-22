@@ -1,6 +1,7 @@
 import formValidate from '../../modules/formValidate/formValidate.js';
 
-const form = document.querySelector('#form-contact');
+const el = document.querySelector('[data-view=contact]');
+const form = el.querySelector('#form-contact');
 const url = paramsData.wp_ajax_url;
 
 new formValidate(form, e => {

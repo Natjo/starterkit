@@ -1,4 +1,4 @@
-<li class="item card-article <?= $args["category_class"] ?>">
+<li class="item <?= $args["category_class"] ?>" data-view="card-article">
 	<a href="<?= $args["link"] ?>" title="<?= $args["title"] ?>">
 		<?php
 		picture(array(

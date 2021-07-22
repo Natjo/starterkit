@@ -1,4 +1,4 @@
-<section class="sitemap">
+<section data-view="sitemap">
 	<div class="container">
 		<ul>
 			<?php foreach ($args as $item) : ?>

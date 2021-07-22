@@ -1,4 +1,4 @@
-<header class="hero-home">
+<header data-view="hero-home">
 	<?php	
 		picture(array(
 			"images" => $args['images'],

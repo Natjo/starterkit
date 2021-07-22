@@ -1,1 +1,5 @@
-.sitemap ul li ul{padding-left:20px}
+[data-view=sitemap] {
+    ul li ul {
+        padding-left: 20px;
+    }
+}

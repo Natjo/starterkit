@@ -1,4 +1,4 @@
-.hero-home{
+[data-view=hero-home]{
     position: relative;
 
     picture {
@@ -52,7 +52,7 @@
     }
     @media (--breakpoint-lg-up) {
         picture {
-            height: calc(100vh - 90px);
+            height: calc(100vh + 1px - var(--header-height));
         }
         .scroll {
             bottom: 40px;

@@ -1,4 +1,4 @@
-.card-highlight{
+[data-view=card-highlight] {
 	position: relative;
 	z-index: 0;
 	padding: 160px 30px 30px;

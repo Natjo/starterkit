@@ -1,6 +1,7 @@
 @import url(../../modules/slider/slider.css);
+@import url(../../modules/gridMasonry/gridMasonry.css);
 
-.highlights {
+[data-view=highlights]{
     .card-highlight{
         opacity: 0;
     }

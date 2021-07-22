@@ -1,6 +1,8 @@
-.interview {
+[data-view=interview]{
     padding-top: var(--margin-lg);
     padding-bottom: var(--margin-lg);
+    content-visibility: auto;
+    
 
     .container{
         display: grid;

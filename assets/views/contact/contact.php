@@ -4,16 +4,16 @@
 			<fieldset>
 				<legend>Personal information</legend>
 				<div class="field">
-					<label for="">Name</label>
-					<input type="text" name="name">
+					<label for="form-contat-name">Name</label>
+					<input id="form-contat-name" type="text" name="name" aria-label="Name">
 				</div>
 				<div class="field">
-					<label for="">Email</label>
-					<input type="email" name="email">
+					<label for="form-contat-email">Email</label>
+					<input id="form-contat-email" type="email" name="email" aria-label="Email">
 				</div>
 				<div class="field">
-					<label for="">Message</label>
-					<textarea name="message">
+					<label for="form-contat-msg">Message</label>
+					<textarea id="form-contat-msg" name="message" aria-label="Msg">
                 </textarea>
 				</div>
 				<div class="action">

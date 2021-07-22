@@ -1,4 +1,4 @@
-<li class="item card-highlight">
+<li class="item" data-view="card-highlight">
 	<a href="<?= $args['link'] ?>" target="_blank">
 		<?php
 		picture(array(
