@@ -1,6 +1,6 @@
 <section class="contact" data-view="contact">
 	<div class="container">
-		<form id="form-contact" action="contact" method="post" data-nonce="contactNonce" novalidate="novalidate" role="form" aria-label="Contact information" data-mandatory="Mandatory field">
+		<form id="form-contact" action="contact" method="post" data-nonce="<?= wp_create_nonce("contactNonce"); ?>" novalidate="novalidate" role="form" aria-label="Contact information" data-mandatory="Mandatory field">
 			<fieldset>
 				<legend>Personal information</legend>
 				<div class="field">

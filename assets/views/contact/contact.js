@@ -7,7 +7,7 @@ const url = paramsData.wp_ajax_url;
 new formValidate(form, e => {
     const formData = new FormData(form);
     formData.append('nonce', form.dataset.nonce);
-    formData.append('action', form.action);
+    formData.append('action', form.getAttribute('action'));
 
     const xhr = new XMLHttpRequest();
     xhr.open('POST', url, true);

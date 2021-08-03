@@ -6,7 +6,7 @@
 .tl2{
     font-family: var(--font-2);
     font-size: var(--font-size-xlg);
-    line-height: 1.1; 
+    line-height: 1.1;  
     font-weight: 500;
     color: var(--color-2);
 }
@@ -29,7 +29,7 @@
 }
 .link-2[target=_blank]{
         padding-left: 35px;
-        background: transparent url(../img/blank.svg) no-repeat 0 0;
+        background: transparent url(img/blank.svg) no-repeat 0 0;
     }
 
 .btn-1{
@@ -104,7 +104,7 @@
 
 .rte a[target=_blank]{
         padding-left: 35px;
-        background: transparent url(../img/blank.svg) no-repeat 0 0;
+        background: transparent url(img/blank.svg) no-repeat 0 0;
     }
 
 .rte strong{

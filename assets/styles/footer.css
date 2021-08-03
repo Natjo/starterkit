@@ -21,8 +21,17 @@
     fill: var(--color-5);
 }
 
+
 #footer .extra {
     font-size: var(--font-size-sm);
+}
+
+#nav-footer{
+    border: 1px solid red;
+    padding: 10px;
+    ul ul{
+        padding-left: 20px;
+    }
 }
 
 @media (max-width: 991px) {

@@ -41,11 +41,11 @@ const core = {
         else fs.copySync(file, dist_name);
     },
     compile_syles() {
-        
         const dir = `${src}styles/`;
         let str = '';
+        let inc = 0;
         styles = [];
-        
+
         fs.readdirSync(dir).forEach(res => {
             const file = path.resolve(dir, res);
             if (/.css$/.test(file)) {
@@ -54,11 +54,11 @@ const core = {
                 } 
             }
         });
-        styles.forEach((file, inc) => {
+        styles.forEach(file => {
            core.postcss(file, css => { 
                 str += css;
-                if(inc == styles.length - 1) {
-                    fs.ensureDirSync(path.dirname(`${dist}assets/styles.css`));
+                inc++;
+                if(inc == styles.length ) {
                     fs.writeFileSync(`${dist}assets/styles.css`, str); 
                 }      
             });
@@ -151,11 +151,13 @@ watch(src, {recursive: true}, (evt, file) => {
     const key = filename.replace(ext, '') // stage, block-intro ...
     const view = file.split('/')[2]; // footer, header, strate-intro ..
     const exist = fs.existsSync(dist_file) ? true : false;
+ 
 
-    if(!fs.existsSync(dist_file)) evt = 'add';
+    if(folder !== 'styles'){
+        if(!fs.existsSync(dist_file)) evt = 'add';
+        if(evt == 'update' || evt == 'add') core.compile(file, dist_file, ext);
+    }
 
-    if(evt == 'update' || evt == 'add') core.compile(file, dist_file, ext);
-   
     if(folder == 'views' && ext != '.php'){
         if(isFile) json.datas[key][ext.replace('.','')] = ''; 
         else delete json.datas[key];
