@@ -68,6 +68,6 @@ web/wp-content/languages/themes/*-backup-*
 
 # Front
 web/wp-content/themes/*
-!web/wp-content/themes/default
+
 web/wp-content/themes/default/assets/*
 node_modules/*
