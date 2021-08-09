@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Yoast SEO - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2021-07-13 07:51:14+0000\n"
+"PO-Revision-Date: 2021-07-29 14:13:25+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,100 @@ msgstr ""
 "X-Generator: GlotPress/3.0.0-alpha.2\n"
 "Language: fr\n"
 "Project-Id-Version: Plugins - Yoast SEO - Stable (latest release)\n"
+
+#: src/schema-templates/preparation-time.block.php:13
+msgid "Prep time"
+msgstr "Temps de préparation"
+
+#: src/schema-templates/preparation-time.block.php:11
+msgid "The time it takes to prepare the items to be used in the instructions."
+msgstr "Le temps qu’il faut pour préparer les éléments qui seront utilisés ensuite."
+
+#: src/schema-templates/preparation-time.block.php:11
+msgid "Recipe prep time"
+msgstr "Temps de préparation de la recette"
+
+#: src/schema-templates/cooking-time.block.php:11
+msgid "The time it takes to actually cook the dish."
+msgstr "Le temps qu’il faut pour cuisiner le plat."
+
+#: src/schema-templates/cooking-time.block.php:11
+msgid "Recipe cooking time"
+msgstr "Durée de cuisson de la recette"
+
+#: src/integrations/admin/workouts-integration.php:71
+msgid "Workouts"
+msgstr "Entraînements"
+
+#. translators: %1$s is the plugin name, %2$s and %3$s are a link.
+#: inc/class-addon-manager.php:322
+msgid "A new version of %1$s is available. %2$sRenew your subscription%3$s if you want to update to the latest version."
+msgstr "Une nouvelle version de %1$s est disponible. %2$sRenouvelez votre abonnement%3$s si vous souhaitez passer à la dernière version."
+
+#: admin/views/workouts.php:145
+msgid "Finish this workout and make sure the right pages are ranking with Yoast SEO Premium."
+msgstr "Terminez cet entraînement et assurez-vous que les bonnes pages soient bien visibles avec Yoast SEO Premium."
+
+#: admin/views/workouts.php:140
+msgid "Want to continue?"
+msgstr "Vous souhaitez continuer ?"
+
+#. translators: %1$s expands to <em>, %2$s expands to </em>.
+#: admin/views/workouts.php:118
+msgid "Surf to each one of your cornerstones on your own website. Hit %1$sedit post%2$s and go to the WordPress Backend. Mark them as cornerstones in the SEO tab of the metabox or the sidebar of Yoast SEO."
+msgstr "Naviguez sur chaque publication Cornerstone de votre site. Cliquez sur « %1$sModifier la publication%2$s » et rendez-vous dans l’administration de WordPress. Marquez les ensuite comme Cornerstone dans l’onglet SEO de l’encart Yoast SEO de la colonne latérale."
+
+#: admin/views/workouts.php:112
+msgid "Mark these articles as cornerstone content"
+msgstr "Marquer ces articles comme contenus Cornerstone"
+
+#. translators: %1$s expands to <em>, %2$s expands to </em>.
+#: admin/views/workouts.php:89
+msgid "With which articles do you want to rank highest? Which are the most complete, which are the best explainers, which are %1$sthe%2$s most important? Check out your own website and choose the pages and posts you want to be your cornerstone articles!"
+msgstr "Avec quels articles souhaitez-vous apparaître le plus haut ? Quels sont les plus complets, les plus didactiques, %1$sles%2$s plus importants ? Étudiez votre site et choisissez les pages et articles que vous souhaitez assigner en publications Cornerstone !"
+
+#: admin/views/workouts.php:78
+msgid "Your site might not feel that SEO fit just yet. But that's just a matter of time. Let's start this workout by choosing your cornerstones."
+msgstr "Votre site ne doit pas encore se sentir en forme SEO mais ce n’est qu’une question de temps ! Commençons cet entraînement en choisissant vos Cornerstones."
+
+#: admin/views/workouts.php:73
+msgid "Start: Choose your cornerstones!"
+msgstr "Début : Choisissez vos Cornerstones !"
+
+#. translators: %1$s expands to <em>, %2$s expands to <a>, %3$s expands to
+#. </a>, %4$s expands to </em>.
+#: admin/views/workouts.php:58
+msgid "%1$sNeed more guidance? We've covered every step in more detail in our %2$sCornerstone practical guide%3$s%4$s."
+msgstr "%1$sBesoin de plus d’aide ? Nous avons décrit chaque étape en détail sur notre %2$sguide pratique Cornerstone (en anglais)%3$s%4$s."
+
+#. translators: %1$s expands to <em>, %2$s expands to </em>.
+#: admin/views/workouts.php:43
+msgid "On your site you have a few articles that are %1$sthe%2$s most important. You want to rank highest in Google with these articles. At Yoast, we call these articles cornerstone articles. Take the following 6 steps in order to start ranking with your cornerstone articles!"
+msgstr "Sur votre site, vous avez peu d’articles qui sont %1$sles%2$s plus importants. Le but est d’apparaître le plus haut possible avec eux. Chez Yoast, nous appelons ces articles des publications Cornerstone. Suivez ces 6 étapes dans l’ordre pour les rendre visibles !"
+
+#: admin/views/workouts.php:37
+msgid "Rank with articles you want to rank with"
+msgstr "Soyez visibles avec les articles souhaités"
+
+#: admin/views/workouts.php:36
+msgid "The cornerstone approach"
+msgstr "L’approche Cornerstone"
+
+#: admin/views/workouts.php:29
+msgid "Getting your site in shape and keeping it SEO fit can be challenging. Let us help you get started by taking on the most common SEO challenges, with these step by step SEO workouts."
+msgstr "Mettre son site en forme côté SEO et le garder ainsi peut être difficile. Laissez-nous vous aider en attaquant les challenges SEO les plus communs avec ces entraînements pas-à-pas."
+
+#: admin/views/workouts.php:25
+msgid "SEO Workouts"
+msgstr "Entraînements SEO"
+
+#: admin/views/workouts.php:18
+msgid "Revise this step"
+msgstr "Revoir cette étape"
+
+#: admin/views/workouts.php:17
+msgid "Finish this step"
+msgstr "Terminer cette étape"
 
 #: src/schema-templates/recipe-instructions.block.php:15
 msgid "Enter step"
