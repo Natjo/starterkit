@@ -1,1 +1,5 @@
-const header_nav=()=>{console.log("rgpd")};export default header_nav;
+const header_nav = () => {
+  console.log('rgpd');
+};
+
+export default header_nav;

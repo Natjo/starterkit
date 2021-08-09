@@ -1,1 +1,5 @@
-const header_nav=()=>{console.log("headernav wesh")};export default header_nav;
+const header_nav = () => {
+  console.log('headernav wesh');
+};
+
+export default header_nav;

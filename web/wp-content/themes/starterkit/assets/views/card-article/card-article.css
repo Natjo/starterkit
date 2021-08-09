@@ -1,1 +1,80 @@
-[data-view=card-article]{background:#fff;width:100%;height:100%;box-shadow:0 0 60px rgba(0,0,0,0.2);border-radius:20px;overflow:hidden}[data-view=card-article] a{display:flex;flex-direction:column;height:100%}[data-view=card-article] picture{overflow:hidden}[data-view=card-article] img{width:100%;height:auto;transition:transform 1s ease}[data-view=card-article] .content{padding:30px 30px 20px 30px;display:flex;flex-direction:column;position:relative;flex:1}[data-view=card-article] .content:before{content:"";display:block;height:10px;background:linear-gradient(90deg,var(--color-4),var(--color-1));position:absolute;width:100%;top:0;left:0}[data-view=card-article] .cat{text-transform:uppercase;font-size:1rem;font-family:var(--font-2);margin-bottom:10px}[data-view=card-article] h3{font-family:var(--font-2);font-size:1.5rem;font-weight:700;color:var(--color-3);//min-height:48px}[data-view=card-article] p{margin-top:40px;flex:0 1 115px;font-size:1rem;line-height:1.25;flex:0}[data-view=card-article].tpl-prise-de-parole .content:before{background:linear-gradient(90deg,var(--color-5),var(--color-6))}[data-view=card-article].tpl-prise-de-parole h3{color:var(--color-1)}[data-view=card-article]:hover img{transform:scale(1.05)}
+[data-view=card-article] {
+	background: #fff;
+	width: 100%;
+	height: 100%;
+	box-shadow: 0 0 60px rgba(0, 0, 0, 0.2);
+	border-radius: 20px;
+	overflow: hidden;
+}
+
+	[data-view=card-article] a{
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+	}
+
+	[data-view=card-article] picture{
+		overflow: hidden;
+	}
+
+	[data-view=card-article] img{
+		width: 100%;
+		height: auto;
+		transition: transform 1s ease;
+	}
+
+	[data-view=card-article] .content{
+		padding: 30px 30px 20px 30px;
+		display: flex;
+		flex-direction: column;
+		
+		position: relative;
+		flex: 1;
+	}
+
+	[data-view=card-article] .content:before{
+			content: "";
+			display: block;
+			height: 10px;
+			background: linear-gradient(90deg, var(--color-4), var(--color-1));
+			position: absolute;
+			width: 100%;
+			top: 0;
+			left: 0;
+		}
+
+	[data-view=card-article] .cat{
+		text-transform: uppercase;
+		font-size: 1rem;
+		font-family: var(--font-2);
+		margin-bottom: 10px;
+	}
+
+	[data-view=card-article] h3{
+		font-family: var(--font-2);
+		font-size: 1.5rem;
+		font-weight: 700;
+		color: var(--color-3);
+		//min-height: 48px;
+	}
+
+	[data-view=card-article] p{
+		margin-top: 40px;
+		flex: 0 1 115px;
+	
+		font-size: 1rem;
+		line-height: 1.25;
+		flex: 0;
+	}
+
+	[data-view=card-article].tpl-prise-de-parole .content:before{
+				background: linear-gradient(90deg, var(--color-5), var(--color-6));
+			}
+
+	[data-view=card-article].tpl-prise-de-parole h3{
+			color: var(--color-1);
+		}
+
+	[data-view=card-article]:hover img{
+			transform: scale(1.05);
+		}

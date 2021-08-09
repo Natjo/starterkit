@@ -1,0 +1,12 @@
+.link-1 {
+    text-decoration: underline;
+    color: var(--color-2);
+}
+.link-2 {
+    color: var(--color-3);
+    font-weight: 700;
+}
+.link-2[target="_blank"] {
+    padding-left: 35px;
+    background: transparent url(img/blank.svg) no-repeat 0 0;
+}

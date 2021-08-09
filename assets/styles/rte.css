@@ -1,0 +1,64 @@
+.rte h2 {
+    margin-bottom: 25px;
+    color: var(--color-1);
+    font-family: var(--font-2);
+    font-size: var(--font-size-lg);
+}
+
+.rte h3 {
+    color: var(--color-3);
+    font-family: var(--font-2);
+    font-weight: 700;
+    font-size: var(--font-size-md);
+    margin-bottom: 20px;
+    line-height: 1.25;
+}
+
+.rte p {
+    line-height: 1.4;
+    font-weight: 300;
+    margin-bottom: 20px;
+}
+
+.rte a {
+    color: var(--color-3);
+    font-weight: 700;
+}
+
+.rte a[target="_blank"] {
+    padding-left: 35px;
+    background: transparent url(img/blank.svg) no-repeat 0 0;
+}
+
+.rte strong {
+    color: var(--color-1);
+    font-weight: 700;
+}
+
+.rte ul,
+.rte ol {
+    line-height: 1.4;
+    font-weight: 300;
+    margin-bottom: 20px;
+    display: grid;
+    grid-gap: 20px;
+}
+
+.rte ul li {
+    padding-left: 25px;
+    position: relative;
+}
+
+.rte ul li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    top: 0;
+    line-height: 1.15;
+    font-size: 1.41rem;
+    color: var(--color-1);
+}
+
+.rte *:nth-last-child(1) {
+    margin-bottom: 0;
+}

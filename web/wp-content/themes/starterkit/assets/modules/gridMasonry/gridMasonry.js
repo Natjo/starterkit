@@ -1,1 +1,44 @@
-function GridMasonry(a,b){const c=document.querySelector(a);let d,e,f=[];const g=a=>{e=document.createElement("div"),e.className="masonry-items",c.parentNode.insertBefore(e,c),d=document.createElement("ul"),d.className="masonry",e.parentNode.insertBefore(d,e);const g=c.cloneNode(!0);e.appendChild(g);const h=e.querySelectorAll(b);d.style.gridTemplateColumns=`repeat(${a}, 1fr)`,f.forEach(a=>a.remove()),f=[];let i=[];for(let b=0;b<a;b++){const a=document.createElement("li");d.appendChild(a),f.push(a),1==b?i.push(-150):i.push(0)}for(let b of h){const a=i.indexOf(Math.min(...i));i[a]+=b.clientHeight,f[a].appendChild(b)}};this.destroy=()=>{d&&d.remove(),e&&e.remove()},this.column=a=>g(a)}export default GridMasonry;
+function GridMasonry(selector, item_selector) {
+  const el = document.querySelector(selector);
+  let masonry;
+  let items;
+  let cols = [];
+
+  const create = nb => {
+    items = document.createElement("div");
+    items.className = "masonry-items";
+    el.parentNode.insertBefore(items, el);
+    masonry = document.createElement("ul");
+    masonry.className = "masonry";
+    items.parentNode.insertBefore(masonry, items);
+    const clone = el.cloneNode(true);
+    items.appendChild(clone);
+    const cards = items.querySelectorAll(item_selector);
+    masonry.style.gridTemplateColumns = `repeat(${nb}, 1fr)`;
+    cols.forEach(item => item.remove());
+    cols = [];
+    let arr = [];
+
+    for (let u = 0; u < nb; u++) {
+      const li = document.createElement("li");
+      masonry.appendChild(li);
+      cols.push(li);
+      if (u == 1) arr.push(-150);else arr.push(0);
+    }
+
+    for (let card of cards) {
+      const index = arr.indexOf(Math.min(...arr));
+      arr[index] = arr[index] + card.clientHeight;
+      cols[index].appendChild(card);
+    }
+  };
+
+  this.destroy = () => {
+    if (masonry) masonry.remove();
+    if (items) items.remove();
+  };
+
+  this.column = val => create(val);
+}
+
+export default GridMasonry;

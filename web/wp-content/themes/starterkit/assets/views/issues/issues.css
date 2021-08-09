@@ -1,1 +1,31 @@
-@import url(../../modules/slider/slider.css);[data-view=issues]{padding-top:var(--margin-lg);padding-bottom:var(--margin-lg);background:linear-gradient(to bottom,var(--color-2) 0,var(--color-2) 65%,rgba(0,0,0,0) 65%,rgba(0,0,0,0) 100%)}[data-view=issues] header{display:flex;margin-bottom:30px}[data-view=issues] h2{color:#fff}[data-view=issues] .slider-control{margin-left:auto;align-self:flex-end}[data-view=issues] .card-article{opacity:0}@media(min-width:992px){[data-view=issues] header{margin-bottom:60px}}
+@import url(../../modules/slider/slider.css);
+
+[data-view=issues]{
+    padding-top: var(--margin-lg);
+    padding-bottom: var(--margin-lg);
+    background: linear-gradient(to bottom,var(--color-2) 0%,var(--color-2) 65%,rgba(0, 0, 0, 0) 65%,rgba(0, 0, 0, 0) 100%);
+}
+
+[data-view=issues] header {
+        display: flex;
+        margin-bottom: 30px;
+    }
+
+[data-view=issues] h2 {
+        color: #fff;
+    }
+
+[data-view=issues] .slider-control {
+        margin-left: auto;
+        align-self: flex-end;
+    }
+
+[data-view=issues] .card-article{
+        opacity: 0;
+    }
+
+@media (min-width: 992px) {
+        [data-view=issues] header {
+            margin-bottom: 60px;
+        }
+    }

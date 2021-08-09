@@ -1,1 +1,25 @@
-import header_nav from"./modules/header_nav/header_nav.js";header_nav(),window.addEventListener("load",()=>{import("./modules/rgpd/rgpd.js").then(a=>{a.default(()=>{})});const a=document.createElement("link");a.rel="stylesheet",a.media="print",a.href=`${paramsData.theme_url}/assets/print.css`,document.head.appendChild(a)});const observer=new IntersectionObserver(a=>a.forEach(a=>{if(a.isIntersecting){const b=a.target.dataset.view,c=document.createElement("script");c.type="module",c.src=`${paramsData.theme_url}assets/views/${b}/${b}.js`,c.setAttribute("defer",""),document.body.appendChild(c),observer.unobserve(a.target)}}));for(const a of paramsData.views)observer.observe(document.querySelector(`[data-view=${a}]`));
+import header_nav from './modules/header_nav/header_nav.js';
+header_nav();
+window.addEventListener('load', () => {
+  import('./modules/rgpd/rgpd.js').then(module => {
+    module.default(cat => {});
+  });
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.media = 'print';
+  link.href = `${paramsData.theme_url}/assets/print.css`;
+  document.head.appendChild(link);
+});
+const observer = new IntersectionObserver(items => items.forEach(e => {
+  if (e.isIntersecting) {
+    const view = e.target.dataset.view;
+    const script = document.createElement('script');
+    script.type = 'module';
+    script.src = `${paramsData.theme_url}assets/views/${view}/${view}.js`;
+    script.setAttribute('defer', '');
+    document.body.appendChild(script);
+    observer.unobserve(e.target);
+  }
+}));
+
+for (const view of paramsData.views) observer.observe(document.querySelector(`[data-view=${view}]`));
