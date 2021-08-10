@@ -67,7 +67,6 @@ web/wp-content/uploads/
 web/wp-content/languages/themes/*-backup-*
 
 # Front
-web/wp-content/themes/*
-!web/wp-content/themes/default
-web/wp-content/themes/default/assets/*
+
+web/wp-content/themes/*/assets/*
 node_modules/*
