@@ -2,7 +2,9 @@ import header_nav from './modules/header_nav/header_nav.js';
 header_nav();
 window.addEventListener('load', () => {
   import('./modules/rgpd/rgpd.js').then(module => {
-    module.default(cat => {});
+    module.default(cat => {
+      console.log(cat);
+    });
   });
   const link = document.createElement('link');
   link.rel = 'stylesheet';

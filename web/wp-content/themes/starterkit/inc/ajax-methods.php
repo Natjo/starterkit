@@ -1,4 +1,17 @@
 <?php
+
+add_action( 'wp_ajax_rgpd', 'rgpd_callback' );
+add_action( 'wp_ajax_nopriv_rgpd', 'rgpd_callback' );
+function rgpd_callback()
+{
+    // Security
+    checkNonce('rgpdNonce');
+    ob_start();
+    get_template_part( 'template-parts/general/block', 'rgpd');
+    $response['markup'] = ob_get_clean();
+    wp_send_json( $response );
+}
+
 add_action( 'wp_ajax_contact', 'contact_callback' );
 add_action( 'wp_ajax_nopriv_contact', 'contact_callback' );
 function contact_callback()
@@ -27,9 +40,9 @@ function contact_callback()
 
     if(empty($message)){
         $message = "Votre message à été envoyé";
-/*
+        /*
 
-  $to = get_field('params_contact_application_email', 'option');
+        $to = get_field('params_contact_application_email', 'option');
 
         $subject = 'Nouveau message de : ' . $lastname . ' ' . $firstname;
         $msg = 'Nouveau message <br>';
@@ -63,9 +76,9 @@ function contact_callback()
     wp_send_json( $response );
 }
 
-add_action( 'wp_ajax_rgpd', 'rgpd_callback' );
-add_action( 'wp_ajax_nopriv_rgpd', 'rgpd_callback' );
-function rgpd_callback()
+//add_action( 'wp_ajax_rgpd444', 'rgpd_callback444' );
+//add_action( 'wp_ajax_nopriv_rgpd444', 'rgpd_callback444' );
+function rgpd_callback444()
 {
     // Security
     checkNonce('securite_nonce_rgpd');

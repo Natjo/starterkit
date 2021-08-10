@@ -3,11 +3,11 @@ import header_nav from './modules/header_nav/header_nav.js';
 header_nav();
 
 // Third part
-window.addEventListener('load', () => {    
-    //var arr  = JSON.parse(aramsData.options_rgpd);
+window.addEventListener('load', () => {
     import('./modules/rgpd/rgpd.js')
         .then((module) => {
         module.default(cat => {
+            console.log(cat);
             /*if (cat === 'statistiques') {
                 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
                 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

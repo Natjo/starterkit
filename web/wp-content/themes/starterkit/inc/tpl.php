@@ -11,7 +11,8 @@ echo $content;
 get_footer();
 ?>
 
-<script>var paramsData = <?php paramsData(); ?>;paramsData.views = <?= views_observe()?>;document.addEventListener('DOMContentLoaded', (event) => {const script = document.createElement('script');script.type = 'module';script.src = `<?= THEME_URL; ?>assets/app.js`;script.setAttribute('defer', '');document.body.appendChild(script);});</script>
+<script>var paramsData = <?php paramsData(); ?>;paramsData.views = <?= views_observe()?></script>
+<script type="module" src="<?= THEME_URL; ?>assets/app.js" defer></script>
 
 </body>
 </html>

@@ -3,7 +3,8 @@ define('THEME_DIR', get_template_directory() . '/');
 define('THEME_URL', get_template_directory_uri() . '/');
 define('HOME_URL', get_home_url());
 define('AJAX_URL', admin_url('admin-ajax.php'));
-//define('OPTION_RGPD', get_fields('options'));
+$test = get_fields('options');
+define('OPTION_RGPD', $test);
 
 if (ENV_PROD) {
     define('GTAG_KEY', get_field('params_ga_code', 'option'));
@@ -84,7 +85,9 @@ function paramsData()
         'wp_ajax_url' => AJAX_URL,
         'theme_url' => THEME_URL,
         'contactNonce' => wp_create_nonce('contactNonce'),
-        'gtag_key' =>  GTAG_KEY
+        'gtag_key' =>  GTAG_KEY,
+        'rgpdNonce' => wp_create_nonce('rgpdNonce'),
+        'options_rgpd' => OPTION_RGPD
     );
     echo json_encode($dataToBePassed);
 }
@@ -200,5 +203,3 @@ $headers = array('Content-Type: text/html; charset=UTF-8');
 wp_mail( $to, $subject, $body, $headers );
 
 */
-
-
