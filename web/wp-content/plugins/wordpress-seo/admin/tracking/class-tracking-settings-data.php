@@ -44,6 +44,7 @@ class WPSEO_Tracking_Settings_Data implements WPSEO_Collection {
 		'open_graph_frontpage_desc',
 		'open_graph_frontpage_image',
 		'open_graph_frontpage_image_id',
+		'other_social_urls',
 		'pinterest_url',
 		'pinterestverify',
 		'twitter_site',
@@ -51,6 +52,8 @@ class WPSEO_Tracking_Settings_Data implements WPSEO_Collection {
 		'wikipedia_url',
 		'semrush_tokens',
 		'zapier_api_key',
+		'wincher_tokens',
+		'wincher_website_id',
 	];
 
 	/**
@@ -105,7 +108,6 @@ class WPSEO_Tracking_Settings_Data implements WPSEO_Collection {
 		'disable-date',
 		'disable-post_format',
 		'disable-attachment',
-		'is-media-purge-relevant',
 		'breadcrumbs-404crumb',
 		'breadcrumbs-display-blog-page',
 		'breadcrumbs-boldlast',
@@ -173,6 +175,13 @@ class WPSEO_Tracking_Settings_Data implements WPSEO_Collection {
 		'zapier_api_key',
 		'enable_metabox_insights',
 		'enable_link_suggestions',
+		'workouts',
+		'wincher_integration_active',
+		'wincher_tokens',
+		'wincher_website_id',
+		'wincher_automatically_add_keyphrases',
+		'first_time_install',
+		'other_social_urls',
 	];
 
 	/**
