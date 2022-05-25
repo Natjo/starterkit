@@ -1,13 +1,1 @@
-function Breakpoint(value) {
-  this.above = () => {};
-
-  this.under = () => {};
-
-  const breakpointChecker = e => e.matches ? this.above() : this.under();
-
-  const list = window.matchMedia(`(min-width:${value}px)`);
-  list.addEventListener('change', breakpointChecker);
-  setTimeout(() => list.matches ? this.above() : this.under(), 1);
-}
-
-export default Breakpoint;
+function Breakpoint(a){this.above=()=>{},this.under=()=>{};const b=window.matchMedia(`(min-width:${a}px)`);b.addEventListener("change",a=>a.matches?this.above():this.under()),setTimeout(()=>b.matches?this.above():this.under(),1)}export default Breakpoint;

@@ -6,6 +6,7 @@ define('AJAX_URL', admin_url('admin-ajax.php'));
 $test = get_fields('options');
 define('OPTION_RGPD', $test);
 
+
 if (ENV_PROD) {
     define('GTAG_KEY', get_field('params_ga_code', 'option'));
 } else {
@@ -82,12 +83,11 @@ function views_observe()
 function paramsData()
 {
     $dataToBePassed = array(
-        'wp_ajax_url' => AJAX_URL,
+        'ajax_url' => AJAX_URL,
         'theme_url' => THEME_URL,
-        'contactNonce' => wp_create_nonce('contactNonce'),
         'gtag_key' =>  GTAG_KEY,
         'rgpdNonce' => wp_create_nonce('rgpdNonce'),
-        'options_rgpd' => OPTION_RGPD
+        //'options_rgpd' => OPTION_RGPD
     );
     echo json_encode($dataToBePassed);
 }
@@ -178,7 +178,66 @@ function navDisplay($name)
     }
     tree(buildTree($menu));
 }
+/*class navRender{
+    public $arr = array();
+    private $itemToAdd = array();
 
+    private function buildTree(array &$elements, $parentId = 0)
+    {
+        $branch = array();
+        foreach ($elements as $index => $element) {
+            if ($element['parentId'] == $parentId) {
+                $children = $this->buildTree($elements, $element['id']);
+                if ($children) {
+                    $element['children'] = $children;
+                }
+                $branch[$element['id']] = $element;
+                unset($element);
+            }
+        }
+        return $branch;
+    }
+    private function tree($arr)
+    {
+        echo '<ul>';
+        foreach ($arr as $item) {
+            $classes = "";
+            if (!empty($item['classes'][0])) {
+                $array = $item['classes'];
+                $classes = ' class="' . implode(",", $array) . '"';
+            }
+            echo '<li>';
+       
+            echo '<a href="' . $item['url'] . '"' . $classes . '>' . $item['title'] . '</a>';
+        
+           
+            if ($item['children']) $this->tree($item['children']);
+
+            echo '</li>';
+        }
+        echo '</ul>';
+    }
+
+    public function display($name) {
+        $menu = array();
+        $getMenu = wp_get_nav_menu_items('Footer');
+        foreach ($getMenu as $item) {
+            array_push($menu, array(
+                'id' => $item->ID,
+                'parentId' => $item->menu_item_parent,
+                'title' => $item->title,
+                'url' => $item->url,
+                'classes' => $item->classes,
+                'children' => array()
+            ));
+        }
+        //$this->tree($this->buildTree($menu));
+        return $this->buildTree($menu);
+    }
+    public function insertItem($name) {
+    }   
+}
+*/
 /*
  MAIL
 
@@ -203,3 +262,5 @@ $headers = array('Content-Type: text/html; charset=UTF-8');
 wp_mail( $to, $subject, $body, $headers );
 
 */
+
+

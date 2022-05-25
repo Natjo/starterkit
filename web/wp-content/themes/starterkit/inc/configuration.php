@@ -97,9 +97,6 @@ add_action( 'init', 'scripts_site' );
 
 function scripts_site(){
     if ( !is_admin() && !is_login_page() ) wp_deregister_script('jquery');
-    if( !is_admin() || !is_user_logged_in() ){
-        wp_enqueue_style( 'style_principal', get_template_directory_uri() . '/assets/styles.css', array(), filemtime(get_template_directory() . '/assets/styles.css' ) );
-    }
 }
 
 

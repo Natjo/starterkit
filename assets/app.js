@@ -1,10 +1,9 @@
-import header_nav from './modules/header_nav/header_nav.js';
+import "./modules/header_nav/header_nav.js";
 
-header_nav();
 
 // Third part
 window.addEventListener('load', () => {
-    import('./modules/rgpd/rgpd.js')
+    import("./modules/rgpd/rgpd.js")
         .then((module) => {
         module.default(cat => {
             console.log(cat);
@@ -39,4 +38,7 @@ const observer = new IntersectionObserver(items => items.forEach(e => {
         observer.unobserve(e.target);
     }
 }));
-for (const view of paramsData.views) observer.observe(document.querySelector(`[data-view=${view}]`));
+
+window.paramsData = JSON.parse(appjs.dataset.params_data);
+
+for (const view of JSON.parse(appjs.dataset.views)) observer.observe(document.querySelector(`[data-view=${view}]`));

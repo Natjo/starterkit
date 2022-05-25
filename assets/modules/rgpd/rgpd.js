@@ -15,7 +15,6 @@
  */
 
 const Rgpd = (onexec) => {
-  
     const link = document.createElement('link');
     link.rel = 'stylesheet';
     link.media = 'screen';
@@ -95,7 +94,7 @@ const Rgpd = (onexec) => {
             formData.append('action', action);
     
             // var xhr = new XMLHttpRequest();
-            // xhr.open("POST", ParamsData.wp_ajax_url);
+            // xhr.open("POST", ParamsData.ajax_url);
             // xhr.send(formData);
         };
     
@@ -247,7 +246,7 @@ const Rgpd = (onexec) => {
     formData.append("nonce", paramsData.rgpdNonce);
     formData.append("action", "rgpd");
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", paramsData.wp_ajax_url);
+    xhr.open("POST", paramsData.ajax_url);
     xhr.onload = () => {
         const response = JSON.parse(xhr.response);
         document.body.insertAdjacentHTML('afterend',  response.markup);

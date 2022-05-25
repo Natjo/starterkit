@@ -33,7 +33,6 @@ const core = {
         if(ext == '.js') this.babel(fs.readFileSync(file, 'utf8'), dist_name);
         else if(ext == '.css'){
             this.postcss(file, css => {
-               // console.log(css);
                 fs.ensureDirSync(path.dirname(dist_name));
                 fs.writeFileSync(dist_name, css); 
             });

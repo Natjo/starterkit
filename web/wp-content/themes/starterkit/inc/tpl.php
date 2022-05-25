@@ -11,8 +11,8 @@ echo $content;
 get_footer();
 ?>
 
-<script>var paramsData = <?php paramsData(); ?>;paramsData.views = <?= views_observe()?></script>
-<script type="module" src="<?= THEME_URL; ?>assets/app.js" defer></script>
-
+<script id="appjs" type="module" src="<?= THEME_URL; ?>assets/app.js" defer 
+data-params_data='<?= paramsData(); ?>' 
+data-views='<?= views_observe()?>'></script>
 </body>
 </html>

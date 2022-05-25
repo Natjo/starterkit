@@ -2,7 +2,7 @@ import formValidate from '../../modules/formValidate/formValidate.js';
 
 const el = document.querySelector('[data-view=contact]');
 const form = el.querySelector('#form-contact');
-const url = paramsData.wp_ajax_url;
+const url = paramsData.ajax_url;
 
 new formValidate(form, e => {
     const formData = new FormData(form);
