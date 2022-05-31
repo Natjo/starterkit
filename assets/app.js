@@ -2,7 +2,13 @@ import "./modules/header_nav/header_nav.js";
 
 
 // Third part
-window.addEventListener('load', () => {
+window.addEventListener('load', () => {   
+    const style = document.createElement('link');
+    style.rel = 'stylesheet';
+    style.media = 'screen';
+    style.href = `${paramsData.theme_url}/assets/modules/rgpd/rgpd.css`;
+    document.head.appendChild(style);
+
     import("./modules/rgpd/rgpd.js")
         .then((module) => {
         module.default(cat => {
@@ -26,7 +32,7 @@ window.addEventListener('load', () => {
     document.head.appendChild(link);
 });
 
-// views obsrve
+// views observe
 const observer = new IntersectionObserver(items => items.forEach(e => {
     if (e.isIntersecting) {
         const view = e.target.dataset.view;

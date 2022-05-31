@@ -5,3 +5,5 @@
         <?= icon("twitter", 42, 42) ?>
     </div>
 </footer>
+
+<?php get_template_part('template-parts/general/block', 'rgpd'); ?>

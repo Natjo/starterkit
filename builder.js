@@ -10,6 +10,12 @@ const watch = require('node-watch');
 const isProd = process.argv[2] == '--prod' ? true : false;
 require('dotenv').config({ path: '.docker/.env' })
 
+
+const { optimize } = require('svgo');
+
+
+
+
 const src = 'assets/';
 const dist = `web/wp-content/themes/${process.env.THEME_NAME}/`;
 
@@ -30,12 +36,32 @@ const json = {
 const core = {
     initTime: new Date(),
     compile(file, dist_name, ext){
+       
+
         if(ext == '.js') this.babel(fs.readFileSync(file, 'utf8'), dist_name);
         else if(ext == '.css'){
             this.postcss(file, css => {
                 fs.ensureDirSync(path.dirname(dist_name));
                 fs.writeFileSync(dist_name, css); 
             });
+        }
+        else if(ext == '.svg'){
+            if(isProd){
+                const svgString = fs.readFileSync(file, 'utf8');
+                const result = optimize(svgString, {
+                    path: dist_name,
+                    multipass: true,
+                    plugins: [
+                        "removeUselessDefs"
+                    ]
+                });
+                const optimizedSvgString = result.data;
+                fs.ensureDirSync(path.dirname(dist_name));
+                fs.writeFileSync(dist_name, optimizedSvgString); 
+            } else{
+                fs.copySync(file, dist_name);
+            }
+
         }
         else fs.copySync(file, dist_name);
     },

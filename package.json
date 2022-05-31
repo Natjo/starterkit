@@ -20,7 +20,8 @@
     "postcss-custom-media": "7.0.8",
     "postcss-nested": "^5.0.1",
     "uglifycss": "^0.0.29",
-    "dotenv": "10.0.0"
+    "dotenv": "10.0.0",
+    "svgo": "2.8.0"
   },
   "dependencies": {
     "core-js": "^3.6.5"
