@@ -6,7 +6,7 @@
 
 <body <?php body_class(); ?>>
 <?php 
-get_header('nav');
+get_header();
 echo $content;
 get_footer();
 ?>

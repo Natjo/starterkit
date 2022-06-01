@@ -1,4 +1,4 @@
-FROM wordpress:5.5-php8.0-fpm
+FROM wordpress:5.5-php7.4-fpm
 
 # Install sockets for PHP
 RUN docker-php-ext-install sockets

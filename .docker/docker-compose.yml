@@ -2,7 +2,7 @@ version: '3.6'
 
 services: 
   wordpress:
-    image: wordpress:5.5-php7.2-fpm
+    image: wordpress:5.5-php7.4-fpm
     build:
       context: .
       dockerfile: wordpress/Dockerfile

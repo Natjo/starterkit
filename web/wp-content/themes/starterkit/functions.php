@@ -64,8 +64,29 @@ function views($name, $args = null, $observe = true)
             array_push($links, $file);
         }
     }
-    get_template_part('./assets/views/' . $name . '/' .  $name . '', '', $args);
+    get_template_part('./assets/views/strates/' . $name . '/' .  $name . '', '', $args);
 }
+
+function heros($name, $args = null, $observe = false)
+{
+    global $json;
+    global $views;
+    global $links;
+
+    if (!array_key_exists($name, $views)) {
+        $views[$name] = array(
+            "js" => $json[$name]["js"],
+            "css" => $json[$name]["css"],
+            "observe" => $observe
+        );
+        if ($json[$name]["css"]) {
+            $file = $json[$name]["css"];
+            array_push($links, $file);
+        }
+    }
+    get_template_part('./assets/views/heros/' . $name . '/' .  $name . '', '', $args);
+}
+
 function views_observe()
 {
     global $views;
