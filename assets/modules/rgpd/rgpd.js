@@ -28,6 +28,8 @@
     const manage_links = document.querySelectorAll('a[href="#rgpd-manage"]');
     let scrollTop;
     let cats = {};
+    modal.removeAttribute('style');
+    manage.removeAttribute('style');
 
     const eraseUnusedCookies = () => {
         for (const checkbox of checkboxes) {
@@ -62,7 +64,7 @@
             formData.append('nonce', nonce);
             formData.append('action', action);
             const xhr = new XMLHttpRequest();
-            xhr.open('POST', ParamsData.wp_ajax_url);
+            xhr.open('POST', paramsData.wp_ajax_url);
             xhr.send(formData);
             document.activeElement.blur();
         }else{
@@ -182,7 +184,6 @@
             modal.removeAttribute('aria-hidden');
         }
         manage.classList.add('close');
-        manage_box.addEventListener('animationend', (e) => e.stopImmediatePropagation());
         window.removeEventListener(clicktouch, clickoutside);
         window.removeEventListener('scroll', disableScroll);
 
@@ -217,12 +218,6 @@
     };
 
     btn_close.onclick = e => close(e);
-
-    checkboxes.forEach(checkbox => {
-        checkbox.onclick = e => {
-            checkbox.parentNode.classList.toggle("checked");
-        }
-    });
 };
 
 export default Rgpd;

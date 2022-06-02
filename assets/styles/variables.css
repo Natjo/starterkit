@@ -42,8 +42,7 @@
     --margin-xl: 60px;
 }
 
-
-@media (min-width: 992px) {
+@media (--breakpoint-lg-up) {
     :root{
         --ctr-margin: 60px;
         --header-height: 90px;

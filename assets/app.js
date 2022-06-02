@@ -1,6 +1,5 @@
 import "./modules/header_nav/header_nav.js";
 
-
 // Third part
 window.addEventListener('load', () => {   
     const style = document.createElement('link');
@@ -47,4 +46,6 @@ const observer = new IntersectionObserver(items => items.forEach(e => {
 
 window.paramsData = JSON.parse(appjs.dataset.params_data);
 
-for (const view of JSON.parse(appjs.dataset.views)) observer.observe(document.querySelector(`[data-view=${view}]`));
+for (const view of JSON.parse(appjs.dataset.views)) {
+    observer.observe(document.querySelector(`[data-view=${view}]`));
+}

@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Yoast SEO - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2022-05-17 07:51:12+0000\n"
+"PO-Revision-Date: 2022-05-31 08:46:53+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,73 @@ msgstr ""
 "X-Generator: GlotPress/4.0.0-alpha.1\n"
 "Language: fr\n"
 "Project-Id-Version: Plugins - Yoast SEO - Stable (latest release)\n"
+
+#: src/integrations/admin/crawl-settings-integration.php:103
+#: src/integrations/admin/crawl-settings-integration.php:125
+msgid "Post comment feeds"
+msgstr "Flux des commentaires"
+
+#. translators: %1$s opens the link to the Yoast.com article about Crawl
+#. settings, %2$s closes the link,
+#: admin/views/tabs/network/crawl-settings.php:31
+msgid "%1$sLearn more about crawl settings.%2$s"
+msgstr "%1$sEn savoir plus sur les réglages d’exploration.%2$s"
+
+#. translators: %1$s opens the link to the Yoast.com article about Crawl
+#. settings, %2$s closes the link,
+#: admin/views/tabs/dashboard/crawl-settings.php:29
+msgid "%1$sLearn more about crawl settings and how they could benefit your site.%2$s"
+msgstr "%1$sEn savoir plus sur les réglages d’exploration et comment ils peuvent aider votre site.%2$s"
+
+#. translators: %1$s expands to Yoast SEO
+#: admin/views/tabs/dashboard/crawl-settings.php:22
+msgid "To make the crawling of your site more efficient and environmental friendly, %1$s allows you to remove RSS feeds (added by WordPress) that might not be needed for your site."
+msgstr "Pour rendre l’exploration de vitre site plus efficace et écologiquement sobre, %1$s vous permet de retirer les flux RSS (ajoutés par WordPress) qui ne serait pas utile à votre site."
+
+#: admin/views/redirects.php:188
+msgid "No items found."
+msgstr "Aucun élément trouvé."
+
+#: admin/views/redirects.php:137
+msgid "All redirect types"
+msgstr "Tous les types de redirection"
+
+#: admin/views/redirects.php:122
+msgid "Add Redirect"
+msgstr "Ajouter une redirection"
+
+#: admin/views/redirects.php:100 admin/views/redirects.php:165
+#: admin/views/redirects.php:212
+msgid "Old URL"
+msgstr "Ancienne URL"
+
+#. translators: 1: opens a link. 2: closes the link.
+#: admin/views/redirects.php:91
+msgid "The redirect type is the HTTP response code sent to the browser telling the browser what type of redirect is served. %1$sLearn more about redirect types%2$s."
+msgstr "Le type de redirection est le code de réponse HTTP envoyé au navigateur. %1$sEn savoir plus sur les types de redirection%2$s."
+
+#: admin/views/redirects.php:66 admin/views/redirects.php:75
+msgid "301 Moved Permanently"
+msgstr "301 Déplacé définitivement"
+
+#: admin/views/redirects.php:59 admin/views/redirects.php:155
+#: admin/views/redirects.php:203
+msgid "Type"
+msgstr "Type"
+
+#: admin/views/redirects.php:50
+msgid "Plain redirects"
+msgstr "Redirections classiques"
+
+#: admin/views/redirects.php:37
+msgid "Regex Redirects"
+msgstr "Redirections regex"
+
+#: admin/pages/network.php:28 admin/views/tabs/dashboard/crawl-settings.php:17
+#: admin/views/tabs/network/crawl-settings.php:19
+#: src/integrations/admin/crawl-settings-integration.php:79
+msgid "Crawl settings"
+msgstr "Exploration"
 
 #: src/integrations/admin/first-time-configuration-integration.php:116
 msgid "First-time configuration"
@@ -482,6 +549,8 @@ msgstr "Une description de la recette."
 msgid "Recipe description"
 msgstr "Description de la recette"
 
+#: admin/views/redirects.php:22
+#: src/integrations/admin/crawl-settings-integration.php:141
 #: src/integrations/admin/social-templates-integration.php:251
 msgid "Unlock with Premium"
 msgstr "Débloquer avec la version premium"
@@ -719,7 +788,7 @@ msgid "You can speed up your site and get insight into your internal linking str
 msgstr "Vous pouvez accélérer votre site et obtenir des statistiques de maillage interne en nous autorisant à procéder à quelques optimisations sur le stockage des données SEO."
 
 #: src/presenters/admin/indexing-notification-presenter.php:59
-#: js/dist/first-time-configuration.js:5 js/dist/indexation.js:1
+#: js/dist/first-time-configuration.js:3 js/dist/indexation.js:1
 msgid "Start SEO data optimization"
 msgstr "Démarrer l’optimisation des données SEO"
 
@@ -1412,7 +1481,7 @@ msgid "Personal info"
 msgstr "Informations personnelles"
 
 #: admin/views/tabs/metas/paper-content/general/knowledge-graph.php:52
-#: js/dist/first-time-configuration.js:7
+#: js/dist/first-time-configuration.js:5
 msgid "Organization name"
 msgstr "Nom de l’entité"
 
@@ -1430,8 +1499,6 @@ msgstr "Entité ou personne physique"
 
 #: admin/views/tabs/metas/paper-content/general/knowledge-graph.php:32
 #: admin/views/tabs/metas/paper-content/general/knowledge-graph.php:38
-#: src/integrations/admin/configuration-workout-integration.php:392
-#: src/integrations/admin/configuration-workout-integration.php:405
 #: src/integrations/admin/first-time-configuration-integration.php:423
 #: src/integrations/admin/first-time-configuration-integration.php:436
 msgid "Organization"
@@ -1606,15 +1673,18 @@ msgstr "Vérifier la densité de requête"
 
 #: admin/views/tabs/network/features.php:53
 #: admin/views/tabs/network/integrations.php:62
+#: src/integrations/admin/crawl-settings-integration.php:123
 msgid "Disable"
 msgstr "Désactiver"
 
 #: admin/views/tabs/network/features.php:52
 #: admin/views/tabs/network/integrations.php:61
+#: src/integrations/admin/crawl-settings-integration.php:122
 msgid "Allow Control"
 msgstr "Autoriser le contrôle"
 
 #. translators: %s expands to Yoast SEO
+#: admin/views/tabs/network/crawl-settings.php:24
 #: admin/views/tabs/network/features.php:24
 msgid "This tab allows you to selectively disable %s features for all sites in the network. By default all features are enabled, which allows site admins to choose for themselves if they want to toggle a feature on or off for their site. When you disable a feature here, site admins will not be able to use that feature at all."
 msgstr "Cet onglet vous permet de désactiver certaines fonctionnalités de %s pour tous les sites du réseau. Par défaut, toutes les fonctionnalités sont activées, ce qui permet aux administrateurs et administratrices de choisir lesquelles ils veulent activer/désactiver pour leur site. Lorsque vous désactivez une fonctionnalité ici, les administrateurs et administratrices des sites ne pourront plus l’utiliser du tout."
@@ -1715,7 +1785,7 @@ msgstr "Vérifier les liens vers cette URL"
 msgid "Keyword research training"
 msgstr "Formation à la recherche de mots-clés"
 
-#: admin/pages/network.php:21
+#: admin/pages/network.php:36
 msgid "Restore Site"
 msgstr "Restaurer le site"
 
@@ -2612,13 +2682,17 @@ msgstr "Les autres atouts de %s :"
 msgid "Cornerstone content"
 msgstr "Contenu Cornestone"
 
+#: src/integrations/admin/crawl-settings-integration.php:141
+msgid "Upgrade Premium"
+msgstr "Passez à la version Premium"
+
 #: admin/class-premium-upsell-admin-block.php:56
 #: js/dist/externals-components.js:9 js/dist/externals-components.js:19
 msgid "Superfast internal linking suggestions"
 msgstr "Suggestions de liens internes super-rapides"
 
 #: admin/class-yoast-form.php:139 admin/class-yoast-form.php:144
-#: js/dist/first-time-configuration.js:5 js/dist/settings.js:14
+#: js/dist/first-time-configuration.js:3 js/dist/settings.js:14
 msgid "Save changes"
 msgstr "Enregistrer les modifications"
 
@@ -2697,7 +2771,7 @@ msgstr "%1$s, auteur/autrice sur %2$s"
 msgid "Marks are disabled in current view"
 msgstr "Les marques sont désactivés dans la vue actuelle"
 
-#: inc/class-wpseo-replace-vars.php:1475 js/dist/first-time-configuration.js:7
+#: inc/class-wpseo-replace-vars.php:1475 js/dist/first-time-configuration.js:5
 #: js/dist/settings.js:10
 msgid "Name"
 msgstr "Nom"
@@ -3128,11 +3202,18 @@ msgstr "L’entrée doit être un entier."
 msgid "Trying to build the sitemap cache key, but the postfix and prefix combination leaves too little room to do this. You are probably requesting a page that is way out of the expected range."
 msgstr "Tentative de construction d’une clé de cache sécurisée pour le plan de site, mais la combinaison du suffixe et du préfixe laisse trop peu de place pour le faire. Vous demandez probablement une page qui est bien loin de la plage attendue."
 
+#: admin/views/redirects.php:32
+#: src/integrations/admin/redirects-integration.php:50
+msgid "Redirects"
+msgstr "Redirections"
+
 #: admin/views/tabs/metas/taxonomies/category-url.php:10
+#: src/integrations/admin/crawl-settings-integration.php:101
 msgid "Remove"
 msgstr "Supprimer"
 
 #: admin/views/tabs/metas/taxonomies/category-url.php:10
+#: src/integrations/admin/crawl-settings-integration.php:100
 msgid "Keep"
 msgstr "Conserver"
 
@@ -3320,22 +3401,22 @@ msgstr "Résumé"
 msgid "The post %1$s appeared first on %2$s."
 msgstr "L’article %1$s est apparu en premier sur %2$s."
 
-#: inc/options/class-wpseo-option-ms.php:217
+#: inc/options/class-wpseo-option-ms.php:218
 msgid "No numeric value was received."
 msgstr "Les chiffres ne sont pas acceptés"
 
 #. translators: %s is the ID number of a blog.
-#: inc/options/class-wpseo-option-ms.php:205
+#: inc/options/class-wpseo-option-ms.php:206
 msgid "This must be an existing blog. Blog %s does not exist or has been marked as deleted."
 msgstr "Blog inexistant. Le blog %s n’existe pas ou a été marqué comme étant supprimé."
 
-#: inc/options/class-wpseo-option-ms.php:201
-#: inc/options/class-wpseo-option-ms.php:217
+#: inc/options/class-wpseo-option-ms.php:202
+#: inc/options/class-wpseo-option-ms.php:218
 msgid "The default blog setting must be the numeric blog id of the blog you want to use as default."
 msgstr "Le réglage par défaut du blog doit être l’identifiant numérique du blog que vous souhaitez utiliser par défaut."
 
 #. translators: %1$s expands to the option name and %2$sexpands to Yoast SEO
-#: inc/options/class-wpseo-option-ms.php:181
+#: inc/options/class-wpseo-option-ms.php:182
 msgid "%1$s is not a valid choice for who should be allowed access to the %2$s settings. Value reset to the default."
 msgstr "%1$s n’est pas un choix valide pour ceux qui devraient être autorisés d’accéder aux réglages de %2$s. La valeur par défaut a été remise."
 
@@ -3931,7 +4012,6 @@ msgid "The premium version of %1$s with more features & support."
 msgstr "La version Premium de %1$s avec plus de fonctionnalités & de support."
 
 #: admin/views/tabs/metas/paper-content/general/knowledge-graph.php:33
-#: src/integrations/admin/configuration-workout-integration.php:397
 #: src/integrations/admin/first-time-configuration-integration.php:428
 msgid "Person"
 msgstr "Personne"
@@ -3968,6 +4048,14 @@ msgstr "Pour pouvoir créer une redirection et régler ce problème, vous avez b
 #: admin/google_search_console/views/gsc-redirect-nopremium.php:15
 msgid "Creating redirects is a %s feature"
 msgstr "la création de redirection est une fonctionnalité de %s."
+
+#: admin/views/redirects.php:175 admin/views/redirects.php:222
+msgid "New URL"
+msgstr "Nouvelle URL"
+
+#: admin/views/redirects.php:112
+msgid "URL"
+msgstr "URL"
 
 #. translators: %s: 'Facebook' plugin name of possibly conflicting plugin
 #: admin/class-yoast-plugin-conflict.php:214
@@ -4235,7 +4323,7 @@ msgstr "Prévisualiser &#8220;%s&#8221;"
 msgid "Edit"
 msgstr "Modifier"
 
-#: admin/class-bulk-editor-list-table.php:415
+#: admin/class-bulk-editor-list-table.php:415 admin/views/redirects.php:141
 msgid "Filter"
 msgstr "Filtrer"
 
@@ -4275,7 +4363,8 @@ msgstr "Identifiant Twitter (sans le @)"
 msgid "FAQ"
 msgstr "FAQ"
 
-#: admin/class-admin.php:221 js/dist/structured-data-blocks.js:1
+#: admin/class-admin.php:221 admin/views/redirects.php:42
+#: js/dist/structured-data-blocks.js:1
 msgid "Settings"
 msgstr "Réglages"
 
