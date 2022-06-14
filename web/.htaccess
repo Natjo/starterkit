@@ -32,7 +32,7 @@ ExpiresByType application/x-javascript "access plus 2592000 seconds"
 
 # BEGIN Cache-Control Headers
 <IfModule mod_headers.c>
-<FilesMatch "\.(ico|jpe?g|png|gif|svg|webp|swf|css|gz)$">
+<FilesMatch "\.(ico|jpe?g|png|gif|svg|webp|swf|css|gz|woff2|css)$">
 Header set Cache-Control "max-age=2592000, public"
 </FilesMatch>
 <FilesMatch "\.(js)$">
