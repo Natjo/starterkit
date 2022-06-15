@@ -45,6 +45,7 @@ add_filter('wp_editor_set_quality', function ($arg) {
  */
 
 $json = json_decode(file_get_contents(get_template_directory() . "/assets/views.json"), true);
+
 $views = array();
 $links = array();
 function views($name, $args = null, $observe = true)
@@ -53,39 +54,23 @@ function views($name, $args = null, $observe = true)
     global $views;
     global $links;
 
+    // no doublon
     if (!array_key_exists($name, $views)) {
+        // add js view in array
         $views[$name] = array(
             "js" => $json[$name]["js"],
-            "css" => $json[$name]["css"],
             "observe" => $observe
         );
+       
+        // add css file if exist
         if ($json[$name]["css"]) {
             $file = $json[$name]["css"];
             array_push($links, $file);
         }
     }
-    get_template_part('./assets/views/strates/' . $name . '/' .  $name . '', '', $args);
+    get_template_part('./assets/views/' . $name . '/' .  $name . '', '', $args);
 }
 
-function heros($name, $args = null, $observe = false)
-{
-    global $json;
-    global $views;
-    global $links;
-
-    if (!array_key_exists($name, $views)) {
-        $views[$name] = array(
-            "js" => $json[$name]["js"],
-            "css" => $json[$name]["css"],
-            "observe" => $observe
-        );
-        if ($json[$name]["css"]) {
-            $file = $json[$name]["css"];
-            array_push($links, $file);
-        }
-    }
-    get_template_part('./assets/views/heros/' . $name . '/' .  $name . '', '', $args);
-}
 
 function views_observe()
 {

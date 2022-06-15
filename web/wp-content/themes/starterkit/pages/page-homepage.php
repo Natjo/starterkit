@@ -11,7 +11,7 @@ $pageId = get_the_ID();
 
 <main id="main" role="main" tabindex="-1">
     <?php
-    heros('hero-home', array(
+    views('hero-home', array(
         'title' => get_field('hero-homepage-title', $pageId)
     ));
     ?>

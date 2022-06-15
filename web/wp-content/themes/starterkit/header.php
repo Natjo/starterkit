@@ -21,6 +21,8 @@ $siteDescription = 'description';
     <?php wp_head(); ?>
     
     <link rel='stylesheet' href='<?= THEME_URL; ?>assets/styles.css'  media='screen' />
+
+
     <?php foreach ($args as $value) echo '<link href="'.THEME_URL.$value.'" rel="stylesheet" media="screen">';?>
 
-</head>
+</head>    
