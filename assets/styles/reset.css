@@ -13,9 +13,6 @@ a{
     color: inherit;
     text-decoration: none;
 }
-a:focus{
-    outline: none;
-}
 img{
     display: block;
     margin: 0;
@@ -61,7 +58,6 @@ button{
     font-family: inherit;
     font-size: inherit;
     color: inherit;
-    outline: none;
     background: none;
     cursor: pointer;
 	padding: 0;

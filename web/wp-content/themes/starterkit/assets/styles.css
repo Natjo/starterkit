@@ -1,3 +1,6 @@
+.btn-1 {
+    font-size: 1rem;
+}
 /* ConduitITCPro */
 @font-face {
     font-family: 'ConduitITCPro';
@@ -56,10 +59,7 @@
     font-weight: 700;
     font-style: normal;
     font-display: swap;
-}.btn-1 {
-    font-size: 1rem;
-}
-#footer{
+}#footer{
     background: antiquewhite;;
 }#header {
     background-color: aliceblue;
@@ -89,75 +89,25 @@ body {
     text-decoration: underline;
     color: var(--color-2);
 }
-h1, h2, h3, h4{
-	margin: 0;
+.tl1 {
+    font-family: var(--font-2);
+    font-size: var(--font-size-xxlg);
+    line-height: 1.1;
 }
-ol, ul{
-	margin: 0;
-    padding-left: 0;
-    list-style: none;
+.tl2 {
+    font-family: var(--font-2);
+    font-size: var(--font-size-xlg);
+    line-height: 1.1;
+    color: var(--color-2);
 }
-p{
-    margin: 0;
+.tl3 {
+    color: var(--color-3);
+    font-family: var(--font-2);
+    font-size: var(--font-size-md);
+    margin-bottom: 20px;
+    line-height: 1.25;
 }
-a{
-    color: inherit;
-    text-decoration: none;
-}
-a:focus{
-    outline: none;
-}
-img{
-    display: block;
-    margin: 0;
-}
-figure{
-    margin: 0;
-}
-picture{
-    display: block;
-}
-canvas{
-    display: block;
-}
-iframe{
-    display: block;
-	border: 0;
-}
-fieldset{
-    margin: 0;
-    padding: 0;
-	border: 0;
-}
-table{
-	border-collapse: collapse;
-    border-spacing: 0;
-}
-tbody, thead, tr, th, td{
-	padding: 0;
-}
-svg{
-	display: block;
-}
-video{
-    display: block;
-}
-blockquote{
-	margin: 0;
-}
-dl, dd{
-    margin: 0;
-}
-button{
-    font-family: inherit;
-    font-size: inherit;
-    color: inherit;
-    outline: none;
-    background: none;
-    cursor: pointer;
-	padding: 0;
-	border: 0;
-}:root{
+:root{
     --font-1: 'ConduitITCPro', sans-serif;
     --font-2: 'aeonik', sans-serif;
 
@@ -228,21 +178,68 @@ button{
     --color-tpl-1: var(--color-5);
     --color-tpl-2:  var(--color-6);
     --color-tpl-3:  var(--color-2);
-}.tl1 {
-    font-family: var(--font-2);
-    font-size: var(--font-size-xxlg);
-    line-height: 1.1;
+}h1, h2, h3, h4{
+	margin: 0;
 }
-.tl2 {
-    font-family: var(--font-2);
-    font-size: var(--font-size-xlg);
-    line-height: 1.1;
-    color: var(--color-2);
+ol, ul{
+	margin: 0;
+    padding-left: 0;
+    list-style: none;
 }
-.tl3 {
-    color: var(--color-3);
-    font-family: var(--font-2);
-    font-size: var(--font-size-md);
-    margin-bottom: 20px;
-    line-height: 1.25;
+p{
+    margin: 0;
+}
+a{
+    color: inherit;
+    text-decoration: none;
+}
+img{
+    display: block;
+    margin: 0;
+}
+figure{
+    margin: 0;
+}
+picture{
+    display: block;
+}
+canvas{
+    display: block;
+}
+iframe{
+    display: block;
+	border: 0;
+}
+fieldset{
+    margin: 0;
+    padding: 0;
+	border: 0;
+}
+table{
+	border-collapse: collapse;
+    border-spacing: 0;
+}
+tbody, thead, tr, th, td{
+	padding: 0;
+}
+svg{
+	display: block;
+}
+video{
+    display: block;
+}
+blockquote{
+	margin: 0;
+}
+dl, dd{
+    margin: 0;
+}
+button{
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background: none;
+    cursor: pointer;
+	padding: 0;
+	border: 0;
 }

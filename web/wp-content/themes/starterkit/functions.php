@@ -45,7 +45,6 @@ add_filter('wp_editor_set_quality', function ($arg) {
  */
 
 $json = json_decode(file_get_contents(get_template_directory() . "/assets/views.json"), true);
-
 $views = array();
 $links = array();
 function views($name, $args = null, $observe = true)
