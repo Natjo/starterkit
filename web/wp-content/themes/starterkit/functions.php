@@ -25,7 +25,6 @@ if (!ENV_LOCAL) {
 }
 require_once(__DIR__ . '/inc/methods.php');
 require_once(__DIR__ . '/inc/ajax-methods.php');
-require_once(__DIR__ . '/inc/images_size.php');
 require_once(__DIR__ . '/inc/tinymce.php');
 
 // no compression
@@ -132,117 +131,7 @@ function console($value)
     echo "</pre>";
 }
 
-/**
- * WP Nav to TREE
- * 
- */
-function buildTree(array &$elements, $parentId = 0)
-{
-    $branch = array();
-    foreach ($elements as $index => $element) {
-        if ($element['parentId'] == $parentId) {
-            $children = buildTree($elements, $element['id']);
-            if ($children) {
-                $element['children'] = $children;
-            }
-            $branch[$element['id']] = $element;
-            unset($element);
-        }
-    }
-    return $branch;
-}
-function tree($arr)
-{
-    echo '<ul>';
-    foreach ($arr as $item) {
-        $classes = "";
-        if ($item['classes'][0]) {
-            $array = $item['classes'];
-            $classes = ' class="' . implode(",", $array) . '"';
-        }
-        echo '<li>';
-        echo '<a href="' . $item['url'] . '"' . $classes . '>' . $item['title'] . '</a>';
-        if ($item['children']) tree($item['children']);
-        echo '</li>';
-    }
-    echo '</ul>';
-}
-function navDisplay($name)
-{
-    $menu = array();
-    $getMenu = wp_get_nav_menu_items($name);
-    foreach ($getMenu as $item) {
-        array_push($menu, array(
-            'id' => $item->ID,
-            'parentId' => $item->menu_item_parent,
-            'title' => $item->title,
-            'url' => $item->url,
-            'classes' => $item->classes,
-            'children' => array()
-        ));
-    }
-    tree(buildTree($menu));
-}
-/*class navRender{
-    public $arr = array();
-    private $itemToAdd = array();
 
-    private function buildTree(array &$elements, $parentId = 0)
-    {
-        $branch = array();
-        foreach ($elements as $index => $element) {
-            if ($element['parentId'] == $parentId) {
-                $children = $this->buildTree($elements, $element['id']);
-                if ($children) {
-                    $element['children'] = $children;
-                }
-                $branch[$element['id']] = $element;
-                unset($element);
-            }
-        }
-        return $branch;
-    }
-    private function tree($arr)
-    {
-        echo '<ul>';
-        foreach ($arr as $item) {
-            $classes = "";
-            if (!empty($item['classes'][0])) {
-                $array = $item['classes'];
-                $classes = ' class="' . implode(",", $array) . '"';
-            }
-            echo '<li>';
-       
-            echo '<a href="' . $item['url'] . '"' . $classes . '>' . $item['title'] . '</a>';
-        
-           
-            if ($item['children']) $this->tree($item['children']);
-
-            echo '</li>';
-        }
-        echo '</ul>';
-    }
-
-    public function display($name) {
-        $menu = array();
-        $getMenu = wp_get_nav_menu_items('Footer');
-        foreach ($getMenu as $item) {
-            array_push($menu, array(
-                'id' => $item->ID,
-                'parentId' => $item->menu_item_parent,
-                'title' => $item->title,
-                'url' => $item->url,
-                'classes' => $item->classes,
-                'children' => array()
-            ));
-        }
-        //$this->tree($this->buildTree($menu));
-        return $this->buildTree($menu);
-    }
-    public function insertItem($name) {
-    }   
-}
-*/
 /*
  MAIL
 
@@ -284,6 +173,7 @@ function clear_nav_menu_item_class($classes, $item, $args)
     return array();
 }
 
+// template
 function get_tpl(){
     global $links;
     include("inc/tpl.php");

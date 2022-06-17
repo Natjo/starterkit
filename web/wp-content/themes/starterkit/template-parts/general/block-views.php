@@ -12,6 +12,17 @@
             views('strate-articles', array(
                 'items' => $aView['strate-articles-items'],
             ));
+
+        elseif ($aView['acf_fc_layout'] == 'strate-image') :
+            views('strate-image', array(
+                'image' => [
+                    'desktop' => lsd_get_thumb($aView['img-desktop'], 'image-desktop'),
+                    'mobile' => lsd_get_thumb($aView['img-mobile'], 'image-mobile'),
+                    'tablet' => lsd_get_thumb($aView['img-tablet'], 'image-tablet'),
+                    'width' => '1200',
+                    'height' => '800'
+                ]
+            ));
         endif;
 
     endforeach;

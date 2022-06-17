@@ -1,28 +1,18 @@
 .btn-1 {
     font-size: 1rem;
 }
-body {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    margin: 0;
-    font-family: var(--font-1);
-    font-size: var(--font-size);
-    color: var(--color-text);
-    line-height: 1;
+#footer {
+    background: antiquewhite;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
 }
 
-.container {
-    max-width: var(--ctr-width);
-    margin-right: auto;
-    margin-left: auto;
-    padding-left: var(--ctr-offset);
-    padding-right: var(--ctr-offset);
-}
-
-.container-fluid {
-    padding-left: var(--ctr-offset);
-    padding-right: var(--ctr-offset);
-}#header {
+#nav-footer ul{
+        display: flex;
+        gap: 12px;
+    }#header {
     background-color: aliceblue;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -53,7 +43,28 @@ body {
             display: flex;
             gap: 12px;
         }
-    }/* ConduitITCPro */
+    }body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    font-family: var(--font-1);
+    font-size: var(--font-size);
+    color: var(--color-text);
+    line-height: 1;
+}
+
+.container {
+    max-width: var(--ctr-width);
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: var(--ctr-offset);
+    padding-right: var(--ctr-offset);
+}
+
+.container-fluid {
+    padding-left: var(--ctr-offset);
+    padding-right: var(--ctr-offset);
+}/* ConduitITCPro */
 @font-face {
     font-family: 'ConduitITCPro';
     src: url(fonts/ConduitITCPro-Light.woff2) format('woff2');
@@ -175,22 +186,25 @@ button{
     cursor: pointer;
 	padding: 0;
 	border: 0;
-}.link-1 {
-    text-decoration: underline;
+}.tl1 {
+    font-family: var(--font-2);
+    font-size: var(--font-size-xxlg);
+    line-height: 1.1;
+}
+.tl2 {
+    font-family: var(--font-2);
+    font-size: var(--font-size-xlg);
+    line-height: 1.1;
     color: var(--color-2);
 }
-#footer {
-    background: antiquewhite;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 60px;
+.tl3 {
+    color: var(--color-3);
+    font-family: var(--font-2);
+    font-size: var(--font-size-md);
+    margin-bottom: 20px;
+    line-height: 1.25;
 }
-
-#nav-footer ul{
-        display: flex;
-        gap: 12px;
-    }:root{
+:root{
     --font-1: 'ConduitITCPro', sans-serif;
     --font-2: 'aeonik', sans-serif;
 
@@ -261,21 +275,7 @@ button{
     --color-tpl-1: var(--color-5);
     --color-tpl-2:  var(--color-6);
     --color-tpl-3:  var(--color-2);
-}.tl1 {
-    font-family: var(--font-2);
-    font-size: var(--font-size-xxlg);
-    line-height: 1.1;
-}
-.tl2 {
-    font-family: var(--font-2);
-    font-size: var(--font-size-xlg);
-    line-height: 1.1;
+}.link-1 {
+    text-decoration: underline;
     color: var(--color-2);
-}
-.tl3 {
-    color: var(--color-3);
-    font-family: var(--font-2);
-    font-size: var(--font-size-md);
-    margin-bottom: 20px;
-    line-height: 1.25;
 }

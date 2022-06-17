@@ -23,9 +23,25 @@ function theme_setup() {
 
     show_admin_bar(false);
 
-    add_image_size( 'thumbnail_example', 600, 800, array( 'center', 'center' ) );
 
+    add_image_size('image-desktop', 1200, 800, true);
+    add_image_size('image-tablet', 768, 600, true);  
+    add_image_size('image-mobile', 576, 768, true);  
 }
+
+// Remove unused format
+function disable_unused_format($sizes)
+{
+    unset($sizes['large']);
+    unset($sizes['2048x2048']);
+    unset($sizes['1536x1536']);
+    unset($sizes['medium_large']);
+    return $sizes;
+}
+add_filter('intermediate_image_sizes_advanced', 'disable_unused_format');
+
+
+
 
 // function remove_default_post_type_menu_bar( $wp_admin_bar ) {
 //     $wp_admin_bar->remove_node( 'new-post' );
