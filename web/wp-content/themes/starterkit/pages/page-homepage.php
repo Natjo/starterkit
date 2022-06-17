@@ -18,4 +18,4 @@ $pageId = get_the_ID();
     <?php get_template_part('template-parts/general/block', 'views'); ?>
 </main>
 
-<?php
+<?php get_tpl();

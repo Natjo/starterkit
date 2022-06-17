@@ -12,11 +12,11 @@ body {
     max-width: var(--ctr-width);
     margin-right: auto;
     margin-left: auto;
-    padding-left: var(--ctr-margin);
-    padding-right: var(--ctr-margin);
+    padding-left: var(--ctr-offset);
+    padding-right: var(--ctr-offset);
 }
 
 .container-fluid {
-    padding-left: var(--ctr-margin);
-    padding-right: var(--ctr-margin);
+    padding-left: var(--ctr-offset);
+    padding-right: var(--ctr-offset);
 }

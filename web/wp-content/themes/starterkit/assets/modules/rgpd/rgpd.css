@@ -87,7 +87,7 @@
     box-sizing: border-box;
     padding: 20px;
     background: rgba(0, 0, 0, 0.3);
-    padding: var(--ctr-margin);
+    padding: var(--ctr-offset);
 }
 
 #rgpd-manage.open {

@@ -269,3 +269,24 @@ wp_mail( $to, $subject, $body, $headers );
 */
 
 
+
+
+// remove classes/ids items of Walker_Nav_Menu
+add_filter('nav_menu_item_id', 'clear_nav_menu_item_id', 10, 3);
+function clear_nav_menu_item_id($id, $item, $args)
+{
+    return "";
+}
+
+add_filter('nav_menu_css_class', 'clear_nav_menu_item_class', 10, 3);
+function clear_nav_menu_item_class($classes, $item, $args)
+{
+    return array();
+}
+
+function get_tpl(){
+    global $links;
+    include("inc/tpl.php");
+}
+
+ob_start();

@@ -4,7 +4,6 @@
 
     <?php
     foreach ($aViews as $aView) :
-
         if ($aView['acf_fc_layout'] == 'strate-wysiwyg') :
             views('strate-wysiwyg', array(
                 'text' => $aView['text'],

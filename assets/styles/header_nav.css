@@ -1,3 +1,30 @@
 #header {
     background-color: aliceblue;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    .header-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    @media (--breakpoint-lg-up) {
+        #btn-nav {
+            display: none;
+        }
+    }
+}
+
+#nav {
+    @media (--breakpoint-lg-down) {
+        display: none;
+    }
+    @media (--breakpoint-lg-up) {
+        ul {
+            display: flex;
+            gap: 12px;
+        }
+    }
+
 }

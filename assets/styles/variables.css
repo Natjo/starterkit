@@ -3,7 +3,7 @@
     --font-2: 'aeonik', sans-serif;
 
     --ctr-width: 1180px;
-    --ctr-margin: 20px;
+    --ctr-offset: 20px;
 
     --gap: 20px;
 
@@ -44,7 +44,7 @@
 
 @media (--breakpoint-lg-up) {
     :root{
-        --ctr-margin: 60px;
+        --ctr-offset: 60px;
         --header-height: 90px;
         --gap: 40px;
 
