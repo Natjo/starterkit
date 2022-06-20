@@ -25,7 +25,7 @@ if (!ENV_LOCAL) {
 }
 require_once(__DIR__ . '/inc/methods.php');
 require_once(__DIR__ . '/inc/ajax-methods.php');
-require_once(__DIR__ . '/inc/tinymce.php');
+require_once(__DIR__ . '/inc/custom/search.php');
 
 // no compression
 add_filter('jpeg_quality', function ($arg) {
@@ -54,14 +54,16 @@ function views($name, $args = null, $observe = true)
 
     // no doublon
     if (!array_key_exists($name, $views)) {
-        // add js view in array
-        $views[$name] = array(
-            "js" => $json[$name]["js"],
-            "observe" => $observe
-        );
-       
+        // add js view in array if exist
+        if (!empty($json[$name]["js"])) {
+            $views[$name] = array(
+                "js" => $json[$name]["js"],
+                "observe" => $observe
+            );
+        }
+
         // add css file if exist
-        if ($json[$name]["css"]) {
+        if (!empty($json[$name]["css"])) {
             $file = $json[$name]["css"];
             array_push($links, $file);
         }
@@ -69,12 +71,11 @@ function views($name, $args = null, $observe = true)
     get_template_part('./assets/views/' . $name . '/' .  $name . '', '', $args);
 }
 
-
 function views_observe()
 {
     global $views;
     $arr = array();
-    foreach ($views as $key => $view) { 
+    foreach ($views as $key => $view) {
         if ($view["js"] && $view["observe"]) array_push($arr, $key);
     }
     return json_encode($arr);
@@ -131,6 +132,18 @@ function console($value)
     echo "</pre>";
 }
 
+// Array of taxonomies terms in post 
+function lsd_get_the_terms_name($ID, $taxonomy)
+{
+    $arr = array();
+    $terms = get_the_terms($ID, $taxonomy);
+    if ($terms) {
+        foreach ($terms as $term) {
+            array_push($arr, $term->name);
+        }
+    }
+    return $arr;
+}
 
 /*
  MAIL
@@ -157,24 +170,35 @@ wp_mail( $to, $subject, $body, $headers );
 
 */
 
-
-
-
-// remove classes/ids items of Walker_Nav_Menu
-add_filter('nav_menu_item_id', 'clear_nav_menu_item_id', 10, 3);
-function clear_nav_menu_item_id($id, $item, $args)
+// Rewrite rules for news page
+function news_rewrite_url()
 {
-    return "";
-}
+    add_rewrite_tag('%paged%', '([^&]+)');
 
-add_filter('nav_menu_css_class', 'clear_nav_menu_item_class', 10, 3);
-function clear_nav_menu_item_class($classes, $item, $args)
+    add_rewrite_rule(
+        'actualites/page/([^/]+)',
+        'index.php?pagename=actualites&paged=$matches[1]',
+        'top'
+    );
+}
+add_action('init', 'news_rewrite_url');
+
+// remove classes and ids of wp_list_pages()
+function remove_page_class($wp_list_pages)
 {
-    return array();
+    $pattern = '/\<li class="page_item[^>]*>/';
+    $replace_with = '<li>';
+    return preg_replace($pattern, $replace_with, $wp_list_pages);
 }
+add_filter('wp_list_pages', 'remove_page_class');
 
-// template
-function get_tpl(){
+
+
+// -------
+//template
+//--------
+function get_tpl()
+{
     global $links;
     include("inc/tpl.php");
 }

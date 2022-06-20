@@ -1,23 +1,20 @@
 <?php
 /*
-Template Name: Page Contact
+Template Name: Page Actualities
 */
 
-$pageId = get_the_ID();
 ?>
 
 <?php get_template_part('template-parts/general/block', 'header_nav'); ?>
 
 <main id="main" role="main" tabindex="-1">
-
     <?php
     views('hero-simple', array(
         'title' => get_the_title()
     ));
     ?>
 
-    <?php views('form-contact'); ?>
-
+    <?php views('strate-actualites'); ?>
 </main>
 
 <?php get_tpl();

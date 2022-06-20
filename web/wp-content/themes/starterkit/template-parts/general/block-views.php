@@ -8,10 +8,6 @@
             views('strate-wysiwyg', array(
                 'text' => $aView['text'],
             ));
-        elseif ($aView['acf_fc_layout'] == 'strate-articles') :
-            views('strate-articles', array(
-                'items' => $aView['strate-articles-items'],
-            ));
 
         elseif ($aView['acf_fc_layout'] == 'strate-image') :
             views('strate-image', array(

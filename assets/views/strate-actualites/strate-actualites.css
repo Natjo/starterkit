@@ -1,0 +1,16 @@
+[data-view=strate-actualites] {
+    ul {
+
+        display: grid;
+        grid-gap: var(--gap);
+
+        @media (--breakpoint-sm-up) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media (--breakpoint-md-up) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+    }
+}

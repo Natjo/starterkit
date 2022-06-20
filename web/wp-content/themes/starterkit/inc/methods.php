@@ -20,48 +20,59 @@ function dateMonthInFr($date)
     return str_replace($english_months, $french_months,  $date);
 }
 
-function lsdDebugBloc($folder = '', $slug, $name, $args = '') {
-    $datasDebug['path'] = 'template-parts/'. $folder . '/' .  $slug .'-'.$name.'.php';
-    $datasDebug['args'] = $args;
 
-    return $datasDebug;
-
-}
-
-function lsd_get_thumb($id, $size) {
-    if(empty($size)){
-        $size = 'medium';
-    }
-
-    if($id){
+// Image url fonction id
+function lsd_get_thumb($id, $size = 'medium')
+{
+    if ($id) {
         $img = wp_get_attachment_image_src($id, $size);
-        $extension = substr($img[0],strrpos($img[0],'.')+1);
+        $extension = substr($img[0], strrpos($img[0], '.') + 1);
 
-        if($extension == 'gif' || $extension == 'GIF'):
+        if ($extension == 'gif' || $extension == 'GIF') :
             $img = wp_get_attachment_image_src($id, 'full');
         endif;
 
-        $imgUrl = reset($img);
+        $imgUrl = is_array($img) ? reset($img) : "";
 
         return $imgUrl;
     }
 }
 
-function youtube_id_from_url($url) {
+
+// Image url function de mise en avant des articles
+function lsd_get_featured($id, $size = 'medium')
+{
+    if ($id) {
+        $img_id = get_post_thumbnail_id($id);
+        $img = wp_get_attachment_image_src($img_id, $size);
+        $extension = substr($img[0], strrpos($img[0], '.') + 1);
+
+        if ($extension == 'gif' || $extension == 'GIF') :
+            $img = wp_get_attachment_image_src($img_id, 'full');
+        endif;
+
+        $imgUrl = is_array($img) ? reset($img) : "";
+
+        return $imgUrl;
+    }
+}
+
+function youtube_id_from_url($url)
+{
     $parts = parse_url($url);
 
-    if(isset($parts['query'])){
+    if (isset($parts['query'])) {
         parse_str($parts['query'], $qs);
-        if(isset($qs['v'])){
+        if (isset($qs['v'])) {
             return $qs['v'];
-        }else if(isset($qs['vi'])){
+        } else if (isset($qs['vi'])) {
             return $qs['vi'];
         }
     }
 
-    if(isset($parts['path'])){
+    if (isset($parts['path'])) {
         $path = explode('/', trim($parts['path'], '/'));
-        return $path[count($path)-1];
+        return $path[count($path) - 1];
     }
 
     return "";
