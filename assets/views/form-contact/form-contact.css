@@ -1,3 +1,13 @@
 [data-view=form-contact]{
 
+
+    .msg{
+        &.error{
+            border: 2px solid red;
+        }
+        &.valid{
+            border: 2px solid green;
+        }
+    }
+
 }

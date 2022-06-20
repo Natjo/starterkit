@@ -26,6 +26,8 @@ if (!ENV_LOCAL) {
 require_once(__DIR__ . '/inc/methods.php');
 require_once(__DIR__ . '/inc/ajax-methods.php');
 require_once(__DIR__ . '/inc/custom/search.php');
+require_once(__DIR__ . '/inc/custom/form.php');
+require_once(__DIR__ . '/inc/custom/walker.php');
 
 // no compression
 add_filter('jpeg_quality', function ($arg) {
@@ -145,30 +147,22 @@ function lsd_get_the_terms_name($ID, $taxonomy)
     return $arr;
 }
 
-/*
- MAIL
 
-add_action( 'phpmailer_init', 'my_phpmailer_configuration' );
-function my_phpmailer_configuration( $phpmailer ) {
-  $phpmailer->isSMTP();   
-  $phpmailer->Host = 'xxxx';
-  $phpmailer->SMTPAuth = true; // Indispensable pour forcer l'authentification
-  $phpmailer->Port = 465;
-  $phpmailer->Username = 'xxxx@xxxx.com';
-  $phpmailer->Password = 'xxxx';
-  $phpmailer->SMTPSecure = "ssl"; // Sécurisation du serveur SMTP : ssl ou tls
-  $phpmailer->From = "xxxx@xxxx.com"; // Adresse email d'envoi des mails
-  $phpmailer->FromName = "Site - Clos Cristal"; // Nom affiché lors de l'envoi du mail
+// MAIL
+add_action('phpmailer_init', 'my_phpmailer_configuration');
+function my_phpmailer_configuration($phpmailer)
+{
+    $phpmailer->isSMTP();
+    $phpmailer->Host = 'in-v3.mailjet.com';
+    $phpmailer->SMTPAuth = true; // Indispensable pour forcer l'authentification
+    $phpmailer->Port = 587;
+    $phpmailer->Username = 'a16fb8f8858b28ba57a608c6a9452130';
+    $phpmailer->Password = '7f570d9dedc28b17bedfdd473acc019c';
+    $phpmailer->SMTPSecure = "tls"; // Sécurisation du serveur SMTP : ssl ou tls
+    $phpmailer->From = "mail@lonsdale.fr"; // Adresse email d'envoi des mails
+    $phpmailer->FromName = "Site - Valorplast"; // Nom affiché lors de l'envoi du mail
 }
 
-
-$to = 'j.burt@lonsdale.fr';
-$subject = 'The subject';
-$body = 'The email body content';
-$headers = array('Content-Type: text/html; charset=UTF-8'); 
-wp_mail( $to, $subject, $body, $headers );
-
-*/
 
 // Rewrite rules for news page
 function news_rewrite_url()
