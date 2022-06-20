@@ -16,82 +16,14 @@ Dans le répertoire .docker se situent tous les fichiers nécessaires à la conf
 
 Dupliquer et renommer .docker/.env-sample => **.docker/.env** **/!\ ne pas renommer autrement**
 
-Renseigner les différentes variables.
 
-```
-COMPOSE_PROJECT_NAME # le nom de 'la stack docker-compose'
-APP_NAME # le nom du projet sans caractères accentués ni espaces
-DOMAIN # le domaine
-WP_THEME_NAME # le nom du theme
-```
-
-Attention les variables commencant par WP_ sont utilisées en tant que variables d'environnement par le container worpress : ne pas supprimer ni renommer.
-
-Si la base de données tourne sous docker, utiliser ce jeu de variables : 
-
-```
-DB_HOST=db:3306
-DB_NAME=wordpress
-DB_USER=wordpress
-DB_TABLE_PREFIX=wp_
-DB_ROOT_PASSWORD=wordpress
-DB_PASSWORD=wordpress
-```
-
-#### 2 - Ajouter le ServerName dans son propre hosts
-
-```
-127.0.0.1   ServerName.code
-```
-
-ou utiliser le script :
+#### 2 - Ajouter le ServerName dans hosts, Générer les certificats, start
 ```
 .docker/scripts/hosts-file-setup.sh
-```
-
-#### 3 - Générer les certificats
-
-utiliser le script :
-```
 .docker/scripts/cert-create.sh
-```
-
-et truster les certificats pour Chrome et Safari
-```
 .docker/scripts/cert-trust.sh
-```
-
-### Lancement
-
-```
 .docker/run.sh
 ```
-
-le script coupe et supprime les containers actifs et lance docker-compose up -d
-
-5 containers vont être créés et vont communiquer entre eux :
-
-wordpress@5.5-php7.4-fpm / node@12.18 / mysql@5.7 / composer / nginx
-
-**sur wordpress@5.5-php7.4-fpm :** wp-cli est installé, entrer dans le container : (${APP_NAME} est renseigné dans .docker/.env)
-```
-docker exec -it ${APP_NAME}-wp bash
-```
-puis se référer aux commands https://developer.wordpress.org/cli/commands/
-```
-wp-cli --info
-```
-
-Le dossier du theme sera renommé conformément à la config dans .docker/.env
-**Attention à modifier le .gitignore en conséquence pour versionner le dossier du theme**
-
-**sur node@12.18 :** yarn est installé, le container lance l'install et le run dev au lancement
-
-**sur composer :** ce container permettra l'utilisation de bedrock par la suite https://roots.io/bedrock/
-
-**sur nginx :** gestion du https : ports 80 et 443
-
-Pour les services wordpress et nginx, les config se trouvent respectivement dans les rep .docker/nginx et .docker/wordpress
 
 Editer la feuille CSS **web/wp-content/themes/[default ou ${WP_THEME_NAME}]/style.css** : changer l'entête
 
@@ -105,85 +37,18 @@ Text Domain: default
 */
 ```
 
+**sur wordpress@5.5-php7.4-fpm :** wp-cli est installé, entrer dans le container : (${APP_NAME} est renseigné dans .docker/.env)
+```
+docker exec -it ${APP_NAME}-wp bash
+```
+puis se référer aux commands https://developer.wordpress.org/cli/commands/
+```
+wp-cli --info
+```
+
 pour couper les containers
 ```
 .docker/stop.sh
-```
-
-### Autres scripts utiles
-
-**.docker/scripts/bdd-import.sh**
-le script invite à saisir le path vers le fichier.sql (drag'n'dropper le fichier dans le terminal)
-
-**.docker/scripts/bdd-export.sh**
-le script invite à saisir le path vers le dossier où télécharger le dump (drag'n'dropper le dossier dans le terminal)
-
-**.docker/scripts/node-assets-prod.sh**
-génération des assets en mode prod : optimisation images et concaténation des scripts
-le container node doit tourner pour cela.
-
-**.docker/scripts/node-docker-enter.sh**
-permet d'entrer dans le container node de docker pour y installer de nouveaux node_modules par exemple
-utiliser les commandes :
-```
-yarn add [package@version]
-```
-ou
-```
-yarn remove [package@version]
-```
-le container node doit tourner pour cela.
-
-vous pouvez aussi utiliser directement en ligne de commande :
-```
-docker exec -it [APP_NAME présent dans le fichier .docker/.env]-node bash
-```
-
-### Commandes docker
-#### Voir tous les conteneurs
-```
-docker ps -a
-```
-
-#### Arrêter tous les docker conteneurs
-```
-docker container stop $(docker container ls -aq)
-```
-
-#### Supprimer tous docker conteneurs
-```
-docker container rm $(docker container ls -aq)
-```
-
-#### Supprimer tous les conteneurs ET toutes les images
-```
-docker rm -v $(docker ps -a -q)
-docker rmi -f $(docker images -q)
-```
-
-#### Voir tous les conteneurs docker-compose
-```
-docker-compose ps
-```
-
-#### Arrêter tous les docker-compose conteneurs
-```
-docker-compose stop
-```
-
-#### Arrêter et supprimer tous les docker-compose conteneurs
-```
-docker-compose down
-```
-
-#### Clean up docker compose
-```
-docker-compose rm -v
-```
-
-#### Builder un container à nouveau si changements
-```
-docker-compose up -d --force-recreate --build
 ```
 
 #### Rentrer dans un shell à l'intérieur du conteneur
@@ -228,6 +93,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC06uGrpswAZrIpRQfiAxOrGiuLZguefwzyljyL4VPl
 
 Merci
 ```
+
 ### 3 - gitlab
 
 Télécharger https://projects.lonsdale.fr/#/files/7047136, copier contenu clé privé et la mettre dans la var SSH_KEY
@@ -283,3 +149,13 @@ password: my.cnf password
 shh host: lonsdale-preprod.ovh.bearstech.com  
 ssh user: [le user du projet]  
 ssh key: user key id_rsa  
+
+<hr>
+
+### workfow
+L'environnement utilise les modules js natif<br>
+Les styles qui sont dans **asets/styles** seront compilés dans un fichier, pour pouvoir gérer le css critque<br>
+Les **css** et/ou les **js** des views ne seront chargé que si la view et dans la page
+
+
+

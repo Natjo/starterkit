@@ -1,1 +1,7 @@
-[data-view=card-article]{background-color:#f5f5f5}[data-view=card-article] img{width:100%;height:auto}
+[data-view=card-article] {
+    background-color: #f5F5F5;
+}
+    [data-view=card-article] img{
+        width: 100%;
+        height: auto;
+    }
