@@ -1,62 +1,7 @@
-/* ConduitITCPro */
-@font-face {
-    font-family: 'ConduitITCPro';
-    src: url(fonts/ConduitITCPro-Light.woff2) format('woff2');
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
+.btn-1 {
+    font-size: 1rem;
 }
-@font-face {
-    font-family: 'ConduitITCPro';
-    src: url(fonts/ConduitITCPro-LightItalic.woff2) format('woff2');
-    font-weight: 300;
-    font-style: italic;
-    font-display: swap;
-}
-@font-face {
-    font-family: 'ConduitITCPro';
-    src: url(fonts/ConduitITCStd-Regular.woff2) format('woff2');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-}
-@font-face {
-    font-family: 'ConduitITCPro';
-    src: url(fonts/ConduitITCPro-Bold.woff2) format('woff2');
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-}
-
-/* Aeonik */
-@font-face {
-    font-family: 'Aeonik';
-    src: url(fonts/aeonik-light.woff2) format('woff2');
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
-}
-@font-face {
-    font-family: 'Aeonik';
-    src: url(fonts/aeonik-regular.woff2) format('woff2');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-}
-@font-face {
-    font-family: 'Aeonik';
-    src: url(fonts/aeonik-medium.woff2) format('woff2');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-}
-@font-face {
-    font-family: 'Aeonik';
-    src: url(fonts/aeonik-bold.woff2) format('woff2');
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-}body {
+body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     margin: 0;
@@ -141,7 +86,12 @@ button{
     cursor: pointer;
 	padding: 0;
 	border: 0;
-}#footer {
+}.rte strong{
+        color: green;
+    }
+    .rte p{
+        margin-bottom: 40px;
+    }#footer {
     background: antiquewhite;
     display: flex;
     align-items: center;
@@ -156,12 +106,164 @@ button{
     text-decoration: underline;
     color: var(--color-2);
 }
-.rte strong{
-        color: green;
-    }.btn-1 {
-    font-size: 1rem;
+#header {
+    position: fixed;
+    width: 100%;
+    height: var(--header-height);
+    display: grid; 
+    align-items: center;
+    grid-template-columns: var(--ctr-offset) auto [ctr] minmax(auto, var(--ctr-width)) auto var(--ctr-offset);
+   	transition: background .3s ease, height 0s linear .3s, transform .3s ease, grid .2s ease;
 }
-.tl1 {
+    
+    #header:before{
+		content: "";
+		grid-column: 1 / -1;
+		grid-row: 1;
+		height: var(--header-height);
+		background: red;
+		align-self: start;
+	}
+    
+    #header.trig{
+		--header-height: 40px;
+	}
+    
+    #header .logo,
+    #header #nav,
+    #header #btn-nav {
+        grid-column: ctr;
+        grid-row: 1;
+    }
+    
+    #header .logo {
+        justify-self: start;
+    }
+    
+    #header .logo svg{
+            height: 100%;
+            width: auto;
+        }
+    
+    @media (max-width: 991px) {#header {
+        grid-template-rows: var(--header-height) 1fr;
+        background: rgba(0, 0, 0, 0)
+}
+       
+        #header #nav-panel {
+            position: absolute;
+            right: 100%;
+            grid-column: 1 / -1;
+            grid-row: 2;
+            width: 100%;
+            max-width: 320px;
+            height: 100%;
+            overflow: hidden;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+            transform: translateX(0);
+            visibility: hidden;
+            transition: transform .2s ease, visibility 0s linear 1.2s;
+            background: green;
+            padding: 20px;
+        }
+
+        #header #btn-nav {
+            justify-self: end;
+        }
+
+        #header.open {
+            transition: background .3s ease, height 0s linear 0s;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+            #header.open #nav-panel {
+                transition: transform .2s ease, visibility 0s linear 0s;
+                transform: translateX(100%);
+                visibility: visible;
+            }
+    }
+    
+    @media (min-width: 992px) {
+        #header #btn-nav {
+            display: none;
+        }
+        #header #nav-panel {
+            justify-self: end;
+            grid-column: ctr;
+            grid-row: 1;
+        }
+        #header #nav {
+            display: flex;
+            justify-self: end;
+        }
+
+        #header .nav-links {
+            display: flex;
+            gap: 5px;
+        }
+    }/* ConduitITCPro */
+@font-face {
+    font-family: 'ConduitITCPro';
+    src: url(fonts/ConduitITCPro-Light.woff2) format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'ConduitITCPro';
+    src: url(fonts/ConduitITCPro-LightItalic.woff2) format('woff2');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'ConduitITCPro';
+    src: url(fonts/ConduitITCStd-Regular.woff2) format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'ConduitITCPro';
+    src: url(fonts/ConduitITCPro-Bold.woff2) format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Aeonik */
+@font-face {
+    font-family: 'Aeonik';
+    src: url(fonts/aeonik-light.woff2) format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Aeonik';
+    src: url(fonts/aeonik-regular.woff2) format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Aeonik';
+    src: url(fonts/aeonik-medium.woff2) format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Aeonik';
+    src: url(fonts/aeonik-bold.woff2) format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}.tl1 {
     font-family: var(--font-2);
     font-size: var(--font-size-xxlg);
     line-height: 1.1;
@@ -250,35 +352,4 @@ button{
     --color-tpl-1: var(--color-5);
     --color-tpl-2:  var(--color-6);
     --color-tpl-3:  var(--color-2);
-}#header {
-    background-color: aliceblue;
-    padding-top: 10px;
-    padding-bottom: 10px;
 }
-
-    #header .header-content {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    @media (min-width: 992px) {
-        #header #btn-nav {
-            display: none;
-        }
-    }
-
-@media (max-width: 991px) {
-
-#nav {
-        display: none
-
-}
-    }
-
-@media (min-width: 992px) {
-        #nav ul {
-            display: flex;
-            gap: 12px;
-        }
-    }

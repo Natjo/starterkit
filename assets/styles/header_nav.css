@@ -1,30 +1,98 @@
 #header {
-    background-color: aliceblue;
-    padding-top: 10px;
-    padding-bottom: 10px;
-
-    .header-content {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+    position: fixed;
+    width: 100%;
+    height: var(--header-height);
+    display: grid; 
+    align-items: center;
+    grid-template-columns: var(--ctr-offset) auto [ctr] minmax(auto, var(--ctr-width)) auto var(--ctr-offset);
+   	transition: background .3s ease, height 0s linear .3s, transform .3s ease, grid .2s ease;
+    
+    &:before{
+		content: "";
+		grid-column: 1 / -1;
+		grid-row: 1;
+		height: var(--header-height);
+		background: red;
+		align-self: start;
+	}
+	&.trig{
+		--header-height: 40px;
+	}
+    .logo,
+    #nav,
+    #btn-nav {
+        grid-column: ctr;
+        grid-row: 1;
     }
+
+    .logo {
+        justify-self: start;
+
+        svg{
+            height: 100%;
+            width: auto;
+        }
+    }
+
+    @media (--breakpoint-lg-down) {
+        grid-template-rows: var(--header-height) 1fr;
+        background: rgba(0, 0, 0, 0);
+       
+        #nav-panel {
+            position: absolute;
+            right: 100%;
+            grid-column: 1 / -1;
+            grid-row: 2;
+            width: 100%;
+            max-width: 320px;
+            height: 100%;
+            overflow: hidden;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+            transform: translateX(0);
+            visibility: hidden;
+            transition: transform .2s ease, visibility 0s linear 1.2s;
+            background: green;
+            padding: 20px;
+        }
+
+        #btn-nav {
+            justify-self: end;
+        }
+
+        &.open {
+            transition: background .3s ease, height 0s linear 0s;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+
+            #nav-panel {
+                transition: transform .2s ease, visibility 0s linear 0s;
+                transform: translateX(100%);
+                visibility: visible;
+            }
+        }
+    }
+
 
     @media (--breakpoint-lg-up) {
         #btn-nav {
             display: none;
         }
-    }
-}
-
-#nav {
-    @media (--breakpoint-lg-down) {
-        display: none;
-    }
-    @media (--breakpoint-lg-up) {
-        ul {
+        #nav-panel {
+            justify-self: end;
+            grid-column: ctr;
+            grid-row: 1;
+        }
+        #nav {
             display: flex;
-            gap: 12px;
+            justify-self: end;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 5px;
         }
     }
-
 }
