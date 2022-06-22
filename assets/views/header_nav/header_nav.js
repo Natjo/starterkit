@@ -3,17 +3,16 @@ const header = document.getElementById('header');
 const panel = document.getElementById('nav-panel');
 const btn_nav = header.querySelector('#btn-nav');
 
-let oldstatus, status = 0;
+let oldtrig, trig = 0;
 let triger = 150;
 
-const change = () => header.classList[status === 1 ? 'add' : 'remove']('trig');
+const change = () => header.classList[trig === 1 ? 'add' : 'remove']('trig');
 
 const scroll = () => {
     scrollY = window.pageYOffset;
-    if (scrollY > triger) status = 1;
-    if (scrollY === 0) status = 0;
-    oldstatus !== status && change();
-    oldstatus = status;
+    trig = scrollY > triger ? 1 : 0;
+    oldtrig !== trig && change();
+    oldtrig = trig;
 };
 const open = () => {
     document.body.classList.add('hasPopin');
@@ -37,14 +36,15 @@ const clickOut = e => {
 const onKeyUp = () => {
     if (!panel.contains(document.activeElement) && !btn_nav.contains(document.activeElement)) close();
 }
-const onKeyDown = () => {
-    if (event.key == 'Escape') {
+const onKeyDown = e => {
+    if (e.key == 'Escape') {
         close();
         btn_nav.focus();
     }
 }
+
 btn_nav.onclick = () => btn_nav.getAttribute('aria-expanded') === 'false' ? open() : close();
 
 window.addEventListener('scroll', scroll, { passive: true });
+
 window.pageYOffset > triger && header.classList.add('show');
-;

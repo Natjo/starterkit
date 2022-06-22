@@ -268,7 +268,7 @@ function my_mce4_options($init)
 {
 
     $custom_colours = '
-        "00ffff", "Color 1 name",
+        "ff0000", "red",
         "00ffff", "Color 2 name",
         "00ffff", "Color 3 name",
         "00ffff", "Color 4 name",
@@ -315,7 +315,7 @@ function jivedig_remove_tiny_mce_buttons_from_kitchen_sink($buttons)
 
     $remove_buttons = array(
         //'formatselect', // format dropdown menu for <p>, headings, etc
-        'underline',
+        //'underline',
         'alignjustify',
         //'forecolor', // text color
         //'pastetext', // paste as text
@@ -345,6 +345,7 @@ function my_mce_buttons_2($buttons)
      */
     $buttons[] = 'superscript';
     $buttons[] = 'subscript';
+    $buttons[] = 'underline';
 
     return $buttons;
 }

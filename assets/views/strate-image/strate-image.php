@@ -13,6 +13,6 @@ $image = $args['image'];
             <source srcset="<?= $image['tablet'] ?>.webp" media="(min-width: 576px)" type="image/webp">
             <source srcset="<?= $image['tablet'] ?>" media="(min-width: 576px)" type="image/jpeg">
         <?php endif; ?>
-        <img src="<?= $image['desktop'] ?>" alt="" loading="lazy" width="<?= $image['width'] ?>" height="<?= $images['height'] ?>">
+        <img src="<?= $image['desktop'] ?>" alt="" loading="lazy" width="<?= $image['width'] ?>" height="<?= $image['height'] ?>">
     </picture>
 </section>

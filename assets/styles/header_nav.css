@@ -1,51 +1,29 @@
 #header {
     position: fixed;
     width: 100%;
-    height: var(--header-height);
-    display: grid; 
-    align-items: center;
-    grid-template-columns: var(--ctr-offset) auto [ctr] minmax(auto, var(--ctr-width)) auto var(--ctr-offset);
-   	transition: background .3s ease, height 0s linear .3s, transform .3s ease, grid .2s ease;
-    
-    &:before{
-		content: "";
-		grid-column: 1 / -1;
-		grid-row: 1;
-		height: var(--header-height);
-		background: red;
-		align-self: start;
-	}
-	&.trig{
-		--header-height: 40px;
-	}
-    .logo,
-    #nav,
-    #btn-nav {
-        grid-column: ctr;
-        grid-row: 1;
+    background: aliceblue;
+
+    .container-fluid {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: var(--header-height);
+        transition: height .2s ease;
     }
 
-    .logo {
-        justify-self: start;
+    &.trig {
 
-        svg{
-            height: 100%;
-            width: auto;
-        }
+        --header-height: 50px;
     }
 
     @media (--breakpoint-lg-down) {
-        grid-template-rows: var(--header-height) 1fr;
-        background: rgba(0, 0, 0, 0);
-       
         #nav-panel {
-            position: absolute;
+            position: fixed;
+            top: var(--header-height);
             right: 100%;
-            grid-column: 1 / -1;
-            grid-row: 2;
             width: 100%;
             max-width: 320px;
-            height: 100%;
+            height: calc(100vh - var(--header-height));
             overflow: hidden;
             overflow-y: auto;
             display: flex;
@@ -54,18 +32,31 @@
             transform: translateX(0);
             visibility: hidden;
             transition: transform .2s ease, visibility 0s linear 1.2s;
-            background: green;
+            background: #f5f5f5;
             padding: 20px;
+            content-visibility: auto;
+            contain-intrinsic-size: 0 calc(100vh - var(--header-height));
         }
 
-        #btn-nav {
-            justify-self: end;
+        &:before {
+            content: "";
+            width: 100%;
+            height: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            position: absolute;
+            top: 100%;
+            display: block;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity .2s ease, height 0s linear 1.2s;
         }
 
         &.open {
-            transition: background .3s ease, height 0s linear 0s;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            &:before {
+                opacity: 1;
+                height: 100vh;
+                transition: opacity .2s ease, height 0s linear 0s;
+            }
 
             #nav-panel {
                 transition: transform .2s ease, visibility 0s linear 0s;
@@ -75,16 +66,17 @@
         }
     }
 
-
     @media (--breakpoint-lg-up) {
         #btn-nav {
             display: none;
         }
+
         #nav-panel {
             justify-self: end;
             grid-column: ctr;
             grid-row: 1;
         }
+
         #nav {
             display: flex;
             justify-self: end;

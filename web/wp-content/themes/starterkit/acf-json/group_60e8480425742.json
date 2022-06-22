@@ -195,7 +195,7 @@
             {
                 "param": "post_type",
                 "operator": "==",
-                "value": "post"
+                "value": "news"
             }
         ]
     ],
@@ -216,5 +216,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1655457084
+    "modified": 1655904661
 }

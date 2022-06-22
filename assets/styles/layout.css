@@ -6,6 +6,14 @@ body {
     font-size: var(--font-size);
     color: var(--color-text);
     line-height: 1;
+
+    &.hasPopin{
+		height: 100vh;
+		overflow: hidden !important;
+		position: relative;
+		touch-action: none;
+		-webkit-overflow-scrolling: touch;
+	}
 }
 
 .container {
@@ -19,4 +27,8 @@ body {
 .container-fluid {
     padding-left: var(--ctr-offset);
     padding-right: var(--ctr-offset);
+}
+main{
+    padding-top: var(--header-height);
+    padding-bottom: 40px;
 }

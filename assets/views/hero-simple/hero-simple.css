@@ -1,3 +1,6 @@
-[data-view=hero-simple]{
- 
+[data-view=hero-simple] {
+    background: #f8f8f8;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 40px;
 }
