@@ -51,12 +51,14 @@ $mail_error = !empty($mail['error']) ? true : false;
                         <textarea name="contact-msg" id="contact-msg" required aria-describedby="error-msg"></textarea>
                     </div>
 
-                    <div class="field">
+                    <div class="field checkbox">
                         <input type="checkbox" name="contact-consent" id="contact-consent" required aria-describedby="error-optin">
                         <label for="contact-consent" class="label-checkbox rte">J'accepte</label>
                     </div>
 
-                    <button type="submit">Envoyer</button>
+                    <div class="action">
+                        <button type="submit" class="btn-1">Envoyer</button>
+                    </div>
                 </fieldset>
             </div>
         </form>

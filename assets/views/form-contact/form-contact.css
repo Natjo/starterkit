@@ -1,6 +1,6 @@
+@import url('../../modules/form/form.css');
+
 [data-view=form-contact]{
-
-
     .msg{
         &.error{
             border: 2px solid red;

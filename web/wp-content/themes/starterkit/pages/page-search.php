@@ -10,11 +10,10 @@
 
 <?php get_template_part('template-parts/general/block', 'header_nav'); ?>
 
-<form id="search" method="post" action="/">
-    <input type="text" name="s">
-</form>
-
-<main id="main" role="main" tabindex="-1">
+<main id="main" role="main" tabindex="-1" class="page-search">
+    <form id="search" method="post" action="/">
+        <input type="text" name="s">
+    </form>
     <?php views('strate-search'); ?>
 </main>
 

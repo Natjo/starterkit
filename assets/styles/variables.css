@@ -8,24 +8,22 @@
     --gap: 20px;
 
     --header-height: 70px;
+
     --color-text: #1D1D1B;
+
+    --gray-light: #ECECEC;
     --gray: #ECECEC;
+    --gray-dark: #ECECEC;
 
     --color-1: #7163A9;
     --color-2: #3F3B8F;
     --color-3: #0089AB;
     --color-4: #77C7C8;
     --color-5: #F18E7E;
-    --color-6: #B770AC;
-    --color-7: #5F71B5;
-    --color-8: #F3F2CE;
-    --color-9: #60AAA7;
-    --color-10: #FFDC93;
 
-    --color-tpl-1: var(--color-4);
-    --color-tpl-2: var(--color-3);
-    --color-tpl-3: var(--color-1);
-   
+    --color-error: red;
+    --color-valid: green;
+    --color-focus: blue;
 
     --font-size-sm: .875rem;
     --font-size: .875rem;
@@ -35,11 +33,10 @@
     --font-size-xlg: 2.25rem;
     --font-size-xxlg: 2.25rem;
 
-    --margin-sm: 30px;
-    --margin: 60px;
-    --margin-md: 40px;
-    --margin-lg: 40px;
-    --margin-xl: 60px;
+    --margin-sm: 10px; 
+    --margin: 10px;
+    --margin-md: 20px;
+    --margin-lg: 20px;
 }
 
 @media (--breakpoint-lg-up) {
@@ -56,17 +53,9 @@
         --font-size-xlg: 4rem;
         --font-size-xxlg: 4.625rem;
 
-        --margin-sm: 40px; 
-        --margin: 50px;
-        --margin-md: 60px;
-        --margin-lg: 84px;
-        --margin-xl: 200px;
+        --margin-sm: 10px; 
+        --margin: 20px;
+        --margin-md: 30px;
+        --margin-lg: 40px;
     }
-}
-
-/* template */
-.tpl-prise-de-parole{
-    --color-tpl-1: var(--color-5);
-    --color-tpl-2:  var(--color-6);
-    --color-tpl-3:  var(--color-2);
 }

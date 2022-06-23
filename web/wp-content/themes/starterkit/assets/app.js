@@ -19,16 +19,13 @@ window.addEventListener('load', () => {
 const observer = new IntersectionObserver(items => items.forEach(e => {
   if (e.isIntersecting) {
     const view = e.target.dataset.view;
-    const script = document.createElement('script');
-    script.type = 'module';
-    script.src = `${paramsData.theme_url}assets/views/${view}/${view}.js`;
-    script.setAttribute('defer', '');
-    document.body.appendChild(script);
+    import(`${paramsData.theme_url}assets/views/${view}/${view}.js`).then(view => view.default(e.target));
     observer.unobserve(e.target);
   }
 }));
-window.paramsData = JSON.parse(appjs.dataset.params_data);
 
 for (const view of JSON.parse(appjs.dataset.views)) {
   observer.observe(document.querySelector(`[data-view=${view}]`));
 }
+
+window.paramsData = JSON.parse(appjs.dataset.params_data);
