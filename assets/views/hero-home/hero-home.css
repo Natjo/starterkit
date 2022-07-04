@@ -1,4 +1,5 @@
 [data-view=hero-home]{
-    position: relative;
+
     background-color: pink;
+    height: 200px;
 }
