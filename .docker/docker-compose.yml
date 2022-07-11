@@ -2,7 +2,7 @@ version: '3.6'
 
 services: 
   wordpress:
-    image: wordpress:5.5-php7.4-fpm
+    image: wordpress:php8.0-fpm
     build:
       context: .
       dockerfile: wordpress/Dockerfile
@@ -15,7 +15,7 @@ services:
       TABLE_PREFIX: ${DB_TABLE_PREFIX}
     volumes:
       - ../.docker/wordpress/php.ini:/usr/local/etc/php/conf.d/php.ini
-      - ../web:/var/www/html
+      - ../web:/var/www/html:rw,cached
       - ../web/wp-config-sample.php:/var/www/html/wp-config-sample.php
       - ../web/wp-content/uploads:/var/www/html/wp-content/uploads:cached
       - ../web/wp-content/plugins:/var/www/html/wp-content/plugins:cached
@@ -44,7 +44,7 @@ services:
     volumes:
       - ../.docker/nginx/default.conf:/tmp/default.template
       - ../.docker/certs:/etc/certs
-      - ../web:/var/www/html
+      - ../web:/var/www/html:rw,cached
     depends_on:
       - wordpress
     restart: unless-stopped

@@ -12,7 +12,8 @@ require('dotenv').config({ path: '.docker/.env' })
 
 
 const { optimize } = require('svgo');
-
+const breakpoints = [576, 768, 992, 1200, 1440];
+const dispatch = { mobile: "", desktop: "" };
 
 const src = 'assets/';
 const dist = `web/wp-content/themes/${process.env.THEME_NAME}/`;
@@ -61,6 +62,34 @@ const core = {
         }
         else fs.copySync(file, dist_name);
     },
+    dispatchCSS(str) {
+        const regexp = /@media[ ]{0,}\(([min|max]+-width):[ ]{0,}([0-9]+)px\)[ ]{0,}{([\s\S]+?})\s*}/g;
+        let results = str.matchAll(regexp);
+
+        for (const result of results) {
+            const up = result[1] == 'max-width' ? false : true;
+            const breakpoint = Number(result[2]);
+            const content = result[0];
+
+            if (!up) {
+                if ((breakpoint < 992)) {
+                    dispatch.mobile += content;
+                } else {
+                    dispatch.desktop += content;
+                }
+            } else {
+                if ((breakpoint >= 992)) {
+                    dispatch.desktop += content;
+                } else {
+                    dispatch.mobile += content;
+                }
+            }
+            str = str.replace(content, "");
+        }
+
+        fs.writeFileSync(`${dist}assets/styles-mobile.css`, str + dispatch.mobile);
+        fs.writeFileSync(`${dist}assets/styles-desktop.css`, str + dispatch.desktop);
+    },
     compile_syles() {
         let str = '';
         let inc = 0;
@@ -70,6 +99,7 @@ const core = {
                     str += css;
                     inc++;
                     if (inc == commonstyles.length) {
+                        //core.dispatch(str);
                         fs.writeFileSync(`${dist}assets/styles.css`, str);
                     }
                 });
@@ -135,6 +165,15 @@ const core = {
                 console.log('');
             })
             .then(result => {
+                //console.log(result.css);
+                //var tteesstt = 991;
+                // var b= '@media[ ]{0,}\(max-width:[ ]{0,}991px\)[ ]{0,}{([\s\S]+?})\s*}';
+                // const rere =  RegExp(b, 'gi');
+                //const test = `@media[ ]{0,}\(max-width:[ ]{0,}991px\)[ ]{0,}{([\s\S]+?})\s*}`;
+                //const regexp = `\\b/@media[ ]{0,}\(max-width:[ ]{0,}991px\)[ ]{0,}{([\s\S]+?})\s*}/g\\b`;
+
+
+
                 func(isProd ? uglifycss.processString(result.css) : result.css);
             })
     },
@@ -192,5 +231,7 @@ watch(src, { recursive: true }, (evt, file) => {
         core.console(`${folder}-${view}`, filename, evt);
     }
 });
+
+
 
 console.log(`I'm Watching you...`);

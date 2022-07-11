@@ -1,5 +1,5 @@
 html{
-    -webkit-text-size-adjust: 100%;
+    font-size: 62.5%;
 }
 body {
     -webkit-font-smoothing: antialiased;
@@ -42,13 +42,12 @@ main {
     padding-bottom: 0;
 }
 
-
 #quick_access {
     height: 0;
     overflow: hidden;
 
     &:focus-within {
-        padding: 20px var(--ctr-margin);
+        padding: 20px var(--ctr-offset);
         height: auto;
         
         a {

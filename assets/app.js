@@ -35,7 +35,6 @@ const observer = new IntersectionObserver(items => items.forEach(e => {
     }
 }));
 for (const view of JSON.parse(appjs.dataset.views)) {
-    console.log(appjs.dataset.views);
     observer.observe(document.querySelector(`[data-view=${view}]`));
 }
 
