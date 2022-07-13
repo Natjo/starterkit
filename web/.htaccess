@@ -29,6 +29,7 @@ ExpiresByType application/xhtml+xml "access plus 7200 seconds"
 ExpiresByType application/javascript A2592000
 ExpiresByType application/x-javascript "access plus 2592000 seconds"
 </IfModule>
+# END Expire headers
 
 # BEGIN Cache-Control Headers
 <IfModule mod_headers.c>
@@ -47,7 +48,7 @@ Header unset Cache-Control
 </FilesMatch>
 </IfModule>
 # END Cache-Control Headers
-# END Expire headers
+
 
 # BEGIN WordPress
 # The directives (lines) between "BEGIN WordPress" and "END WordPress" are

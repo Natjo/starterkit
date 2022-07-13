@@ -1,5 +1,4 @@
 <?php
-
 add_action( 'wp_ajax_rgpd', 'rgpd_callback' );
 add_action( 'wp_ajax_nopriv_rgpd', 'rgpd_callback' );
 function rgpd_callback()
