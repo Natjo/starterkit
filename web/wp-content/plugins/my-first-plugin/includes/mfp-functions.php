@@ -1,5 +1,5 @@
 <?php
-
+global $url;
 //$url = 'https://172.19.0.3';
 //$url = 'https://starterkit.code';
 //$url = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://') . $_SERVER['SERVER_NAME'];
@@ -18,150 +18,63 @@ function mfp_Add_My_Admin_Link()
 	);
 }
 
-
-
-function display111()
+// helpers
+function loadPage($url)
 {
-	$posts = new WP_Query('post_type=any&posts_per_page=-1&post_status=publish');
-	$posts = $posts->posts;
-	foreach ($posts as $post) {
-		echo "<tr>";
-		echo '<td><a href="/' . $post->post_name . '/" target="_blank">' . $post->post_title . '</a></td>';
-		echo "<td>" . $post->post_type  . "</td>";
-		echo "<td>" . $post->post_modified_gmt . "</td>";
-		echo "<td> 2000411-04</td>";
-		echo '<td><input type="checkbox"></td>';
-		echo '<td>✓</td>';
-		echo "</tr>";
-	}
+	$arrContextOptions = array(
+		"ssl" => array(
+			"verify_peer" => false,
+			"verify_peer_name" => false,
+		),
+	);
+	return file_get_contents($url, false, stream_context_create($arrContextOptions));
 }
 
-
-function getAllPages()
+function queryPosts()
 {
-
-	global $url;
-
-	function loadPage($url)
-	{
-		$arrContextOptions = array(
-			"ssl" => array(
-				"verify_peer" => false,
-				"verify_peer_name" => false,
-			),
-		);
-		return file_get_contents($url, true, stream_context_create($arrContextOptions));
-	}
-
-
-	global $allPages;
-	$allPages = array();
-
-	array_push($allPages, array(
-		"folder" => "/404/"
-	));
-
 	$args = array(
-		'sort_order' => 'asc',
-		'sort_column' => 'post_title',
-		'hierarchical' => 1,
-		'exclude' => '',
-		'include' => '',
-		'meta_key' => '',
-		'meta_value' => '',
-		'authors' => '',
-		'child_of' => 0,
-		'parent' => -1,
-		'exclude_tree' => '',
-		'number' => '',
-		'offset' => 0,
-		'post_type' => 'page',
+		'post_type' => "any",
+		'posts_per_page' => -1,
+		'order' => 'DESC',
+		'orderby' => 'modified',
 		'post_status' => 'publish'
 	);
-
-	$pages = get_pages($args);
-
-	foreach ($pages as $page) {
-		array_push($allPages, array(
-			"folder" => "/" . $page->post_name . "/",
-			"ID" => $page->ID,
-			"post_date_gmt" => $page->post_date_gmt,
-			"post_modified_gmt" => $page->post_modified_gmt,
-			"post_name" => $page->post_name,
-			"post_title" => $page->post_title,
-			"post_parent" => $page->post_name,
-			"post_type" => $page->post_type,
-			"page_template" => get_post_meta($page->ID, '_wp_page_template', true)
-
-		));
-		// print_r($page);
-		//get_field( 'xxxxxx',  'red' , $page->ID);
-		// update_post_meta( $page->ID, 'xxxxxx', 'red' );
-	}
-
-	function cptPage($name, $slug)
-	{
-		global $allPages;
-		$args = array(
-			'post_type' => $name,
-			'posts_per_page' => -1,
-			'order' => 'ID',
-			'orderby' => 'title',
-			'post_status' => 'publish',
-			'ignore_sticky_posts' => 1,
-		);
-		$queryArticles = new WP_Query($args);
-		$inc = 0;
-		if ($queryArticles->have_posts()) {
-			while ($queryArticles->have_posts()) {
-				$queryArticles->the_post();
-				$rowId = get_the_ID();
-				$inc++;
-				array_push($allPages, array(
-					"folder" => "/" . $slug . "/" . get_post_field('post_name', $rowId) . "/",
-					"ID" => $rowId,
-					"post_date_gmt" =>  get_post_field('post_date_gmt', $rowId),
-					"post_modified_gmt" => get_post_field('post_modified_gmt', $rowId),
-					"post_name" => get_post_field('post_name', $rowId),
-					"post_title" => get_post_field('post_title', $rowId),
-					"post_parent" => get_post_field('post_name', $rowId),
-					"post_type" => get_post_field('post_type', $rowId),
-					/*"page_template" => get_post_meta($page->ID, '_wp_page_template', true)*/
-				));
-
-				array_push($allPages, array(
-					"folder" => "/" . $slug . "/page/" . $inc . "/",
-					"ID" => $rowId,
-					"post_date_gmt" =>  get_post_field('post_date_gmt', $rowId),
-					"post_modified_gmt" => get_post_field('post_modified_gmt', $rowId),
-					"post_title" => get_post_field('post_title', $rowId),
-					"post_name" => get_post_field('post_name', $rowId),
-					"post_parent" => get_post_field('post_name', $rowId),
-					"post_type" => get_post_field('post_type', $rowId),
-					"pagination" => true
-				));
-			}
-			wp_reset_postdata();
-		}
-	}
-
-
+	$posts = new WP_Query($args);
+	wp_reset_postdata();
+	return $posts->posts;
+}
+function display()
+{
+	// list of cpts
 	$args = array(
 		'public'   => true,
 		'_builtin' => false,
 	);
-
 	$output = 'names'; // names or objects, note names is the default
 	$operator = 'and'; // 'and' or 'or'
 	$post_types = get_post_types($args, $output, $operator);
 
-	foreach ($post_types  as $post_type) {
-		$post_type_object = get_post_type_object($post_type);
-		$slug     = $post_type_object->rewrite['slug'];
-		cptPage($post_type, $slug);
-	}
+	//
+	$posts = queryPosts();
+	foreach ($posts as $post) {
+		$origin = date_create($post->post_modified_gmt);
+		$target = date_create($post->static_generate);
+		$interval = date_diff($origin, $target);
+		$slug = $post->post_name;
 
-	return $allPages;
+		if (in_array($post->post_type, $post_types)) {
+			$post_type_object = get_post_type_object($post->post_type);
+			$slug = $post_type_object->rewrite['slug'] . "/" . $post->post_name;
+		}
+		echo "<tr>";
+		echo '<td><a href="/' . $slug . '/" target="_blank">' . $post->post_title . '</a></td>';
+		echo "<td>" . $post->post_type  . "</td>";
+		echo "<td>" . $post->post_modified_gmt . "</td>";
+		echo "<td>" . $post->static_generate . "</td>";
+		echo '<td><input type="checkbox" ' . ($post->static_active ? "checked" : "") . '></td>';
+		echo '<td>✓' . $interval->format('%R%a days') . '</td>';
+		echo "</tr>";
+	}
 }
 
 
@@ -174,14 +87,11 @@ function static_change_status_callback()
 {
 	checkNonce('test_nonce');
 
-	echo $_POST['status'];
-
 	if ($_POST['status'] == "true") {
 		rename(ABSPATH . "wp-content/static_inactive/", ABSPATH . "wp-content/static/");
 	} else {
 		rename(ABSPATH . "wp-content/static/", ABSPATH . "wp-content/static_inactive/");
 	}
-
 
 	$link = mysqli_connect(getenv('DB_HOST'), getenv('DB_USER'), getenv('DB_PASSWORD'), getenv('DB_NAME'));
 	// Check connection
@@ -193,6 +103,24 @@ function static_change_status_callback()
 	mysqli_close($link);
 }
 
+function ctpPages($value)
+{
+	$args = array(
+		'post_type' => $value,
+		'posts_per_page' => -1,
+		'order' => 'ID',
+		'orderby' => 'title',
+		'post_status' => 'publish',
+		'ignore_sticky_posts' => 1,
+	);
+	$queryArticles = new WP_Query($args);
+	$posts_per_page = get_option('posts_per_page');
+	$totalPages = ceil($queryArticles->post_count / $posts_per_page);
+	for($i = 1; $i <= $totalPages; $i++){
+		echo "page/".$i;
+
+	}
+}
 //
 add_action('wp_ajax_test', 'test_callback');
 add_action('wp_ajax_nopriv_test', 'test_callback');
@@ -202,47 +130,53 @@ function test_callback()
 
 	checkNonce('test_nonce');
 
-	$allPages = getAllPages();
 
-	/*foreach ($allPages  as $page) {
+	// list of cpts
+	$args = array(
+		'public'   => true,
+		'_builtin' => false,
+	);
+	$output = 'names'; // names or objects, note names is the default
+	$operator = 'and'; // 'and' or 'or'
+	$post_types = get_post_types($args, $output, $operator);
 
-		$html = loadPage($url . $page['folder'] . "?dynamic=true");
-		if ($page['folder'] === "/home/") {
-			file_put_contents(WP_CONTENT_DIR . '/static/index.html', $html);
-		} else {
-			mkdir(WP_CONTENT_DIR . '/static' . $page['folder'], 0755, true);
-			file_put_contents(WP_CONTENT_DIR . '/static' . $page['folder'] . 'index.html', $html);
-		}
-	}	*/
-	
-	$posts = new WP_Query('post_type=any&posts_per_page=-1&post_status=publish');
-	$posts = $posts->posts;
-	wp_reset_postdata();
-
-	foreach ($posts as $post) {
-		$folder = "/" . $post->post_name . "/";
-		$html = loadPage($url . $folder . "?dynamic=true");
-		if ($folder === "/home/") {
-			file_put_contents(WP_CONTENT_DIR . '/static/index.html', $html);
-		} else {
-			mkdir(WP_CONTENT_DIR . '/static' . $folder, 0755, true);
-			file_put_contents(WP_CONTENT_DIR . '/static' . $folder . 'index.html', $html);
-		}
+	foreach ($post_types as $post_type) {
+		ctpPages($post_type);
 	}
 
+	$posts = queryPosts();
+
+	$static_folder = ($_POST['status'] == "true") ? "static" : "static_inactive";
 	$markup = "";
 	foreach ($posts as $post) {
+		$folder = "/" . $post->post_name . "/";
+
+		if (in_array($post->post_type, $post_types)) {
+			$post_type_object = get_post_type_object($post->post_type);
+			$folder = "/" . $post_type_object->rewrite['slug'] . "/" . $post->post_name . "/";
+		}
+
+
+		$html = loadPage($url . $folder . "?dynamic=true");
+		if ($folder === "/home/") {
+			file_put_contents(WP_CONTENT_DIR . '/' . $static_folder . '/index.html', $html);
+		} else {
+			mkdir(WP_CONTENT_DIR . '/' . $static_folder . $folder, 0755, true);
+			file_put_contents(WP_CONTENT_DIR . '/' . $static_folder . $folder . 'index.html', $html);
+		}
+
 		$markup .= "<tr>";
 		$markup .= '<td><a href="/' . $post->post_name . '/" target="_blank">' . $post->post_title . '</a></td>';
 		$markup .= "<td>" . $post->post_type  . "</td>";
 		$markup .= "<td>" . $post->post_modified_gmt . "</td>";
-		$markup .= "<td> 2000411-04</td>";
+		$markup .= "<td> 20s00411-04</td>";
 		$markup .= '<td><input type="checkbox"></td>';
 		$markup .= '<td>✓</td>';
 		$markup .= "</tr>";
 	}
 
 	$response['markup'] = $markup;
+
 	wp_send_json($response);
 	wp_die();
 }
