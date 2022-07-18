@@ -117,7 +117,7 @@ function ctpPages($value)
 	$posts_per_page = get_option('posts_per_page');
 	$totalPages = ceil($queryArticles->post_count / $posts_per_page);
 	for($i = 1; $i <= $totalPages; $i++){
-		echo "page/".$i;
+		//echo "page/".$i;
 
 	}
 }
