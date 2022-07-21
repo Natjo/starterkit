@@ -1,9 +1,6 @@
 <?php
 global $url;
-//$url = 'https://172.19.0.3';
-//$url = 'https://starterkit.code';
-//$url = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://') . $_SERVER['SERVER_NAME'];
-$url = "https://newsletter.preprod.lonsdale.fr/";
+
 
 // Hook the 'admin_menu' action hook, run the function named 'mfp_Add_My_Admin_Link()'
 // Add a new top level menu link to the ACP
@@ -19,6 +16,323 @@ function mfp_Add_My_Admin_Link()
 }
 
 // helpers
+class TinyHtmlMinifier
+{
+	private $options;
+	private $output;
+	private $build;
+	private $skip;
+	private $skipName;
+	private $head;
+	private $elements;
+
+	public function __construct(array $options)
+	{
+		$this->options = $options;
+		$this->output = '';
+		$this->build = [];
+		$this->skip = 0;
+		$this->skipName = '';
+		$this->head = false;
+		$this->elements = [
+			'skip' => [
+				'code',
+				'pre',
+				'script',
+				'textarea',
+			],
+			'inline' => [
+				'a',
+				'abbr',
+				'acronym',
+				'b',
+				'bdo',
+				'big',
+				'br',
+				'cite',
+				'code',
+				'dfn',
+				'em',
+				'i',
+				'img',
+				'kbd',
+				'map',
+				'object',
+				'samp',
+				'small',
+				'span',
+				'strong',
+				'sub',
+				'sup',
+				'tt',
+				'var',
+				'q',
+			],
+			'hard' => [
+				'!doctype',
+				'body',
+				'html',
+			]
+		];
+	}
+
+	// Run minifier
+	public function minify(string $html): string
+	{
+		if (
+			!isset($this->options['disable_comments']) ||
+			!$this->options['disable_comments']
+		) {
+			$html = $this->removeComments($html);
+		}
+
+		$rest = $html;
+
+		while (!empty($rest)) {
+			$parts = explode('<', $rest, 2);
+			$this->walk($parts[0]);
+			$rest = (isset($parts[1])) ? $parts[1] : '';
+		}
+
+		return $this->output;
+	}
+
+	// Walk trough html
+	private function walk(&$part)
+	{
+		$tag_parts = explode('>', $part);
+		$tag_content = $tag_parts[0];
+
+		if (!empty($tag_content)) {
+			$name = $this->findName($tag_content);
+			$element = $this->toElement($tag_content, $part, $name);
+			$type = $this->toType($element);
+
+			if ($name == 'head') {
+				$this->head = $type === 'open';
+			}
+
+			$this->build[] = [
+				'name' => $name,
+				'content' => $element,
+				'type' => $type
+			];
+
+			$this->setSkip($name, $type);
+
+			if (!empty($tag_content)) {
+				$content = (isset($tag_parts[1])) ? $tag_parts[1] : '';
+				if ($content !== '') {
+					$this->build[] = [
+						'content' => $this->compact($content, $name, $element),
+						'type' => 'content'
+					];
+				}
+			}
+
+			$this->buildHtml();
+		}
+	}
+
+	// Remove comments
+	private function removeComments($content = '')
+	{
+		return preg_replace('/(?=<!--)([\s\S]*?)-->/', '', $content);
+	}
+
+	// Check if string contains string
+	private function contains($needle, $haystack)
+	{
+		return strpos($haystack, $needle) !== false;
+	}
+
+	// Return type of element
+	private function toType($element)
+	{
+		return (substr($element, 1, 1) == '/') ? 'close' : 'open';
+	}
+
+	// Create element
+	private function toElement($element, $noll, $name)
+	{
+		$element = $this->stripWhitespace($element);
+		$element = $this->addChevrons($element, $noll);
+		$element = $this->removeSelfSlash($element);
+		$element = $this->removeMeta($element, $name);
+		return $element;
+	}
+
+	// Remove unneeded element meta
+	private function removeMeta($element, $name)
+	{
+		if ($name == 'style') {
+			$element = str_replace(
+				[
+					' type="text/css"',
+					"' type='text/css'"
+				],
+				['', ''],
+				$element
+			);
+		} elseif ($name == 'script') {
+			$element = str_replace(
+				[
+					' type="text/javascript"',
+					" type='text/javascript'"
+				],
+				['', ''],
+				$element
+			);
+		}
+		return $element;
+	}
+
+	// Strip whitespace from element
+	private function stripWhitespace($element)
+	{
+		if ($this->skip == 0) {
+			$element = preg_replace('/\s+/', ' ', $element);
+		}
+		return trim($element);
+	}
+
+	// Add chevrons around element
+	private function addChevrons($element, $noll)
+	{
+		if (empty($element)) {
+			return $element;
+		}
+		$char = ($this->contains('>', $noll)) ? '>' : '';
+		$element = '<' . $element . $char;
+		return $element;
+	}
+
+	// Remove unneeded self slash
+	private function removeSelfSlash($element)
+	{
+		if (substr($element, -3) == ' />') {
+			$element = substr($element, 0, -3) . '>';
+		}
+		return $element;
+	}
+
+	// Compact content
+	private function compact($content, $name, $element)
+	{
+		if ($this->skip != 0) {
+			$name = $this->skipName;
+		} else {
+			$content = preg_replace('/\s+/', ' ', $content);
+		}
+
+		if (in_array($name, $this->elements['skip'])) {
+			return $content;
+		} elseif (
+			in_array($name, $this->elements['hard']) ||
+			$this->head
+		) {
+			return $this->minifyHard($content);
+		} else {
+			return $this->minifyKeepSpaces($content);
+		}
+	}
+
+	// Build html
+	private function buildHtml()
+	{
+		foreach ($this->build as $build) {
+
+			if (!empty($this->options['collapse_whitespace'])) {
+
+				if (strlen(trim($build['content'])) == 0)
+					continue;
+
+				elseif ($build['type'] != 'content' && !in_array($build['name'], $this->elements['inline']))
+					trim($build['content']);
+			}
+
+			$this->output .= $build['content'];
+		}
+
+		$this->build = [];
+	}
+
+	// Find name by part
+	private function findName($part)
+	{
+		$name_cut = explode(" ", $part, 2)[0];
+		$name_cut = explode(">", $name_cut, 2)[0];
+		$name_cut = explode("\n", $name_cut, 2)[0];
+		$name_cut = preg_replace('/\s+/', '', $name_cut);
+		$name_cut = strtolower(str_replace('/', '', $name_cut));
+		return $name_cut;
+	}
+
+	// Set skip if elements are blocked from minification
+	private function setSkip($name, $type)
+	{
+		foreach ($this->elements['skip'] as $element) {
+			if ($element == $name && $this->skip == 0) {
+				$this->skipName = $name;
+			}
+		}
+		if (in_array($name, $this->elements['skip'])) {
+			if ($type == 'open') {
+				$this->skip++;
+			}
+			if ($type == 'close') {
+				$this->skip--;
+			}
+		}
+	}
+
+	// Minify all, even spaces between elements
+	private function minifyHard($element)
+	{
+		$element = preg_replace('!\s+!', ' ', $element);
+		$element = trim($element);
+		return trim($element);
+	}
+
+	// Strip but keep one space
+	private function minifyKeepSpaces($element)
+	{
+		return preg_replace('!\s+!', ' ', $element);
+	}
+}
+class TinyMinify
+{
+	public static function html(string $html, array $options = []): string
+	{
+		$minifier = new TinyHtmlMinifier($options);
+		return $minifier->minify($html);
+	}
+}
+function rm_rf($path)
+{
+	if (@is_dir($path) && is_writable($path)) {
+		$dp = opendir($path);
+		while ($ent = readdir($dp)) {
+			if ($ent == '.' || $ent == '..') {
+				continue;
+			}
+			$file = $path . DIRECTORY_SEPARATOR . $ent;
+			if (@is_dir($file)) {
+				rm_rf($file);
+			} elseif (is_writable($file)) {
+				unlink($file);
+			} else {
+				echo $file . "is not writable and cannot be removed. Please fix the permission or select a new path.\n";
+			}
+		}
+		closedir($dp);
+		return rmdir($path);
+	} else {
+		return @unlink($path);
+	}
+}
+
+//
 function loadPage($url)
 {
 	$arrContextOptions = array(
@@ -43,70 +357,73 @@ function queryPosts()
 	wp_reset_postdata();
 	return $posts->posts;
 }
-function display()
-{
-	// list of cpts
-	$args = array(
-		'public'   => true,
-		'_builtin' => false,
-	);
-	$output = 'names'; // names or objects, note names is the default
-	$operator = 'and'; // 'and' or 'or'
-	$post_types = get_post_types($args, $output, $operator);
 
-	//
-	$posts = queryPosts();
+function tr($posts, $post_types)
+{
+	$markup = "";
 	foreach ($posts as $post) {
-		$origin = date_create($post->post_modified_gmt);
+		$origin = date_create($post->post_modified);
 		$target = date_create($post->static_generate);
-		$interval = date_diff($origin, $target);
+		$upToDate = $origin < $target ? true : false;
 		$slug = $post->post_name;
 
 		if (in_array($post->post_type, $post_types)) {
 			$post_type_object = get_post_type_object($post->post_type);
 			$slug = $post_type_object->rewrite['slug'] . "/" . $post->post_name;
 		}
-		echo "<tr>";
-		echo '<td><a href="/' . $slug . '/" target="_blank">' . $post->post_title . '</a></td>';
-		echo "<td>" . $post->post_type  . "</td>";
-		echo "<td>" . $post->post_modified_gmt . "</td>";
-		echo "<td>" . $post->static_generate . "</td>";
-		echo '<td><input type="checkbox" ' . ($post->static_active ? "checked" : "") . '></td>';
-		echo '<td>✓' . $interval->format('%R%a days') . '</td>';
-		echo "</tr>";
+
+		if ($post->post_parent) {
+			$parent_slug = get_post_field('post_name', $post->post_parent);
+			$slug = $parent_slug . "/" . $post->post_name;
+		}
+
+		$markup .= '<tr>';
+		$markup .= '<td><a href="/' . $slug . '/" target="_blank">' . $post->post_title . '</a></td>';
+		$markup .= "<td>" . $post->post_type  . "</td>";
+		$markup .= '<td><input type="checkbox" ' . ($post->static_active ? "checked" : "") . ' value="' . $post->static_active  . '" class="checkbox-static_active" id="' . $post->ID . '" ></td>';
+		$markup .= ($upToDate ?  '<td style="color:green">✓</td>' : '<td style="color:red">x</td>');
+		$markup .= "</tr>";
 	}
+	return $markup;
 }
 
-
-// AJAX
-
-// toggle static/not static
-add_action('wp_ajax_static_change_status', 'static_change_status_callback');
-add_action('wp_ajax_nopriv_static_change_status', 'static_change_status_callback');
-function static_change_status_callback()
+function postTypes()
 {
-	checkNonce('test_nonce');
 
-	if ($_POST['status'] == "true") {
-		rename(ABSPATH . "wp-content/static_inactive/", ABSPATH . "wp-content/static/");
-	} else {
-		rename(ABSPATH . "wp-content/static/", ABSPATH . "wp-content/static_inactive/");
-	}
+	$args = array(
+		'public'   => true,
+		'_builtin' => false,
+	);
+	$output = 'names'; // names or objects, note names is the default
+	$operator = 'and'; // 'and' or 'or'
+	return get_post_types($args, $output, $operator);
+}
 
+function display()
+{
+	$post_types = postTypes();
+	$posts = queryPosts();
+	return tr($posts, $post_types);
+}
+
+function upToDate($posts)
+{
 	$link = mysqli_connect(getenv('DB_HOST'), getenv('DB_USER'), getenv('DB_PASSWORD'), getenv('DB_NAME'));
-	// Check connection
-	if ($link === false) {
-		// die("ERROR: Could not connect. " . mysqli_connect_error());
+
+	foreach ($posts as $post) {
+		$sql = "UPDATE wp_posts SET static_generate = CURRENT_TIMESTAMP WHERE ID = " . $post->ID;
+		mysqli_query($link, $sql);
 	}
-	$sql = "UPDATE wp_static_options SET static_active = " . $_POST['status'] . " WHERE options_id = 1";
-	mysqli_query($link, $sql);
 	mysqli_close($link);
 }
 
-function ctpPages($value)
+// cpts pages pagination generate
+function ctpPages($post_type)
 {
+	global $url;
+
 	$args = array(
-		'post_type' => $value,
+		'post_type' => $post_type,
 		'posts_per_page' => -1,
 		'order' => 'ID',
 		'orderby' => 'title',
@@ -116,67 +433,58 @@ function ctpPages($value)
 	$queryArticles = new WP_Query($args);
 	$posts_per_page = get_option('posts_per_page');
 	$totalPages = ceil($queryArticles->post_count / $posts_per_page);
-	for($i = 1; $i <= $totalPages; $i++){
-		//echo "page/".$i;
 
+	$post_type_object = get_post_type_object($post_type);
+	$slug = $post_type_object->rewrite['slug'];
+	$has_pagination = $post_type_object->has_pagination;
+
+	if ($has_pagination) {
+		for ($i = 1; $i <= $totalPages; $i++) {
+			$pp =  $slug . "/page/" . $i . "/";
+			$html = loadPage($url ."/". $pp . "?generate=true");
+			mkdir(WP_CONTENT_DIR . '/static/' . $pp, 0755, true);
+			file_put_contents(WP_CONTENT_DIR . '/static/' . $pp . 'index.html', TinyMinify::html($html));
+		}
 	}
 }
-//
-add_action('wp_ajax_test', 'test_callback');
-add_action('wp_ajax_nopriv_test', 'test_callback');
-function test_callback()
+
+function create($posts, $post_types)
 {
 	global $url;
 
-	checkNonce('test_nonce');
+	rm_rf(WP_CONTENT_DIR . '/static');
+	mkdir(WP_CONTENT_DIR . '/static/', 0755, true);
 
-
-	// list of cpts
-	$args = array(
-		'public'   => true,
-		'_builtin' => false,
-	);
-	$output = 'names'; // names or objects, note names is the default
-	$operator = 'and'; // 'and' or 'or'
-	$post_types = get_post_types($args, $output, $operator);
-
+	// create pages pagination
 	foreach ($post_types as $post_type) {
-		ctpPages($post_type);
+		$post_type_object = get_post_type_object($post_type);
+		if($post_type_object->has_pagination){
+			ctpPages($post_type);
+		}
 	}
 
-	$posts = queryPosts();
-
-	$static_folder = ($_POST['status'] == "true") ? "static" : "static_inactive";
-	$markup = "";
+	// create folders and files
 	foreach ($posts as $post) {
-		$folder = "/" . $post->post_name . "/";
+		if ($post->static_active) {
+			$folder = $post->post_name . "/";
+			if (in_array($post->post_type, $post_types)) {
+				$post_type_object = get_post_type_object($post->post_type);
+				$folder =  $post_type_object->rewrite['slug'] . "/" . $post->post_name . "/";
+			}
 
-		if (in_array($post->post_type, $post_types)) {
-			$post_type_object = get_post_type_object($post->post_type);
-			$folder = "/" . $post_type_object->rewrite['slug'] . "/" . $post->post_name . "/";
+			if ($post->post_parent) {
+				$parent_slug = get_post_field('post_name', $post->post_parent);
+				$folder =  $parent_slug . "/" . $post->post_name . "/";
+			}
+
+			$html = loadPage($url ."/". $folder . "?generate=true");
+
+			if ($folder === "home/") {
+				file_put_contents(WP_CONTENT_DIR . '/static/index.html', TinyMinify::html($html));
+			} else {
+				mkdir(WP_CONTENT_DIR . "/static/" . $folder, 0755, true);
+				file_put_contents(WP_CONTENT_DIR . "/static/" . $folder . 'index.html', TinyMinify::html($html));
+			}
 		}
-
-
-		$html = loadPage($url . $folder . "?dynamic=true");
-		if ($folder === "/home/") {
-			file_put_contents(WP_CONTENT_DIR . '/' . $static_folder . '/index.html', $html);
-		} else {
-			mkdir(WP_CONTENT_DIR . '/' . $static_folder . $folder, 0755, true);
-			file_put_contents(WP_CONTENT_DIR . '/' . $static_folder . $folder . 'index.html', $html);
-		}
-
-		$markup .= "<tr>";
-		$markup .= '<td><a href="/' . $post->post_name . '/" target="_blank">' . $post->post_title . '</a></td>';
-		$markup .= "<td>" . $post->post_type  . "</td>";
-		$markup .= "<td>" . $post->post_modified_gmt . "</td>";
-		$markup .= "<td> 20s00411-04</td>";
-		$markup .= '<td><input type="checkbox"></td>';
-		$markup .= '<td>✓</td>';
-		$markup .= "</tr>";
 	}
-
-	$response['markup'] = $markup;
-
-	wp_send_json($response);
-	wp_die();
 }

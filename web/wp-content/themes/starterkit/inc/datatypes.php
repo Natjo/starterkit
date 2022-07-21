@@ -36,6 +36,8 @@ function create_cpt()
         'show_in_nav_menus' => true,
         'can_export' => true,
         'has_archive' => false,
+        'has_pagination' => true,
+        'posts_per_page' => get_option('posts_per_page'),
         'hierarchical' => false,
         'show_in_rest' => true,
         'publicly_queryable' => true,

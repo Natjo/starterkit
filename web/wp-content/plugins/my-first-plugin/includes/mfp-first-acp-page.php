@@ -2,54 +2,13 @@
 
 global $wpdb;
 $nonce = wp_create_nonce('test_nonce');
-$table_options = $wpdb->prefix . 'static_options';
-$charset_collate = $wpdb->get_charset_collate();
+$isStatic  = (file_exists(WP_CONTENT_DIR . '/static/'))  ? 1 : 0;
 
-// create tables if no exist
-if ($wpdb->get_var("SHOW TABLES LIKE '$table_options'") != $table_options) {
-	$sql = "CREATE TABLE $table_options (
-    options_id mediumint(9) NOT NULL AUTO_INCREMENT,
-    static_active BOOLEAN DEFAULT 0,
-    PRIMARY KEY  (options_id)
-  ) $charset_collate;";
-
-	require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-	dbDelta($sql);
-
-	$table_pages = $wpdb->prefix . 'static_pages';
-
-	$sql = "CREATE TABLE $table_pages (
-    id mediumint(9) NOT NULL AUTO_INCREMENT,
-    post_title varchar(45) DEFAULT NULL,
-    folder varchar(45) DEFAULT NULL,
-    post_date_gmt varchar(45) DEFAULT NULL,
-    post_modified_gmt varchar(45) DEFAULT NULL,
-    is_static BOOLEAN DEFAULT 1,
-    last_generate BOOLEAN DEFAULT 1,
-    time timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    PRIMARY KEY  (id)
-  ) $charset_collate;";
-
-	require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-	dbDelta($sql);
-
-	$wpdb->insert(
-		$table_options,
-		array(
-			'static_active' => true,
-		)
-	);
-} else {
-	$table_name = $wpdb->prefix . 'static_options';
-	$result = $wpdb->get_results("SELECT static_active FROM  " . $table_name . "  WHERE  options_id = 1 ");
-	$isStatic = $result[0]->static_active;
-}
-
-// create column in wp_posts
+// create column (static_active,static_generate) in wp_posts
 $table_posts = $wpdb->prefix . 'posts';
 $table_posts_rows = $wpdb->get_row("SELECT * FROM " . $table_posts);
 if (!isset($table_posts_rows->static_active)) {
-	$wpdb->query("ALTER TABLE wp_posts ADD static_active  BOOLEAN DEFAULT 0 ");
+	$wpdb->query("ALTER TABLE wp_posts ADD static_active  BOOLEAN DEFAULT 1 ");
 }
 if (!isset($table_posts_rows->static_generate)) {
 	$wpdb->query("ALTER TABLE wp_posts ADD static_generate timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL ");
@@ -65,49 +24,72 @@ if (!isset($table_posts_rows->static_generate)) {
 		&nbsp;&nbsp;
 		<button class="plug-static-btn-generate">Generate all pages</button>
 	</div>
+
 	<br>
+	<input type="text" value="https://newsletter.preprod.lonsdale.fr" style="width: 300px">
+	<br>
+
 	<section>
+		<h2>Cpts</h2>
+		<table class="wp-list-table widefat fixed striped">
+			<thead>
+				<tr>
+					<th>Type</th>
+					<th>Slug</th>
+					<th>has pagination</th>
+					<th>Static</th>
+					<th>post per page</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<?php
+
+				// static_active
+				$post_types = postTypes();
+				foreach ($post_types as $post_type) :
+					$args = array(
+						'post_type' => $post_type,
+						'posts_per_page' => -1,
+						'order' => 'ID',
+						'orderby' => 'title',
+						'post_status' => 'publish',
+						'ignore_sticky_posts' => 1,
+					);
+					$queryArticles = new WP_Query($args);
+					$post_type_object = get_post_type_object($post_type);
+				?>
+					<tr>
+						<td>news</td>
+						<td><?= $post_type_object->rewrite['slug'] ?></td>
+						<td><?= $post_type_object->has_pagination ? "oui" : "non" ?></td>
+						<td>oui</td>
+						<td><?= $post_type_object->posts_per_page ?></td>
+					</tr>
+				<?php endforeach; ?>
+
+			</tbody>
+
+		</table>
+	</section>
+	<br>
+
+	<section>
+		<h2>Post</h2>
 		<table class="wp-list-table widefat fixed striped">
 			<thead>
 				<tr>
 					<th>Name</th>
-					<th>Slug</th>
-					<th>has archive</th>
-					<th>New post</th>
-					<th>Status</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>news</td>
-					<td>actualites</td>
-					<td>true</td>
-					<td>3</td>
-					<td>Status</td>
-				</tr>
-			</tbody>
-			
-		</table>
-	</section>
-	<br>
-	<section>
-		<table class="wp-list-table widefat fixed striped">
-			<thead>
-				<tr>
-					<th>Title</th>
 					<th>Type</th>
-					<th>Last save</th>
-					<th>Last generate</th>
-					<th>static mode</th>
-					<th>Status</th>
+					<th>Static</th>
+					<th>Up to date</th>
 				</tr>
 			</thead>
 			<tbody id="plug-static-pages">
-				<?php display(); ?>
+				<?= display(); ?>
 			</tbody>
 		</table>
 	</section>
-
 </div>
 
 
@@ -134,8 +116,27 @@ if (!isset($table_posts_rows->static_generate)) {
 		}
 	}
 
+	// posts is active
+	const checkbox_static_active = pages_result.querySelectorAll(".checkbox-static_active");
+	checkbox_static_active.forEach((el) => {
+		el.onchange = () => {
+			const data = new FormData();
+			data.append('action', "static_posts_his_active");
+			data.append('nonce', '<?= $nonce ?>');
+			data.append('id', el.id);
+			data.append('status', el.checked);
+			const xhr = new XMLHttpRequest();
+			xhr.open("post", '<?= AJAX_URL ?>', true);
+			xhr.send(data);
+			xhr.onload = () => {}
+		}
+	})
+
+
 	// status
 	toogle_status.onchange = () => {
+		btn_generate.disabled = true;
+		toogle_status.disabled = true;
 		const data = new FormData();
 		data.append('action', "static_change_status");
 		data.append('nonce', '<?= $nonce ?>');
@@ -143,6 +144,11 @@ if (!isset($table_posts_rows->static_generate)) {
 		const xhr = new XMLHttpRequest();
 		xhr.open("post", '<?= AJAX_URL ?>', true);
 		xhr.send(data);
-		xhr.onload = () => {}
+		xhr.onload = () => {
+			btn_generate.disabled = false;
+			toogle_status.disabled = false;
+			const response = JSON.parse(xhr.responseText);
+			pages_result.innerHTML = response.markup;
+		}
 	}
 </script>
