@@ -5,13 +5,12 @@ Description: Mon premier plugin !
 Author: Moi
 */
 
-global $url;
-$url = 'https://172.18.0.3';
-//$url = 'https://starterkit.code';
-//$url = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://') . $_SERVER['SERVER_NAME'];
-$url = "https://newsletter.preprod.lonsdale.fr";
+global $host;
+global $hostfinal;
 
-//$url = "localhost";
+$host = "172.18.0.3";
+$hostfinal = $_SERVER['SERVER_NAME'];
+//$url = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://') . $_SERVER['SERVER_NAME'];
 
 
 // Include mfp-functions.php, use require_once to stop the script if mfp-functions.php is not found

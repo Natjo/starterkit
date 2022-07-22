@@ -1,6 +1,4 @@
 <?php
-global $url;
-
 
 // Hook the 'admin_menu' action hook, run the function named 'mfp_Add_My_Admin_Link()'
 // Add a new top level menu link to the ACP
@@ -333,15 +331,27 @@ function rm_rf($path)
 }
 
 //
-function loadPage($url)
+function loadPage($file)
 {
+	global $host;
+	global $hostfinal;
+
 	$arrContextOptions = array(
 		"ssl" => array(
 			"verify_peer" => false,
 			"verify_peer_name" => false,
 		),
 	);
-	return file_get_contents($url, false, stream_context_create($arrContextOptions));
+
+	$html = file_get_contents($file, false, stream_context_create($arrContextOptions));
+	
+	if ($host !== $hostfinal) {
+		$html = str_replace($host, $hostfinal, $html);
+	}
+
+	return $html;
+
+	//return file_get_contents($url, false, stream_context_create($arrContextOptions));
 }
 
 function queryPosts()
@@ -420,7 +430,7 @@ function upToDate($posts)
 // cpts pages pagination generate
 function ctpPages($post_type)
 {
-	global $url;
+	global $host;
 
 	$args = array(
 		'post_type' => $post_type,
@@ -441,7 +451,8 @@ function ctpPages($post_type)
 	if ($has_pagination) {
 		for ($i = 1; $i <= $totalPages; $i++) {
 			$pp =  $slug . "/page/" . $i . "/";
-			$html = loadPage($url ."/". $pp . "?generate=true");
+
+			$html = loadPage("https;//".$host . "/" . $pp . "?generate=true");
 			mkdir(WP_CONTENT_DIR . '/static/' . $pp, 0755, true);
 			file_put_contents(WP_CONTENT_DIR . '/static/' . $pp . 'index.html', TinyMinify::html($html));
 		}
@@ -450,7 +461,7 @@ function ctpPages($post_type)
 
 function create($posts, $post_types)
 {
-	global $url;
+	global $host;
 
 	rm_rf(WP_CONTENT_DIR . '/static');
 	mkdir(WP_CONTENT_DIR . '/static/', 0755, true);
@@ -458,7 +469,7 @@ function create($posts, $post_types)
 	// create pages pagination
 	foreach ($post_types as $post_type) {
 		$post_type_object = get_post_type_object($post_type);
-		if($post_type_object->has_pagination){
+		if ($post_type_object->has_pagination) {
 			ctpPages($post_type);
 		}
 	}
@@ -477,7 +488,7 @@ function create($posts, $post_types)
 				$folder =  $parent_slug . "/" . $post->post_name . "/";
 			}
 
-			$html = loadPage($url ."/". $folder . "?generate=true");
+			$html = loadPage("https://".$host . "/" . $folder . "?generate=true");
 
 			if ($folder === "home/") {
 				file_put_contents(WP_CONTENT_DIR . '/static/index.html', TinyMinify::html($html));

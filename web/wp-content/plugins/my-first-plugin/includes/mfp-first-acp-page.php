@@ -16,9 +16,11 @@ if (!isset($table_posts_rows->static_generate)) {
 
 ?>
 
-
 <div class="wrap">
 	<h1>Static website</h1>
+	TODO<br>
+	display last generate<br>
+	rec host docker<br>
 	<div>
 		<input type="checkbox" id="plug-static-toggle-status" <?php if ($isStatic) echo 'checked' ?>><label for="plug-static-toggle-status">Mode static active</label>
 		&nbsp;&nbsp;
@@ -26,7 +28,9 @@ if (!isset($table_posts_rows->static_generate)) {
 	</div>
 
 	<br>
-	<input type="text" value="https://newsletter.preprod.lonsdale.fr" style="width: 300px">
+	<label>docker host</label>
+	<input type="text" value="172.18.0.3" style="width: 300px"><br>
+
 	<br>
 
 	<section>
