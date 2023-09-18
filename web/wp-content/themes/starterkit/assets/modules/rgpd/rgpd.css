@@ -41,29 +41,12 @@
         display: none;
     }
 
-@-webkit-keyframes rgpd-fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-
 @keyframes rgpd-fadeIn {
     0% {
         opacity: 0;
     }
     100% {
         opacity: 1;
-    }
-}
-@-webkit-keyframes rgpd-fadeOut {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
     }
 }
 @keyframes rgpd-fadeOut {
@@ -92,13 +75,11 @@
 
 #rgpd-manage.open {
         display: grid;
-        -webkit-animation: rgpd-fadeIn 0.2s ease 0.1s both;
-                animation: rgpd-fadeIn 0.2s ease 0.1s both;
+        animation: rgpd-fadeIn 0.2s ease 0.1s both;
     }
 
 #rgpd-manage.close {
-        -webkit-animation: rgpd-fadeOut 0.2s ease 0.1s both;
-                animation: rgpd-fadeOut 0.2s ease 0.1s both;
+        animation: rgpd-fadeOut 0.2s ease 0.1s both;
     }
 
 #rgpd-manage .box {

@@ -1,5 +1,6 @@
 <?php
 define('THEME_DIR', get_template_directory() . '/' );
+define('THEME_ASSETS', get_template_directory_uri() . '/assets/');
 define('THEME_URL',get_template_directory_uri() . '/');
 define('HOME_URL', get_home_url());
 define('AJAX_URL', admin_url('admin-ajax.php'));
@@ -95,29 +96,7 @@ function paramsData()
     echo json_encode($dataToBePassed);
 }
 
-/**
- * Picture
- * 
- */
-function picture($args)
-{
-    get_template_part('template-parts/general/block', 'picture', array(
-        'images' => $args['images'],
-        'width' => isset($args['width']) ? ' width="' . $args['width'] . '"' : '',
-        'height' => isset($args['height']) ? ' height="' . $args['height'] . '"' : '',
-        'alt' => isset($args['alt']) ? $args['alt'] : NULL,
-        'lazy' => isset($args['lazy']) ? ' loading="lazy"' : ''
-    ));
-}
 
-/**
- * Icon
- * 
- */
-function icon($name, $width, $height)
-{
-    return '<svg class="icon" width="' . $width . '" height="' . $height . '" aria-hidden="true" viewBox="0 0 20 20"><use xlink:href="' . THEME_URL . 'assets/img/icons.svg#' . $name . '"></use></svg>';
-}
 
 /**
  * Console
@@ -182,7 +161,13 @@ function remove_page_class($wp_list_pages)
 }
 add_filter('wp_list_pages', 'remove_page_class');
 
-
+/*
+add_action( 'wp', 'onepage' );
+function onepage()
+{
+    get_template_part('pages/page', 'homepage');
+   exit;
+}*/
 
 // -------
 //template
@@ -194,3 +179,5 @@ function get_tpl()
 }
 
 ob_start();
+
+

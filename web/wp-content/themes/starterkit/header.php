@@ -1,5 +1,8 @@
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
+
+    <?= lsd_seo(); ?>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
 
     <link rel="icon" href="<?= THEME_URL; ?>assets/favicon/favicon.ico" sizes="any">
@@ -15,4 +18,4 @@
     <link rel='stylesheet' href='<?= THEME_URL; ?>assets/styles.css'/>
 
     <?php foreach ($args as $value) echo '<link href="'.THEME_URL.$value.'" rel="stylesheet" media="screen">';?>
-</head>    
+</head>

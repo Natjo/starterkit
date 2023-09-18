@@ -25,6 +25,9 @@ function dateMonthInFr($date)
 function lsd_get_thumb($id, $size = 'medium')
 {
     if ($id) {
+        if ("full" == $size) {
+            return wp_get_original_image_url($id);
+        }
         $img = wp_get_attachment_image_src($id, $size);
         $extension = substr($img[0], strrpos($img[0], '.') + 1);
 
@@ -39,23 +42,30 @@ function lsd_get_thumb($id, $size = 'medium')
 }
 
 
+
 // Image url function de mise en avant des articles
 function lsd_get_featured($id, $size = 'medium')
 {
     if ($id) {
+
         $img_id = get_post_thumbnail_id($id);
-        $img = wp_get_attachment_image_src($img_id, $size);
-        $extension = substr($img[0], strrpos($img[0], '.') + 1);
 
-        if ($extension == 'gif' || $extension == 'GIF') :
-            $img = wp_get_attachment_image_src($img_id, 'full');
-        endif;
+        if ("full" == $size) {
+            $imgUrl = wp_get_original_image_url($img_id);
+        } else {
+            $img = wp_get_attachment_image_src($img_id, $size);
+            $extension = substr($img[0], strrpos($img[0], '.') + 1);
 
-        $imgUrl = is_array($img) ? reset($img) : "";
+            if ($extension == 'gif' || $extension == 'GIF') :
+                $img = wp_get_attachment_image_src($img_id, 'full');
+            endif;
 
+            $imgUrl = is_array($img) ? reset($img) : "";
+        }
         return $imgUrl;
     }
 }
+
 
 function youtube_id_from_url($url)
 {
@@ -76,4 +86,148 @@ function youtube_id_from_url($url)
     }
 
     return "";
+}
+
+
+
+/**
+ * isWebp
+ * for srcset picture, add ext .webp if not svg 
+ */
+function isWebp($img)
+{
+    if (!empty($img)) {
+        return pathinfo($img)['extension'] != "svg" ? $img . ".webp" : $img;
+    }
+}
+
+/**
+ * Picture
+ */
+function picture($image, $class = "", $lazy = false, $breakpoints = [768, 1920])
+{
+    if (!empty($image)) {
+        $sm = $breakpoints[0];
+        $wd = $breakpoints[1];
+        $lazy = !empty($lazy) ? ' loading="lazy"' : "";
+        $class = !empty($class) ? ' class="' . $class . '"' : "";
+        $alt = !empty($image["alt"]) ?  $image["alt"]  : "";
+
+        $imgMobile = !empty($image['mobile']) ? $image['mobile'] : null;
+        $imgTablet = !empty($image['tablet']) ? $image['tablet'] : null;
+        $imgDesktop = $image['desktop'];
+
+        echo '<picture' . $class . '>';
+        if (!empty($imgMobile)) {
+            echo '<source srcset="' . isWebp($imgMobile) . '" media="(max-width: ' . ($sm - 1) . 'px)" type="image/webp">';
+            echo '<source srcset="' . $imgMobile . '" media="(max-width: ' . ($sm - 1) . 'px)" type="image/jpeg">';
+        }
+
+        echo '<source srcset="' . isWebp($imgDesktop) . '" media="(min-width: ' . (!empty($imgTablet) ? $wd : $sm) . 'px)" type="image/webp">';
+        echo '<source srcset="' . $imgDesktop . '" media="(min-width: ' . (!empty($imgTablet) ? $wd : $sm)  . 'px)" type="image/jpeg">';
+
+        if (!empty($imgTablet)) {
+            echo ' <source srcset="' . isWebp($imgTablet) . '" media="(min-width: ' . $sm . 'px)" type="image/webp">';
+            echo ' <source srcset="' . $imgTablet . '" media="(min-width: ' . $sm . 'px)" type="image/jpeg">';
+        }
+
+        echo '<img src="' . $imgDesktop . '" alt="' . $alt . '" width="' . $image['width'] . '" height="' . $image['height'] . '"' . $lazy . '>';
+        echo '</picture>';
+    }
+}
+
+
+/**
+ * GetImage
+ *
+ */
+
+ class GetImage
+ {
+     private $_image;
+     private $_size;
+     public $width = null;
+     public $height = null;
+     public $url = null;
+     public $alt = null;
+     public $id = null;
+ 
+     function __construct($image, $size = null)
+     {
+ 
+         $this->_image = $image;
+         $this->_size = $size;
+ 
+         if (!empty($this->_image)) {
+             $this->width = $image["width"];
+             $this->height = $image["height"];
+             $this->alt = $image["alt"];
+             $this->id = $image["ID"];
+ 
+             $sizes = $this->_image["sizes"];
+             $img = $this->_image["url"];
+             foreach ($sizes as $key => $value) {
+                 if ($this->_size === $key) {
+                     $img = $this->_image["sizes"][$this->_size];
+                 }
+             }
+             $this->url = $img;
+         }
+     }
+ }
+
+ 
+/**
+ * SEO title and desc
+ */
+function lsd_seo()
+{
+    remove_action('wp_head', '_wp_render_title_tag', 1);
+
+    $title = get_field('options-seo-title', 'options');
+    $desc = get_field('options-seo-desc', 'options');
+
+    if (empty($title)) {
+        $title = get_bloginfo('name');
+    }
+
+    if (!is_front_page()) {
+
+        $title =  $title . " | " . get_the_title();
+    }
+    $markup = '<title>' . $title  . '</title>' . "\n";
+
+    if (!empty($desc)) {
+        $markup .= '<meta name="description" content="' . $desc . '">' . "\n";
+    }
+
+    return $markup;
+}
+
+/**
+ * Create link
+ *
+ */
+function setlink($link, $classes = "")
+{
+    $target = !empty($link["target"]) && $link["target"] != "" ? 'target="_blank"' : '';
+    return '<a href="' . $link["url"] . '" class="' . $classes . '" ' . $target . '>' . $link["title"] . '</a>';
+}
+
+/**
+ * Create link width picto
+ *
+ */
+function setlinkIcon($link, $classes = "", $icon = "", $width = 13, $height = 17, $label = "")
+{
+    $target = !empty($link["target"]) ? 'target="_blank"' : '';
+    return '<a ' . (!empty($label) ? ' aria-label="' . $label . '"' : "") . ' href="' . $link["url"] . '" class="' . $classes . '" ' . $target . '>' . icon($icon, $width, $height) . "<span>" . $link["title"] . "</span></a>";
+}
+
+/**
+ * Icon
+ */
+function icon($name, $width, $height, $url = THEME_ASSETS)
+{
+    return '<svg class="icon" width="' . $width . '" height="' . $height . '" aria-hidden="true" viewBox="0 0 ' . $width . ' ' . $height . '"><use xlink:href="' . $url . 'img/icons.svg#' . $name . '"></use></svg>';
 }

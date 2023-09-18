@@ -15,7 +15,7 @@ $pageId = get_the_ID();
         'title' => get_field('hero-homepage-title', $pageId)
     ));
     ?>
-    <?php  get_template_part('template-parts/general/block', 'views'); ?>
+    <?php get_template_part('template-parts/general/block', 'views'); ?>
 
 </main>
 

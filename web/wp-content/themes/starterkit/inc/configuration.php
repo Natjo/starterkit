@@ -42,9 +42,6 @@ function disable_unused_format($sizes)
 }
 add_filter('intermediate_image_sizes_advanced', 'disable_unused_format');
 
-
-
-
 // function remove_default_post_type_menu_bar( $wp_admin_bar ) {
 //     $wp_admin_bar->remove_node( 'new-post' );
 // }
@@ -91,6 +88,16 @@ remove_action('wp_head', 'print_emoji_detection_script', 7);
 remove_action('wp_print_styles', 'print_emoji_styles');
 remove_action('admin_print_scripts', 'print_emoji_detection_script');
 remove_action('admin_print_styles', 'print_emoji_styles');
+
+/**
+ * Remove wp files/scripts
+ */
+// Remove wp bmocl inline style
+add_action('wp_enqueue_scripts', 'mywptheme_child_deregister_styles', 20);
+function mywptheme_child_deregister_styles()
+{
+    wp_dequeue_style('classic-theme-styles');
+}
 
 // Remove wp-embed.min.js
 function my_deregister_scripts(){

@@ -31,20 +31,20 @@ if (ENV_PROD) {
 
 // ** Réglages MySQL - Votre hébergeur doit vous fournir ces informations. ** //
 /** Nom de la base de données de WordPress. */
-define('DB_NAME', getenv('DB_NAME'));
+define('DB_NAME', getenv('MYSQL_DATABASE'));
 //define('DB_NAME', 'newsletter');
 
 /** Utilisateur de la base de données MySQL. */
-define('DB_USER', getenv('DB_USER'));
+define('DB_USER', getenv('MYSQL_USER'));
 //define('DB_USER', 'newsletter');
 
 /** Mot de passe de la base de données MySQL. */
-define('DB_PASSWORD', getenv('DB_PASSWORD'));
+define('DB_PASSWORD', getenv('MYSQL_PASSWORD'));
 //define('DB_PASSWORD', 'dG3CxcXE9WdWSR2P');
 
 
 /** Adresse de l’hébergement MySQL. */
-define('DB_HOST', getenv('DB_HOST'));
+define('DB_HOST', getenv('MYSQL_HOST'));
 //define('DB_HOST', 'localhost');
 
 /** Jeu de caractères à utiliser par la base de données lors de la création des tables. */
@@ -85,7 +85,7 @@ define('NONCE_SALT',       '');
  * N’utilisez que des chiffres, des lettres non-accentuées, et des caractères soulignés !
  */
 //$table_prefix  = getenv('TABLE_PREFIX');
-$table_prefix  = "wp_";
+$table_prefix  = getenv('MYSQL_TABLE_PREFIX');
 
 /**
  * Pour les développeurs : le mode déboguage de WordPress.

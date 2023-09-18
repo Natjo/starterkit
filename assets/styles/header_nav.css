@@ -75,7 +75,7 @@
 
         #nav-panel {
             justify-self: end;
-            grid-column: ctr;
+            //grid-column: ctr;
             grid-row: 1;
         }
 

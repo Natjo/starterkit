@@ -5,7 +5,6 @@ namespace Yoast\WP\SEO\Integrations\Admin;
 use WPSEO_Addon_Manager;
 use WPSEO_Admin_Asset_Manager;
 use Yoast\WP\SEO\Conditionals\Admin_Conditional;
-use Yoast\WP\SEO\Helpers\Indexing_Helper;
 use Yoast\WP\SEO\Helpers\Options_Helper;
 use Yoast\WP\SEO\Helpers\Product_Helper;
 use Yoast\WP\SEO\Integrations\Integration_Interface;
@@ -244,7 +243,7 @@ class Workouts_Integration implements Integration_Interface {
 		$notice = new Notice_Presenter(
 			$title,
 			$copy,
-			'Assistent_Time_bubble_500x570.png',
+			null,
 			$button
 		);
 
