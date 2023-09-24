@@ -178,6 +178,7 @@ function get_tpl()
     include("inc/tpl.php");
 }
 
+// Alwys ot the end of functions.php
 ob_start();
 
 

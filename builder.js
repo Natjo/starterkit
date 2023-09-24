@@ -10,7 +10,6 @@ const watch = require('node-watch');
 const isProd = process.argv[2] == '--prod' ? true : false;
 require('dotenv').config({ path: '.docker/.env' })
 
-
 const { optimize } = require('svgo');
 const breakpoints = [576, 768, 992, 1200, 1440];
 const dispatch = { mobile: "", desktop: "" };
@@ -58,7 +57,6 @@ const core = {
             } else {
                 fs.copySync(file, dist_name);
             }
-
         }
         else fs.copySync(file, dist_name);
     },
@@ -144,8 +142,7 @@ const core = {
         result = babel.transform(result, {
             minified: isProd ? true : false,
             comments: false,
-            presets: isProd ? [["minify", { "builtIns": 'entry' }]] : [],
-
+            presets: isProd ? [["minify", { "builtIns": 'entry' }]] : []
         }).code;
 
         fs.ensureDirSync(path.dirname(dest));
@@ -171,8 +168,6 @@ const core = {
                 // const rere =  RegExp(b, 'gi');
                 //const test = `@media[ ]{0,}\(max-width:[ ]{0,}991px\)[ ]{0,}{([\s\S]+?})\s*}`;
                 //const regexp = `\\b/@media[ ]{0,}\(max-width:[ ]{0,}991px\)[ ]{0,}{([\s\S]+?})\s*}/g\\b`;
-
-
 
                 func(isProd ? uglifycss.processString(result.css) : result.css);
             })
@@ -207,7 +202,6 @@ watch(src, { recursive: true }, (evt, file) => {
     const view = file.split('/')[2]; // footer, header, strate-intro ..
     const exist = fs.existsSync(dist_file) ? true : false;
 
-
     if (folder !== 'styles') {
         if (!fs.existsSync(dist_file)) evt = 'add';
         if (evt == 'update' || evt == 'add') core.compile(file, dist_file, ext);
@@ -228,7 +222,7 @@ watch(src, { recursive: true }, (evt, file) => {
         core.compile_syles();
         core.console(folder, filename, evt);
     } else {
-        core.console(`${folder}-${view}`, filename, evt);
+        core.console(`${folder}${view ? `-${view}` : ''}`, filename, evt);
     }
 });
 
