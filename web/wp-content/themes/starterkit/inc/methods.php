@@ -142,59 +142,75 @@ function picture($image, $class = "", $lazy = false, $breakpoints = [768, 1920])
  *
  */
 
- class GetImage
- {
-     private $_image;
-     private $_size;
-     public $width = null;
-     public $height = null;
-     public $url = null;
-     public $alt = null;
-     public $id = null;
- 
-     function __construct($image, $size = null)
-     {
- 
-         $this->_image = $image;
-         $this->_size = $size;
- 
-         if (!empty($this->_image)) {
-             $this->width = $image["width"];
-             $this->height = $image["height"];
-             $this->alt = $image["alt"];
-             $this->id = $image["ID"];
- 
-             $sizes = $this->_image["sizes"];
-             $img = $this->_image["url"];
-             foreach ($sizes as $key => $value) {
-                 if ($this->_size === $key) {
-                     $img = $this->_image["sizes"][$this->_size];
-                 }
-             }
-             $this->url = $img;
-         }
-     }
- }
+class GetImage
+{
+    private $_image;
+    private $_size;
+    public $width = null;
+    public $height = null;
+    public $url = null;
+    public $alt = null;
+    public $id = null;
 
- 
+    function __construct($image, $size = null)
+    {
+
+        $this->_image = $image;
+        $this->_size = $size;
+
+        if (!empty($this->_image)) {
+            $this->width = $image["width"];
+            $this->height = $image["height"];
+            $this->alt = $image["alt"];
+            $this->id = $image["ID"];
+
+            $sizes = $this->_image["sizes"];
+            $img = $this->_image["url"];
+            foreach ($sizes as $key => $value) {
+                if ($this->_size === $key) {
+                    $img = $this->_image["sizes"][$this->_size];
+                }
+            }
+            $this->url = $img;
+        }
+    }
+}
+
+
 /**
  * SEO title and desc
  */
 function lsd_seo()
 {
+
     remove_action('wp_head', '_wp_render_title_tag', 1);
 
     $title = get_field('options-seo-title', 'options');
     $desc = get_field('options-seo-desc', 'options');
 
-    if (empty($title)) {
-        $title = get_bloginfo('name');
+
+    if (get_field('options-seo-desc',  get_the_ID())) {
+        $desc = get_field('options-seo-desc',  get_the_ID());
+    } else {
+        if (empty($desc)) {
+            $desc = get_bloginfo('description');
+        }
     }
 
-    if (!is_front_page()) {
-
-        $title =  $title . " | " . get_the_title();
+    if (get_field('options-seo-title',  get_the_ID())) {
+        $title =  get_field('options-seo-title',  get_the_ID());
+        if (!is_front_page()) {
+            $title =  $title . " | " . get_field('options-seo-title',  get_the_ID());
+        }
+    } else {
+        if (empty($title)) {
+            $title = get_bloginfo('name');
+        }
+        if (!is_front_page()) {
+            $title =  $title . " | " . get_the_title();
+        }
     }
+
     $markup = '<title>' . $title  . '</title>' . "\n";
 
     if (!empty($desc)) {
