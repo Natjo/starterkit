@@ -3,6 +3,7 @@ const path = require('path');
 const postcss = require('postcss');
 const cssnested = require('postcss-nested');
 const cssCustomMedia = require('postcss-custom-media');
+const postcssGlobalData = require('@csstools/postcss-global-data');
 const autoprefixer = require('autoprefixer');
 const uglifycss = require('uglifycss');
 const babel = require('@babel/core');
@@ -151,7 +152,10 @@ const core = {
     postcss(file, func) {
         const str = fs.readFileSync(file, 'utf8');
         postcss([cssnested,
-            cssCustomMedia({ importFrom: `${src}styles/customMedias.css` }),
+            postcssGlobalData({
+                files: [`${src}styles/customMedias.css`]
+            }),
+            cssCustomMedia(),
             autoprefixer({ add: true })])
             .process(str, { from: file })
             .catch(error => {

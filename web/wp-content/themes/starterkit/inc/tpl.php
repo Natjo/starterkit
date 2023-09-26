@@ -11,6 +11,6 @@ echo $content;
 get_footer();
 ?>
 
-<script id="appjs" async type="module" src="<?= THEME_URL; ?>assets/app.js"  data-params_data='<?= paramsData(); ?>' data-views='<?= views_observe()?>'></script>
+<script id="appjs" async type="module" src="<?= THEME_URL; ?>assets/app.js"  data-params_data='<?= paramsData(); ?>' data-views-js='<?= views_observe()?>'></script>
 </body>
 </html>

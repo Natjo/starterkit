@@ -1,5 +1,6 @@
 import "./views/header_nav/header_nav.js";
 
+
 // Third part
 window.addEventListener('load', () => {   
 
@@ -26,7 +27,8 @@ window.addEventListener('load', () => {
     document.head.appendChild(link);
 });
 
-// views observe
+
+// Views observe
 const observer = new IntersectionObserver(items => items.forEach(e => {
     if (e.isIntersecting) {
         const view = e.target.dataset.view;
@@ -34,9 +36,10 @@ const observer = new IntersectionObserver(items => items.forEach(e => {
         observer.unobserve(e.target);
     }
 }));
-for (const view of JSON.parse(appjs.dataset.views)) {
+for (const view of JSON.parse(appjs.dataset.viewsJs)) {
     observer.observe(document.querySelector(`[data-view=${view}]`));
 }
+
 
 // paramsData
 window.paramsData = JSON.parse(appjs.dataset.params_data);
