@@ -84,3 +84,25 @@ function wpdocs_notify_subscribers($post_id, $post, $update)
         }
     }
 }
+
+
+// save acf option
+function clear_advert_main_transient($post_id)
+{
+    global $easy_static_active;
+    $screen = get_current_screen();
+    if ($easy_static_active[0]->option_value) {
+        if ($screen->base === "toplevel_page_acf-options-parametres") {
+            // if (strpos($screen->id, "acf-options-adverts") == true) {
+            $post_types = postTypes();
+
+            $posts = queryPosts();
+
+            create($posts, $post_types);
+
+            upToDate($posts);
+        }
+    }
+}
+add_action('acf/save_post', 'clear_advert_main_transient', 20);
+
