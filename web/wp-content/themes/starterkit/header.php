@@ -15,7 +15,7 @@
 
     <?php wp_head(); ?>
     
-    <link rel='stylesheet' href='<?= THEME_URL; ?>assets/styles.css'/>
+    <link rel='stylesheet' href='<?= THEME_URL; ?>assets/styles.css?v=<?= VERSION; ?>'/>
 
-    <?php foreach ($args as $value) echo '<link href="'.THEME_URL.$value.'" rel="stylesheet" media="screen">';?>
+    <?php foreach ($args as $value) echo '<link href="'.THEME_URL.$value.'?v='.VERSION.'" rel="stylesheet" media="screen">';?>
 </head>

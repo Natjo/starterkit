@@ -4,6 +4,7 @@ define('THEME_ASSETS', get_template_directory_uri() . '/assets/');
 define('THEME_URL',get_template_directory_uri() . '/');
 define('HOME_URL', get_home_url());
 define('AJAX_URL', admin_url('admin-ajax.php'));
+define('VERSION', file_get_contents(get_template_directory() . "/assets/version.txt"));
 
 if (ENV_PROD) {
     define('GTAG_KEY', get_field('params_ga_code', 'option'));
@@ -92,6 +93,7 @@ function paramsData()
         'theme_url' => THEME_URL,
         'gtag_key' =>  GTAG_KEY,
         'rgpdNonce' => wp_create_nonce('rgpdNonce'),
+        'version' => VERSION
     );
     echo json_encode($dataToBePassed);
 }
@@ -169,18 +171,6 @@ function onepage()
    exit;
 }*/
 
-// -------
-//template
-//--------
-function get_tpl()
-{
-    global $links;
-    include("inc/tpl.php");
-}
-
-// Alwys ot the end of functions.php
-ob_start();
-
 
 
 /**
@@ -229,3 +219,16 @@ function acme_add_body_class($classes)
   
   return array_filter($classes);
 }
+
+
+// -------
+//template
+//--------
+function get_tpl()
+{
+    global $links;
+    include("inc/tpl.php");
+}
+
+// Alwys ot the end of functions.php
+ob_start();

@@ -19,6 +19,8 @@ const src = 'assets/';
 const dist = `web/wp-content/themes/${process.env.THEME_NAME}/`;
 let commonstyles = [];
 
+let version = String(Date.now());
+
 const json = {
     datas: {},
     add(name, filename, ext) {
@@ -140,17 +142,34 @@ const core = {
     },
     time: () => time = (new Date() - core.initTime) / 1000,
     babel(result, dest) {
-        result = babel.transform(result, {
+        let res = result;
+
+        //set version to import file
+        if (isProd) {
+            const regex = /(import[ '".\/a-z_]+)(.js)/igm;
+            res = result.replace(regex, `$1.js?v=${version}`);
+        }
+
+        result = babel.transform(res, {
             minified: isProd ? true : false,
             comments: false,
-            presets: isProd ? [["minify", { "builtIns": 'entry' }]] : []
+            //compact: true,
+            // presets: isProd ? [["minify", { "builtIns": 'entry' }]] : []
+            // presets: isProd ? [["minify", { "builtIns": 'entry' }]] : []
         }).code;
 
         fs.ensureDirSync(path.dirname(dest));
         fs.writeFileSync(dest, result);
     },
     postcss(file, func) {
-        const str = fs.readFileSync(file, 'utf8');
+        let str = fs.readFileSync(file, 'utf8');
+
+        //set version to import file
+        if (isProd) {
+            const regex = /(@import[ '"().\/a-z_]+)(.css)/igm;
+            str = str.replace(regex, `$1.css?v=${version}`);
+        }
+
         postcss([cssnested,
             postcssGlobalData({
                 files: [`${src}styles/customMedias.css`]
@@ -186,9 +205,12 @@ const core = {
 }
 
 core.rmDir(`${dist}${src}`);
+
 core.dirScan(src);
 json.create();
 core.compile_syles();
+
+if (isProd) fs.writeFileSync(`${dist}${src}version.txt`, version);
 
 console.log(`${core.time()}s`);
 
