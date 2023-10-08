@@ -1,7 +1,11 @@
-import './views/header_nav/header_nav.js';
+//import './views/header_nav/header_nav.js';
 
 // paramsData
-window.paramsData = JSON.parse(appjs.dataset.params_data);
+window.paramsData = {};
+for(let key in appjs.dataset){
+    window.paramsData[key] = appjs.dataset[key]
+}
+
 
 // Third part
 window.addEventListener('load', () => {

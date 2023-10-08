@@ -12,6 +12,7 @@
  *
  */
 
+
  const Rgpd = onexec => {
     const cookieName = 'rgpd';
     const root = document.documentElement || window;

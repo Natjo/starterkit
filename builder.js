@@ -19,7 +19,10 @@ const src = 'assets/';
 const dist = `web/wp-content/themes/${process.env.THEME_NAME}/`;
 let commonstyles = [];
 
-let version = String(Date.now());
+//let version = String(Date.now());
+
+let date = new Date();
+let version = `${date.getMonth()}${date.getDay()}${date.getHours()}${date.getMinutes()}${date.getSeconds()}`;
 
 const json = {
     datas: {},
@@ -34,11 +37,10 @@ const json = {
     },
     create: () => fs.writeFileSync(`${dist}${src}views.json`, JSON.stringify(json.datas))
 }
-
+let js_folder = [];
 const core = {
     initTime: new Date(),
     compile(file, dist_name, ext) {
-
         if (ext == '.js') this.babel(fs.readFileSync(file, 'utf8'), dist_name);
         else if (ext == '.css') {
             this.postcss(file, css => {
@@ -111,6 +113,7 @@ const core = {
         const recursive = dir => {
             fs.readdirSync(dir).forEach(res => {
                 const file = path.resolve(dir, res);
+
                 const stat = fs.statSync(file);
                 if (stat && stat.isDirectory()) recursive(file);
                 else if (!/.DS_Store$/.test(file)) {
@@ -123,7 +126,12 @@ const core = {
                         const filename = path.parse(name).base;
                         const ext = path.extname(filename);
                         if (/\/views\//.test(file)) json.add(name, filename, ext);
-                        core.compile(file, dist + name, ext);
+                        if (/\/js\//.test(file)) {
+                            js_folder.push(file);
+                        } else {
+                            core.compile(file, dist + name, ext);
+                        }
+
                     }
                 }
             });
@@ -154,7 +162,6 @@ const core = {
             minified: isProd ? true : false,
             comments: false,
             //compact: true,
-            // presets: isProd ? [["minify", { "builtIns": 'entry' }]] : []
             // presets: isProd ? [["minify", { "builtIns": 'entry' }]] : []
         }).code;
 
@@ -201,6 +208,13 @@ const core = {
         if (evt == 'update') status = `32mupdated`;
         if (evt == 'add') status = `36madded`;
         console.log(`\x1b[90m\x1b[3m(${folder})\x1b[39m\x1b[23m`, `\x1b[1m${filename}\x1b[22m`, `\x1b[${status}\x1b[39m`, `\x1b[3m${core.time()}s\x1b[23m`);
+    },
+    compile_js() {
+        let str = "";
+        for (let file of js_folder) {
+            str += fs.readFileSync(file, 'utf8');
+        }
+        this.babel(str, `${dist}assets/app.js`);
     }
 }
 
@@ -210,11 +224,16 @@ core.dirScan(src);
 json.create();
 core.compile_syles();
 
-if (isProd) fs.writeFileSync(`${dist}${src}version.txt`, version);
+fs.writeFileSync(`${dist}${src}version.txt`, version);
+
+
+
+core.compile_js();
 
 console.log(`${core.time()}s`);
 
 if (isProd) return
+
 
 watch(src, { recursive: true }, (evt, file) => {
     if (/.DS_Store$/.test(file)) return
@@ -228,7 +247,7 @@ watch(src, { recursive: true }, (evt, file) => {
     const view = file.split('/')[2]; // footer, header, strate-intro ..
     const exist = fs.existsSync(dist_file) ? true : false;
 
-    if (folder !== 'styles') {
+    if (folder !== 'styles' && folder !== 'js') {
         if (!fs.existsSync(dist_file)) evt = 'add';
         if (evt == 'update' || evt == 'add') core.compile(file, dist_file, ext);
     }
@@ -246,6 +265,9 @@ watch(src, { recursive: true }, (evt, file) => {
 
     if (folder === 'styles') {
         core.compile_syles();
+        core.console(folder, filename, evt);
+    } else if (folder === 'js') {
+        core.compile_js();
         core.console(folder, filename, evt);
     } else {
         core.console(`${folder}${view ? `-${view}` : ''}`, filename, evt);

@@ -1,6 +1,7 @@
 <?php
 define('THEME_DIR', get_template_directory() . '/' );
 define('THEME_ASSETS', get_template_directory_uri() . '/assets/');
+define('THEME', "/wp-content/themes/".get_template()."/");
 define('THEME_URL',get_template_directory_uri() . '/');
 define('HOME_URL', get_home_url());
 define('AJAX_URL', admin_url('admin-ajax.php'));
@@ -92,7 +93,6 @@ function paramsData()
         'ajax_url' => AJAX_URL,
         'theme_url' => THEME_URL,
         'gtag_key' =>  GTAG_KEY,
-        'rgpdNonce' => wp_create_nonce('rgpdNonce'),
         'version' => VERSION
     );
     echo json_encode($dataToBePassed);
