@@ -6,6 +6,10 @@
    
     --color-text: #1D1D1B;
 
+    --margin-sm: 10px; 
+    --margin: 10px;
+    --margin-lg: 20px;
+
     --gray-light: #ECECEC;
     --gray: #ECECEC;
     --gray-dark: #ECECEC;
@@ -34,10 +38,7 @@
         --font-size-xlg: 2rem;
         --font-size-xxlg: 2.2rem;
     
-        --margin-sm: 10px; 
-        --margin: 10px;
-        --margin-md: 20px;
-        --margin-lg: 20px;
+        
     }
 }
 
@@ -54,9 +55,8 @@
         --font-size-xlg: 2.8rem;
         --font-size-xxlg: 3.2rem;
 
-        --margin-sm: 10px; 
-        --margin: 20px;
-        --margin-md: 30px;
-        --margin-lg: 40px;
+        --margin-sm: 20px; 
+        --margin: 40px;
+        --margin-lg: 60px;
     }
 }

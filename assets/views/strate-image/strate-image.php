@@ -1,7 +1,7 @@
 <?php
-$image = $args['image'];
+$image = $args['images'];
 ?>
-<section data-view="strate-image">
+<section class="strate" data-view="strate-image">
     <picture>
         <?php if (!empty($image['mobile'])) : ?>
             <source srcset="<?= $image['mobile'] ?>.webp" media="(max-width: 575px)" type="image/webp">

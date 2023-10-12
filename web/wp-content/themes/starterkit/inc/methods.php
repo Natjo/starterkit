@@ -36,7 +36,7 @@ function lsd_get_thumb($id, $size = 'medium')
         endif;
 
         $imgUrl = is_array($img) ? reset($img) : "";
-
+        $imgUrl =  wp_make_link_relative($imgUrl);
         return $imgUrl;
     }
 }
@@ -136,7 +136,6 @@ function picture($image, $class = "", $lazy = false, $breakpoints = [768, 1920])
     }
 }
 
-
 /**
  * GetImage
  *
@@ -154,24 +153,31 @@ class GetImage
 
     function __construct($image, $size = null)
     {
-
         $this->_image = $image;
         $this->_size = $size;
+        if ($image) {
 
-        if (!empty($this->_image)) {
-            $this->width = $image["width"];
-            $this->height = $image["height"];
-            $this->alt = $image["alt"];
-            $this->id = $image["ID"];
+            $width =  $image["width"];
+            $height =  $image["height"];
 
-            $sizes = $this->_image["sizes"];
-            $img = $this->_image["url"];
-            foreach ($sizes as $key => $value) {
-                if ($this->_size === $key) {
-                    $img = $this->_image["sizes"][$this->_size];
+            if (!empty($this->_image)) {
+                $this->alt = $image["alt"];
+                $this->id = $image["ID"];
+
+                $sizes = $this->_image["sizes"];
+                $img = $this->_image["url"];
+                foreach ($sizes as $key => $value) {
+                    if ($this->_size === $key) {
+                        $img = $this->_image["sizes"][$this->_size];
+                        $width =  $this->_image["sizes"][$this->_size . "-width"];
+                        $height =  $this->_image["sizes"][$this->_size . "-height"];
+                    }
                 }
+                $this->url = $img;
+
+                $this->width =  $width;
+                $this->height = $height;
             }
-            $this->url = $img;
         }
     }
 }
@@ -243,7 +249,29 @@ function setlinkIcon($link, $classes = "", $icon = "", $width = 13, $height = 17
 /**
  * Icon
  */
-function icon($name, $width, $height, $url = THEME_ASSETS)
+function icon($name, $width, $height)
 {
+    $url = get_template_directory_uri() . '/assets/';
     return '<svg class="icon" width="' . $width . '" height="' . $height . '" aria-hidden="true" viewBox="0 0 ' . $width . ' ' . $height . '"><use xlink:href="' . $url . 'img/icons.svg#' . $name . '"></use></svg>';
 }
+
+
+/**
+ * Options
+ * block-options
+ * 
+ */
+
+ function options($args){
+    $margin = $args['margin']['has_margin'] ? ' ' . $args['margin']['value'] : '';
+  
+    if( !$args['margin']['has_margin'] && $args['background']['has_background'] ){
+        $margin = $args['background']['padding'] ? ' nomargin ' . $args['background']['padding'] : '';
+    }
+    $background = $args['background']['color']  ? ' bg ' . $args['background']['color'] : '';
+
+    $reverse = $args['reverse'] ? ' reverse' : '';
+    
+    return $reverse . $margin . $background;
+
+ }

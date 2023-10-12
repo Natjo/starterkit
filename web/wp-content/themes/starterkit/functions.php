@@ -1,6 +1,6 @@
 <?php
 define('THEME_DIR', get_template_directory() . '/' );
-define('THEME_ASSETS', get_template_directory_uri() . '/assets/');
+//define('THEME_ASSETS', get_template_directory_uri() . '/assets/');
 define('THEME', "/wp-content/themes/".get_template()."/");
 define('THEME_URL',get_template_directory_uri() . '/');
 define('HOME_URL', get_home_url());
@@ -24,6 +24,8 @@ if (!ENV_LOCAL) {
     require_once(__DIR__ . '/inc/acf.php');
 }
 require_once(__DIR__ . '/inc/methods.php');
+require_once(__DIR__ . '/inc/strates_helper.php');
+require_once(__DIR__ . '/inc/blocks_helper.php');
 require_once(__DIR__ . '/inc/ajax-methods.php');
 require_once(__DIR__ . '/inc/custom/search.php');
 require_once(__DIR__ . '/inc/custom/form.php');

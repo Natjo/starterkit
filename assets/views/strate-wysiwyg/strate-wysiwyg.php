@@ -1,5 +1,7 @@
-<section data-view="strate-wysiwyg">
-	<div class="container rte">
-		<?= $args['text'] ?>
+<section class="strate" data-view="strate-wysiwyg">
+	<?php views('block-header', $args['block-header']); ?>
+	
+	<div class="container">
+		<?php views('block-text', $args['block-text']); ?>
 	</div>
 </section>

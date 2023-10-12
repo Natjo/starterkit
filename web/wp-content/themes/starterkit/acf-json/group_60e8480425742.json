@@ -1,11 +1,12 @@
 {
     "key": "group_60e8480425742",
-    "title": "Contenus Flexible",
+    "title": "Strates",
     "fields": [
         {
             "key": "field_60e848042d791",
             "label": "",
             "name": "views",
+            "aria-label": "",
             "type": "flexible_content",
             "instructions": "",
             "required": 0,
@@ -23,10 +24,11 @@
                     "display": "block",
                     "sub_fields": [
                         {
-                            "key": "field_61081e8d84a86",
-                            "label": "Text",
-                            "name": "text",
-                            "type": "wysiwyg",
+                            "key": "field_6528225431ac3",
+                            "label": "Header",
+                            "name": "",
+                            "aria-label": "",
+                            "type": "tab",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -35,11 +37,69 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "default_value": "",
-                            "tabs": "all",
-                            "toolbar": "full",
-                            "media_upload": 1,
-                            "delay": 0
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_6526ceb7a0941",
+                            "label": "",
+                            "name": "header",
+                            "aria-label": "",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "field_65279d9d15b27"
+                            ],
+                            "display": "seamless",
+                            "layout": "row",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        },
+                        {
+                            "key": "field_6528225f31ac4",
+                            "label": "Texte",
+                            "name": "",
+                            "aria-label": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_652820e5995b3",
+                            "label": "",
+                            "name": "block-text",
+                            "aria-label": "",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "field_6527b38f04dce"
+                            ],
+                            "display": "seamless",
+                            "layout": "row",
+                            "prefix_label": 0,
+                            "prefix_name": 0
                         }
                     ],
                     "min": "",
@@ -55,6 +115,7 @@
                             "key": "field_62aa07cc66927",
                             "label": "",
                             "name": "strate-articles-items",
+                            "aria-label": "",
                             "type": "repeater",
                             "instructions": "",
                             "required": 0,
@@ -68,12 +129,13 @@
                             "min": 0,
                             "max": 0,
                             "layout": "table",
-                            "button_label": "",
+                            "button_label": "Ajouter un élément",
                             "sub_fields": [
                                 {
                                     "key": "field_62aa07da66928",
                                     "label": "Titre",
                                     "name": "title",
+                                    "aria-label": "",
                                     "type": "text",
                                     "instructions": "",
                                     "required": 0,
@@ -87,9 +149,11 @@
                                     "placeholder": "",
                                     "prepend": "",
                                     "append": "",
-                                    "maxlength": ""
+                                    "maxlength": "",
+                                    "parent_repeater": "field_62aa07cc66927"
                                 }
-                            ]
+                            ],
+                            "rows_per_page": 20
                         }
                     ],
                     "min": "",
@@ -105,6 +169,7 @@
                             "key": "field_62ac3b100c54d",
                             "label": "Image desktop",
                             "name": "img-desktop",
+                            "aria-label": "",
                             "type": "image",
                             "instructions": "",
                             "required": 0,
@@ -114,8 +179,7 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "return_format": "id",
-                            "preview_size": "medium",
+                            "return_format": "array",
                             "library": "all",
                             "min_width": "",
                             "min_height": "",
@@ -123,12 +187,14 @@
                             "max_width": "",
                             "max_height": "",
                             "max_size": "",
-                            "mime_types": ""
+                            "mime_types": "",
+                            "preview_size": "medium"
                         },
                         {
                             "key": "field_62ac3b240c54e",
                             "label": "Image mobile",
                             "name": "img-mobile",
+                            "aria-label": "",
                             "type": "image",
                             "instructions": "",
                             "required": 0,
@@ -138,8 +204,7 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "return_format": "id",
-                            "preview_size": "medium",
+                            "return_format": "array",
                             "library": "all",
                             "min_width": "",
                             "min_height": "",
@@ -147,12 +212,14 @@
                             "max_width": "",
                             "max_height": "",
                             "max_size": "",
-                            "mime_types": ""
+                            "mime_types": "",
+                            "preview_size": "medium"
                         },
                         {
                             "key": "field_62ac4527d0883",
                             "label": "Image tablet",
                             "name": "img-tablet",
+                            "aria-label": "",
                             "type": "image",
                             "instructions": "",
                             "required": 0,
@@ -162,8 +229,7 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "return_format": "id",
-                            "preview_size": "medium",
+                            "return_format": "array",
                             "library": "all",
                             "min_width": "",
                             "min_height": "",
@@ -171,16 +237,203 @@
                             "max_width": "",
                             "max_height": "",
                             "max_size": "",
-                            "mime_types": ""
+                            "mime_types": "",
+                            "preview_size": "medium"
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_6527b2ddb4c0e": {
+                    "key": "layout_6527b2ddb4c0e",
+                    "name": "strate-image_text",
+                    "label": "Image Text",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_652822cc093ce",
+                            "label": "Header",
+                            "name": "",
+                            "aria-label": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_65281cc26fd9c",
+                            "label": "",
+                            "name": "block-header",
+                            "aria-label": "",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "field_65279d9d15b27"
+                            ],
+                            "display": "seamless",
+                            "layout": "row",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        },
+                        {
+                            "key": "field_652822dd093cf",
+                            "label": "Image",
+                            "name": "",
+                            "aria-label": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_6527b2f8b4c10",
+                            "label": "",
+                            "name": "block-image",
+                            "aria-label": "",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "field_6527b246c7c26"
+                            ],
+                            "display": "seamless",
+                            "layout": "row",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        },
+                        {
+                            "key": "field_652822f0093d0",
+                            "label": "Texte",
+                            "name": "",
+                            "aria-label": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_6527b3c39f5b6",
+                            "label": "",
+                            "name": "block-text",
+                            "aria-label": "",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "field_6527b38f04dce"
+                            ],
+                            "display": "seamless",
+                            "layout": "row",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        },
+                        {
+                            "key": "field_65282b927ea03",
+                            "label": "Options",
+                            "name": "",
+                            "aria-label": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_65282bab7ea04",
+                            "label": "Inverser",
+                            "name": "reverse",
+                            "aria-label": "",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "",
+                            "default_value": 0,
+                            "ui_on_text": "",
+                            "ui_off_text": "",
+                            "ui": 1
+                        },
+                        {
+                            "key": "field_65283a447dc86",
+                            "label": "",
+                            "name": "",
+                            "aria-label": "",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "field_652839b820bdd"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
                         }
                     ],
                     "min": "",
                     "max": ""
                 }
             },
-            "button_label": "Ajouter un élément",
             "min": "",
-            "max": ""
+            "max": "",
+            "button_label": "Ajouter un élément"
         }
     ],
     "location": [
@@ -199,7 +452,7 @@
             }
         ]
     ],
-    "menu_order": 1,
+    "menu_order": -2,
     "position": "acf_after_title",
     "style": "default",
     "label_placement": "top",
@@ -216,5 +469,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1655904661
+    "modified": 1697139155
 }
