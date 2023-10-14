@@ -54,7 +54,6 @@ class Strates
         return array_merge($block_text, $block_image, $block_header, $block_options);
     }
 
-
     public static function strate_push_articles($view)
     {
         $block_options = Blocks::block_options($view);
@@ -95,6 +94,16 @@ class Heros
         );
 
         views('hero-homepage', $args);
+    }
+    public static function hero_simple()
+    {
+        $field = get_field('hero-simple', get_the_ID());
+  
+        $args = array(
+            "title" => get_the_title(),
+        );
+
+        views('hero-simple', $args);
     }
 }
 
