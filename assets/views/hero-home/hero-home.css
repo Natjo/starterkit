@@ -1,8 +1,0 @@
-[data-view=hero-home]{
-    background-color: var(--color-2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: calc(100vh - var(--header-height));
-    color: #fff;
-}

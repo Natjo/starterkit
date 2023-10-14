@@ -7,10 +7,8 @@
     font-family: var(--font-2);
     font-size: var(--font-size-xlg);
     line-height: 1.1;
-    color: var(--color-2);
 }
 .tl3 {
-    color: var(--color-3);
     font-family: var(--font-2);
     font-size: var(--font-size-md);
     margin-bottom: 20px;

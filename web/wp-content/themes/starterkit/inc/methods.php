@@ -262,16 +262,18 @@ function icon($name, $width, $height)
  * 
  */
 
- function options($args){
-    $margin = $args['margin']['has_margin'] ? ' ' . $args['margin']['value'] : '';
-  
-    if( !$args['margin']['has_margin'] && $args['background']['has_background'] ){
+function options($args)
+{
+    $margin = $args['margin']['has_margin'] ? ' ' . $args['margin']['value'] : ' nomargin ';
+
+    if (!$args['margin']['has_margin'] && $args['background']['has_background']) {
         $margin = $args['background']['padding'] ? ' nomargin ' . $args['background']['padding'] : '';
     }
-    $background = $args['background']['color']  ? ' bg ' . $args['background']['color'] : '';
+    if ($args['background']['has_background']) {
+        $background = $args['background']['color']  ? ' bg ' . $args['background']['color'] : '';
+    }
 
-    $reverse = $args['reverse'] ? ' reverse' : '';
-    
+    $reverse = !empty($args['reverse']) ? ' reverse' : '';
+
     return $reverse . $margin . $background;
-
- }
+}

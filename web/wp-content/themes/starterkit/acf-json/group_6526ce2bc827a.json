@@ -102,6 +102,31 @@
                     "preview_size": "medium"
                 },
                 {
+                    "key": "field_6528fda6c7e37",
+                    "label": "Tablet",
+                    "name": "image-tablet",
+                    "aria-label": "",
+                    "type": "image",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "",
+                    "preview_size": "medium"
+                },
+                {
                     "key": "field_6527b26ec7c28",
                     "label": "Mobile",
                     "name": "image-mobile",
@@ -314,12 +339,11 @@
                                 "id": ""
                             },
                             "choices": {
-                                "0": "Pas de fond",
                                 "bg-color-1": "Couleur1",
                                 "bg-color-2": "Couleur2",
                                 "bg-color-3": "Couleur3"
                             },
-                            "default_value": 0,
+                            "default_value": "bg-color-1",
                             "return_format": "value",
                             "multiple": 0,
                             "allow_null": 0,
@@ -390,5 +414,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1697139779
+    "modified": 1697223021
 }

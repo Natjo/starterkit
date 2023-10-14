@@ -24,8 +24,7 @@ if (!ENV_LOCAL) {
     require_once(__DIR__ . '/inc/acf.php');
 }
 require_once(__DIR__ . '/inc/methods.php');
-require_once(__DIR__ . '/inc/strates_helper.php');
-require_once(__DIR__ . '/inc/blocks_helper.php');
+require_once(__DIR__ . '/inc/views_helper.php');
 require_once(__DIR__ . '/inc/ajax-methods.php');
 require_once(__DIR__ . '/inc/custom/search.php');
 require_once(__DIR__ . '/inc/custom/form.php');

@@ -1,6 +1,6 @@
-<section class="strate" data-view="strate-wysiwyg">
+<section class="strate<?= options($args) ?>" data-view="strate-wysiwyg">
 	<?php views('block-header', $args['block-header']); ?>
-	
+
 	<div class="container">
 		<?php views('block-text', $args['block-text']); ?>
 	</div>
