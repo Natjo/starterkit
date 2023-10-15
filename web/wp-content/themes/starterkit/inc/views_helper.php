@@ -60,19 +60,42 @@ class Strates
 
         $block_header = Blocks::block_header($view);
 
+        $items = array();
+
+        foreach ($view["items"] as $item) {
+            array_push($items, Cards::card_article($item));
+        }
 
         $args = array(
-            "items" => array(
-                array("title" => "test")
-            ),
+            "items" => $items,
             "cta" => $view["cta"]
         );
-
 
         return array_merge($block_header, $block_options, $args);
     }
 }
 
+class Cards
+{
+    public static function card_article($article)
+    {
+        $terms = lsd_get_the_terms_name($article->ID, 'categories');
+        $args = array(
+            "title" => get_the_title($article->ID),
+            "date" => get_the_date("",$article->ID),
+            "datetime" => get_the_date('Y-m-d',$article->ID),
+            'tag' => !empty($terms) ? $terms[0] : null,
+            'text' => get_field('card-news-desc', $article->ID),
+            'images' => array(
+                'desktop' => lsd_get_featured($article->ID, 'card-actu'),
+                'width' => 440,
+                'height' => 440
+            )
+        );
+
+        return  $args;
+    }
+}
 
 class Heros
 {
@@ -98,7 +121,7 @@ class Heros
     public static function hero_simple()
     {
         $field = get_field('hero-simple', get_the_ID());
-  
+
         $args = array(
             "title" => get_the_title(),
         );

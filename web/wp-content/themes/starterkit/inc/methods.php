@@ -104,7 +104,7 @@ function isWebp($img)
 /**
  * Picture
  */
-function picture($image, $class = "", $lazy = false, $breakpoints = [768, 1920])
+function picture($image, $class = "", $lazy = true, $breakpoints = [768, 1920])
 {
     if (!empty($image)) {
         $sm = $breakpoints[0];

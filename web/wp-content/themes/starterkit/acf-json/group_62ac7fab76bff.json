@@ -6,8 +6,9 @@
             "key": "field_62ac7fc978884",
             "label": "Description",
             "name": "card-news-desc",
+            "aria-label": "",
             "type": "textarea",
-            "instructions": "",
+            "instructions": "Les infos supplementaires qui s'afficheront dans les push article",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -16,9 +17,9 @@
                 "id": ""
             },
             "default_value": "",
-            "placeholder": "",
             "maxlength": "",
             "rows": "",
+            "placeholder": "",
             "new_lines": ""
         }
     ],
@@ -40,5 +41,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1655476760
+    "modified": 1697380970
 }

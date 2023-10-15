@@ -1,23 +1,10 @@
 <?php
 
 // cards
-function cards($name, $rowId)
+function cards($name, $rowId,$article)
 {
     if ($name === 'article') {
-        $terms = lsd_get_the_terms_name($rowId, 'categories');
-        return [
-            'title' => get_the_title(),
-            'datetime' => get_the_date('Y-m-d'),
-            'date' => get_the_date(),
-            'tag' => !empty($terms) ? $terms[0] : null,
-            'text' => get_field('card-news-desc', $rowId),
-            'link' =>  get_the_permalink($rowId),
-            'image' => array(
-                'desktop' => lsd_get_featured($rowId, 'card-actu'),
-                'width' => 440,
-                'height' => 440
-            )
-        ];
+        return Cards::card_article($article);
     }
 }
 
@@ -46,7 +33,7 @@ function getSearchCpt($filters)
         while ($queryArticles->have_posts()) {
             $queryArticles->the_post();
             $rowId = get_the_ID();
-            $items[] = cards($filters['card'], $rowId);
+            $items[] = cards($filters['card'], $rowId,$queryArticles->post);
         }
         wp_reset_postdata();
     }
